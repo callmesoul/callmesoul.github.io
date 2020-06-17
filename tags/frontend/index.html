@@ -141,6 +141,114 @@
     
     <div class="project-card project-card-continuous">
   
+    <div class="imgWrap">
+      <img src="../images/sequelize.jpg" alt="" />
+    </div>
+  
+  <div class="ctnWrap">
+    <a href="/posts/4/" class="title">sequelize 问题汇总</a>
+    <section class="desc">
+  Sequelizesequelize 是nodejs里面很成熟的数据库ORM，配合nodejs使用，开发事半功倍。相较于其他语言ORM，sequelize 有着一整套完整的解决方案，包括各种复杂的查询，联表，数据库表的设计与生成等。
+本文主要记录各种负责的数据查询使用sequelize如何实现，还有记录一些坑或bug。
+sequelize include order写过原生sql查询的人都知道，排序都是在最外层排序的，所以一下代码无效:
+ctx.model.User.findAll({
+    include: [
+        {
+            model: ctx.mode.Book,
+            as: &#39;books&#39;,
+            order: [[&#39;createdAt&#39;, &#39;ASC&#39;]]
+        }
+    ],
+    order: [[&#39;createdAt&#39;, &#39;DESC&#39;]]
+})以上查询最外层的order是有效的， 但是里面include层的books数组排序是无效的，会导致每次查询的数据顺序不一样，要指定include里面数据的排序，应该这样写
+ctx.model.User.findAll({
+    include: [
+        {
+            model: ctx.mode.Book,
+            as: &#39;books&#39;
+        }
+    ],
+    order: [[&#39;createdAt&#39;, &#39;DESC&#39;], order: [[&#39;books&#39;, &#39;createdAt&#39;, &#39;ASC&#39;]]]
+})类似于原生查询的A.createdAt
+
+
+</section>
+    <p class="sub">6月 17, 2020</p>
+  </div>
+</div>
+  
+    
+    <div class="project-card project-card-continuous">
+  
+  <div class="ctnWrap">
+    <a href="/posts/100000/" class="title">webpack使用html-loader引入html模板</a>
+    <section class="desc">
+  前言最近在打一个多页面的手脚架，因为经常会接到一两个页面的临时活动的开发需求。
+vue开发栈喜欢了，想用vue来开发，有感觉有点累赘，大材小用的感觉。
+直接新建个html，手撸起来又各种问题，导致开发效率低下，例如:
+
+平时用惯了es6语法，要写回es5,要经常查文档
+不能使用预处理样式(less,sass)，这个效率大打折扣啊
+手动页面优化(压缩，去除注释,检测语法)
+
+本着现代开流，还是自己根据自己的需求撸个基于webpack的多页面开发手脚架，虽然没用vue，但是开发的流程基本跟vue开发流程一直，能自动化的部分都自动化，能提高开发效率的都用上，以后再也这类需求，就直接拉下手脚架，开发就行，不用再另外一个个配置了。
+本以为大功告成，却忽略了一个问题，就是有时几个页面的头部或者底部是共用的，这时候需要分离出来，不然三个页面个三个一样的头部，要修改头部时也要修改三个页面，这很不好维护。
+于是乎就寻找各种方案了
+html 引入模板
+iframe
+首先淘汰了这种方法，因为iframe算是历史遗留产物，而且会引起许多的bug，能不用还是不用吧。对iframe真心没好感。
+
+模板引擎
+这是开始确认的方向，因为之前玩node用过ejs，使用起来简单方便，于是乎在网上找了各种方案，但还是没找到合适的。
+
+一种是基于一个布局模板去生成html，但这不够灵活啊，不是所有的页面都一定要基于那个模板，比如有几个页面公用一个头部，另一个页面公用另一个头部这样，我能根据自己需求来引入才是完美的，而且ejs并没有继承的功能，不能再一个模板上追加内容，也是个大问题。
+第二种就是项目直接全部用ejs，webpack解析打包成html。虽然解决了上面的问题.但对于前端开发来说不是很友好，都变成了.ejs后缀了，最终还是舍弃了。
+
+
+html-loader 的  interpolate
+html-loader 大部分人都有用，甚至在解决这个问题前我自己也用了，但大部分人都想我一样，用来处理html文件中的静态资源文件，但其实有一个引入模板的功能。
+首先要在webpack rules里加上加一条处理html的规则
+{
+      test: /\.html$/,
+      use: {
+        loader: &#39;html-loader&#39;,
+        options: {
+          // 处理html 引用的图片
+          attrs: [&#39;img:src&#39;],
+          // 开启 html模板功能
+          interpolate: true
+        }
+      }
+    }
+
+
+   然后在html文件就可以直接引入其他html模板了
+   &lt;!DOCTYPE html&gt;
+   &lt;html&gt;
+
+   &lt;head&gt;
+     &lt;title&gt;index&lt;/title&gt;
+     ${require(&quot;../layouts/head.html&quot;)}
+   &lt;/head&gt;
+     ${require(&quot;../layouts/header.html&quot;)}
+   &lt;body&gt;
+
+     ${require(&quot;../layouts/footer.html&quot;)}
+   &lt;/body&gt;
+
+   &lt;/html&gt;
+   简单又灵活，Get it！
+​        最后也分享下自己配置好手脚架：webpack-multiple-pages-template
+
+
+</section>
+    <p class="sub">12月 4, 2019</p>
+  </div>
+</div>
+  
+    
+    <div class="project-card project-card-continuous">
+  
   <div class="ctnWrap">
     <a href="/posts/12005/" class="title">使用headless cms + ssr渲染框架来开发网站</a>
     <section class="desc">
@@ -283,6 +391,298 @@ ghost我用过算最好的博客系统吧，性能飞跃，后台管理、写作
 
 </section>
     <p class="sub">11月 25, 2019</p>
+  </div>
+</div>
+  
+    
+    <div class="project-card project-card-continuous">
+  
+  <div class="ctnWrap">
+    <a href="/posts/51837/" class="title">使用HTTPCODE替换自定义CODE</a>
+    <section class="desc">
+  | 前言：现在的开发基本都是前后端分离的项目，既解放了前后台各自的生产力（后台专注写业务给出数据就行，再也不用管前端UI的事。前台专注于写UI拿数据就行，再也不用跑后台服务，不用打开eclipse了）又可以一套代码兼容多个项目：APP，网页，微信，微信小程序等。
+但在开发的过程中发现了，现在后台普遍用了自定义code去判断接口的成功失败信息。而http code则变成鸡脖，除非是服务器蹦了之外，其他一律返回200成功。为什么会有这个现状呢？具体不是很了解啊，据说是以前IE上有些http code报错会导致IE一些问题。不知道是不是，知道的可以给我科普下。
+而在开发中使用自定义code也并没有什么问题，例如我们的项目一般接口返回的response信息完整结构：
+{
+    data:{
+        data:{
+            userList:[
+                {id:1}
+            ]
+        },
+        rcode: 300,
+        message: &quot;操作成功&quot;
+    },
+    engine:&#39;.....&#39;,
+    headers:{//....},
+    request:{//....},
+    status:200,
+    statusText:&quot;request:ok&quot;
+}
+而我们开发中一般用一个拦截器去拦截接口中的错误和返回接口要用的东西，不用的heades我们就不返回了。例如:
+response.use(
+  (response) =&gt; {
+    if(response.data.rcode===405){
+      //统一处理某个自定义错误code
+    }else{
+      return response.data;//返回我们要用的数据
+      promise.resolve();
+    }
+  },
+  (err) =&gt; {
+    //httpcode 错误 默认返回200，所以只要处理500以上的服务器问题即可
+    //发生网络错误后会走到这里
+    if(err.status&gt;=500){
+       //统一处理某个httpcode 500以上错误
+    }
+  }
+);
+使用了拦截器后我们正常得到的数据格式如下:
+{
+        data:{
+            userList:[
+                {id:1}
+            ]
+        },
+        rcode: 300,
+        message: &quot;操作成功&quot;
+},
+但我们请求完数据后必须判断rcode是否成功才好操作,否则会报错，例如
+let res=await this.api.getUserList();
+if(res.data.rcode==300){//要先判断是否成功,否则失败下面语句会报错找不到&#39;userList&#39;，接口失败是没有返回userList的    
+    this.userList=res.data.userList;
+}
+以上就基本大部分公司的写法，也没什么问题。但写多了（例如：100个接口）就会发现,100个接口，前端就要写100个if(res.data.rcode==300)。能不能有办法优化下。
+后来用接触了nodejs 自己写后台接口发现是可以优化的，而且对于接口比较多的项目，效率可以大大的提高，对于前后台都是。那就是用httpcode替换自定义的code。
+先来说说httpcode相对于自定义code的好处
+规范，httpcode的规范有国际的规范，百度搜一下就有。而使用自定义code规范都是自己定的，而且每个项目的定义code的字段，每个值的规范也不一样容易混乱。如果每个项目都用httpcode 都用国际的规范这样是不是会好很多？
+对于后端开发来说使用httpcode可以大大增加效率，例如：
+
+
+使用自动code时输出数据
+//成功时
+this.body={
+  data:{
+      userList:[{id:1}]
+  },
+  rcode:300,
+  msg:&#39;成功&#39;
+}
+//失败时
+this.body={
+  rcode:400,
+  msg:&#39;失败&#39;
+}
+
+使用httpcode是，因为默认输出都是200，只有错误的的是否才需要去定义错误码：
+//成功时
+this.body={
+    userList:[{id:1}]
+}
+//失败时
+this.status=400;
+this.body={
+    msg:&#39;失败&#39;
+}你可能以为也就简单了那么点事，可是当有100个接口时呢？效率就是从这里来的啊
+
+
+  对于前端开发来说使用httpcode也可以大大增加效率，例如：
+  拦截器就不用去判断自定义code 而直接判断httpcode：
+  response.use(
+    (response) =&gt; {
+      if(response.data.rcode===405){
+        //统一处理某个自定义错误code
+      }else{
+        return response.data;//返回我们要用的数据
+        promise.resolve();
+      }
+    },
+    (err) =&gt; {
+      //httpcode 错误 默认返回200，所以只要处理500以上的服务器问题即可
+      //发生网络错误后会走到这里
+      if(err.status===400){
+        //统一处理某个httpcode 错误
+      }else if(err.status&gt;=500){
+         //统一处理某个httpcode 500以上错误
+      }
+    }
+  );
+然后再来对比下使用httpcode和使用自定义code的数据个操作：
+//自定义code时返回数据
+{
+        data:{
+            userList:[
+                {id:1}
+            ]
+        },
+        rcode: 300,
+        message: &quot;操作成功&quot;
+}
+
+//httpcode时返回数据
+{
+        userList:[
+                {id:1}
+            ]
+},
+
+
+//自定义code时操作
+let res=await this.api.getUserList();
+if(res.data.rcode==300){//要先判断是否成功,否则失败下面语句会报错找不到&#39;userList&#39;，接口失败是没有返回userList的    
+    this.userList=res.data.userList;
+}
+
+
+//httpcode时操作
+let res=await this.api.getUserList();
+if(res){//要先判断是否成功,否则失败下面语句会报错找不到&#39;userList&#39;，接口失败是没有返回userList的    
+    this.userList=res.userList;
+}
+虽然感觉就优化了那么点，但真正写起来，那么多个接口，你就会感觉显明方便多，效率也快乐。
+
+
+</section>
+    <p class="sub">10月 21, 2019</p>
+  </div>
+</div>
+  
+    
+    <div class="project-card project-card-continuous">
+  
+  <div class="ctnWrap">
+    <a href="/posts/12004/" class="title">坑吭记录</a>
+    <section class="desc">
+  
+苹果IOS系统分享配置失败，签名错误
+
+原因：苹果IOS系统下，页面跳转时，路由跳转但地址并没有变，还是进入程序的第一个地址，所以签名的地址！=当前页面地址 所以错误了。
+解决:就是手动把url改了，先建一个mixins插件，然后以后那个页面需要分享就引入这个插件就可以了。
+// assign.js
+
+//ios端 histiry 模式兼容问题
+
+const location = global.location
+const u = navigator.userAgent 
+let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+let baseUrl=process.env.BASE_URL.substring(0,process.env.BASE_URL.length-1); // 兼容自定义 BASE_URL
+
+export default {
+  beforeRouteEnter(to, from, next) {
+    if (isiOS &amp;&amp; baseUrl+to.path !== location.pathname) {//只要ios需要处理，其他跳过
+      // 此处不能使用location.replace
+        location.assign(baseUrl+to.fullPath)
+      //location.replace (baseUrl+to.fullPath) 
+      //重定向时用location.replace 其他用location.assign
+    } else {
+      next()
+    }
+  }
+}
+
+IOS 滚动穿透问题：就是非body滚动时，其他其他浮层滚动，会穿透，时body滚动。
+
+原因：我也不知道啊，为什么这么设计，我也不敢问，也不敢说。
+解决：
+// 打开浮层时调用closeTouch阻止body事件，关闭时调用openTouch 恢复
+{
+    data:{
+        //...
+        handler: function (e) {
+          e.preventDefault()
+        }
+    },
+    methods:{
+        /* 解决iphone页面层级相互影响滑动的问题 */
+      closeTouch: function () {
+        document.getElementsByTagName(&#39;body&#39;)[0].addEventListener(&#39;touchmove&#39;,
+          this.handler, { passive: false })// 阻止默认事件
+      },
+      openTouch: function () {
+        document.getElementsByTagName(&#39;body&#39;)[0].removeEventListener(&#39;touchmove&#39;,
+          this.handler, { passive: false })// 打开默认事件
+      },
+    }
+}
+
+
+</section>
+    <p class="sub">10月 21, 2019</p>
+  </div>
+</div>
+  
+    
+    <div class="project-card project-card-continuous">
+  
+  <div class="ctnWrap">
+    <a href="/posts/794/" class="title">Flex 布局问题汇总</a>
+    <section class="desc">
+  flex布局使用起来很方便\n而且现在的浏览器也基本支持了大家可放心用起来。但用了flex总会有一些小问题这里总结下再使用flex时遇到的问题：
+flex下 input 宽度无法自适应：   &lt;div class=&#39;flex&#39;&gt;        
+    &lt;input class=&#39;flex1&#39;&gt;
+    &lt;button&gt;提交&lt;/button&gt;
+  &lt;/div&gt;
+以上代码在有写浏览器上input宽度不能自适应，导致了input和button宽度固定，如果button的自多点就会超出了父div的宽度了。
+解决方法：
+添加min-width:0;网上说的，但试了下并不行
+
+添加div包裹即可（推荐）
+  &lt;div class=&#39;flex&#39;&gt;
+          &lt;div class=&#39;flex1&#39;&gt;&lt;input style=&#39;width:100%&#39;&gt;&lt;/div&gt;
+
+                &lt;button&gt;提交&lt;/button&gt;
+                    &lt;/div&gt;
+                      ```
+### flex 下`text-overflow: ellipsis;`不生效
+```javascript
+  &lt;div class=&#39;flex&#39;&gt;
+          &lt;label&gt;标题&lt;/label&gt;
+                  &lt;div class=&#39;flex1&#39; style=&#39;text-overflow: ellipsis;overflow:hidden;white-space: nowrap;&#39;&gt;奥术大师多按时发斯蒂芬斯蒂芬斯蒂芬斯蒂芬是否水电费水电费水电费水电费水电费水电费水电费水电费&lt;/div&gt;\n    &lt;/div&gt;\n    ```\n    以上的div还是不能让`text-overflow: ellipsis`生效\n    \n    #### 解决方法\n    \n    - 父flex加`min-width:0;`\n      ```javascript\n        &lt;div class=&#39;flex&#39; style=&#39;min-width:0;&#39;&gt;\n            &lt;label&gt;标题&lt;/label&gt;\n            &lt;div class=&#39;flex1&#39; style=&#39;text-overflow: ellipsis;overflow:hidden;white-space: nowrap;&#39;&gt;奥术大师多按时发斯蒂芬斯蒂芬斯蒂芬斯蒂芬是否水电费水电费水电费水电费水电费水电费水电费水电费&lt;/div&gt;\n        &lt;/div&gt;\n      ```
+
+
+
+
+</section>
+    <p class="sub">10月 14, 2019</p>
+  </div>
+</div>
+  
+    
+    <div class="project-card project-card-continuous">
+  
+  <div class="ctnWrap">
+    <a href="/posts/52063/" class="title">REM自适应</a>
+    <section class="desc">
+  designSize=640 为设计稿大小
+htmlFontSize=100为当设计稿为640px时html font-size为100px
+(建议默认100，因为好换算,10也可以，但pc有些浏览器会不支持12px以下字体，所用100最安全)
+此时1px=0.01rem;
+ (function(doc, win, designSize,htmlFontSize) {
+        var docEl = doc.documentElement,
+                isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+                dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+                dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+        docEl.dataset.dpr = dpr;
+        var recalc = function() {
+          var width = docEl.clientWidth;
+          if (width / dpr &gt; designSize) {
+            width = designSize * dpr;
+          }
+          docEl.dataset.width = width;
+          docEl.dataset.percent = htmlFontSize * (width / designSize);
+          docEl.style.fontSize = htmlFontSize * (width / designSize) + 'px';
+        };
+        recalc();
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+      })(document, window,640,100);
+      ```
+"
+
+
+</section>
+    <p class="sub">10月 14, 2019</p>
   </div>
 </div>
   

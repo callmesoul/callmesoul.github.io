@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://callmesoul.cn/"/>
-  <updated>2020-02-28T00:08:46.091Z</updated>
+  <updated>2020-06-17T01:46:11.565Z</updated>
   <id>https://callmesoul.cn/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>sequelize 问题汇总</title>
+    <link href="https://callmesoul.cn/posts/4/"/>
+    <id>https://callmesoul.cn/posts/4/</id>
+    <published>2020-06-17T01:20:33.000Z</published>
+    <updated>2020-06-17T01:46:11.565Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Sequelize"><a href="#Sequelize" class="headerlink" title="Sequelize"></a>Sequelize</h2><p><code>sequelize</code> 是<code>nodejs</code>里面很成熟的数据库<code>ORM</code>，配合<code>nodejs</code>使用，开发事半功倍。相较于其他语言<code>ORM</code>，<code>sequelize</code> 有着一整套完整的解决方案，包括各种复杂的查询，联表，数据库表的设计与生成等。</p><p>本文主要记录各种负责的数据查询使用<code>sequelize</code>如何实现，还有记录一些坑或bug。</p><h3 id="sequelize-include-order"><a href="#sequelize-include-order" class="headerlink" title="sequelize include order"></a>sequelize include order</h3><p>写过原生sql查询的人都知道，排序都是在最外层排序的，所以一下代码无效:</p><pre><code>ctx.model.User.findAll({    include: [        {            model: ctx.mode.Book,            as: &#39;books&#39;,            order: [[&#39;createdAt&#39;, &#39;ASC&#39;]]        }    ],    order: [[&#39;createdAt&#39;, &#39;DESC&#39;]]})</code></pre><p>以上查询最外层的<code>order</code>是有效的， 但是里面<code>include</code>层的<code>books</code>数组排序是无效的，会导致每次查询的数据顺序不一样，要指定<code>include</code>里面数据的排序，应该这样写</p><pre><code>ctx.model.User.findAll({    include: [        {            model: ctx.mode.Book,            as: &#39;books&#39;        }    ],    order: [[&#39;createdAt&#39;, &#39;DESC&#39;], order: [[&#39;books&#39;, &#39;createdAt&#39;, &#39;ASC&#39;]]]})</code></pre><p>类似于原生查询的<code>A.createdAt</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Sequelize&quot;&gt;&lt;a href=&quot;#Sequelize&quot; class=&quot;headerlink&quot; title=&quot;Sequelize&quot;&gt;&lt;/a&gt;Sequelize&lt;/h2&gt;&lt;p&gt;&lt;code&gt;sequelize&lt;/code&gt; 是&lt;code&gt;nodejs&lt;/code
+      
+    
+    </summary>
+    
+    
+    
+      <category term="frontend" scheme="https://callmesoul.cn/tags/frontend/"/>
+    
+  </entry>
   
   <entry>
     <title>关于Vue-router=&gt;addRoutes 方法的一些坑</title>
@@ -66,7 +90,7 @@
     <link href="https://callmesoul.cn/posts/100000/"/>
     <id>https://callmesoul.cn/posts/100000/</id>
     <published>2019-12-04T08:32:57.000Z</published>
-    <updated>2019-12-09T08:04:45.361Z</updated>
+    <updated>2020-06-17T01:22:04.397Z</updated>
     
     <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在打一个多页面的手脚架，因为经常会接到一两个页面的临时活动的开发需求。</p><p>vue开发栈喜欢了，想用vue来开发，有感觉有点累赘，大材小用的感觉。</p><p>直接新建个html，手撸起来又各种问题，导致开发效率低下，例如:</p><ul><li>平时用惯了es6语法，要写回es5,要经常查文档</li><li>不能使用预处理样式(less,sass)，这个效率大打折扣啊</li><li>手动页面优化(压缩，去除注释,检测语法)</li></ul><p>本着现代开流，还是自己根据自己的需求撸个基于webpack的多页面开发手脚架，虽然没用vue，但是开发的流程基本跟vue开发流程一直，能自动化的部分都自动化，能提高开发效率的都用上，以后再也这类需求，就直接拉下手脚架，开发就行，不用再另外一个个配置了。</p><p>本以为大功告成，却忽略了一个问题，就是有时几个页面的头部或者底部是共用的，这时候需要分离出来，不然三个页面个三个一样的头部，要修改头部时也要修改三个页面，这很不好维护。</p><p>于是乎就寻找各种方案了</p><h3 id="html-引入模板"><a href="#html-引入模板" class="headerlink" title="html 引入模板"></a>html 引入模板</h3><ol><li><p>iframe</p><p>首先淘汰了这种方法，因为iframe算是历史遗留产物，而且会引起许多的bug，能不用还是不用吧。对iframe真心没好感。</p></li><li><p>模板引擎</p><p>这是开始确认的方向，因为之前玩node用过ejs，使用起来简单方便，于是乎在网上找了各种方案，但还是没找到合适的。</p><ul><li>一种是基于一个布局模板去生成html，但这不够灵活啊，不是所有的页面都一定要基于那个模板，比如有几个页面公用一个头部，另一个页面公用另一个头部这样，我能根据自己需求来引入才是完美的，而且ejs并没有继承的功能，不能再一个模板上追加内容，也是个大问题。</li><li>第二种就是项目直接全部用ejs，webpack解析打包成html。虽然解决了上面的问题.但对于前端开发来说不是很友好，都变成了.ejs后缀了，最终还是舍弃了。</li></ul></li><li><p>html-loader 的  interpolate</p><p>html-loader 大部分人都有用，甚至在解决这个问题前我自己也用了，但大部分人都想我一样，用来处理html文件中的静态资源文件，但其实有一个引入模板的功能。</p><p>首先要在webpack rules里加上加一条处理html的规则</p><pre><code class="javascript">{      test: /\.html$/,      use: {        loader: &#39;html-loader&#39;,        options: {          // 处理html 引用的图片          attrs: [&#39;img:src&#39;],          // 开启 html模板功能          interpolate: true        }      }    }</code></pre></li></ol><p>   然后在html文件就可以直接引入其他html模板了</p><pre><code class="html">   &lt;!DOCTYPE html&gt;   &lt;html&gt;   &lt;head&gt;     &lt;title&gt;index&lt;/title&gt;     ${require(&quot;../layouts/head.html&quot;)}   &lt;/head&gt;     ${require(&quot;../layouts/header.html&quot;)}   &lt;body&gt;     ${require(&quot;../layouts/footer.html&quot;)}   &lt;/body&gt;   &lt;/html&gt;</code></pre><p>   简单又灵活，Get it！</p><p>​        最后也分享下自己配置好手脚架：<strong><a href="https://github.com/callmesoul/webpack-multiple-pages-template" target="_blank" rel="noopener">webpack-multiple-pages-template</a></strong></p>]]></content>
     
@@ -81,6 +105,8 @@
     </summary>
     
     
+    
+      <category term="frontend" scheme="https://callmesoul.cn/tags/frontend/"/>
     
   </entry>
   
@@ -173,7 +199,7 @@
     <link href="https://callmesoul.cn/posts/51837/"/>
     <id>https://callmesoul.cn/posts/51837/</id>
     <published>2019-10-21T00:47:58.000Z</published>
-    <updated>2019-12-09T08:04:45.361Z</updated>
+    <updated>2020-06-17T01:21:38.301Z</updated>
     
     <content type="html"><![CDATA[<p>| 前言：现在的开发基本都是前后端分离的项目，既解放了前后台各自的生产力（后台专注写业务给出数据就行，再也不用管前端UI的事。前台专注于写UI拿数据就行，再也不用跑后台服务，不用打开eclipse了）又可以一套代码兼容多个项目：APP，网页，微信，微信小程序等。</p><p>但在开发的过程中发现了，现在后台普遍用了自定义code去判断接口的成功失败信息。而http code则变成鸡脖，除非是服务器蹦了之外，其他一律返回200成功。为什么会有这个现状呢？具体不是很了解啊，据说是以前IE上有些http code报错会导致IE一些问题。不知道是不是，知道的可以给我科普下。</p><p>而在开发中使用自定义code也并没有什么问题，例如我们的项目一般接口返回的response信息完整结构：</p><pre><code class="javascript">{    data:{        data:{            userList:[                {id:1}            ]        },        rcode: 300,        message: &quot;操作成功&quot;    },    engine:&#39;.....&#39;,    headers:{//....},    request:{//....},    status:200,    statusText:&quot;request:ok&quot;}</code></pre><p>而我们开发中一般用一个拦截器去拦截接口中的错误和返回接口要用的东西，不用的heades我们就不返回了。例如:</p><pre><code class="javascript">response.use(  (response) =&gt; {    if(response.data.rcode===405){      //统一处理某个自定义错误code    }else{      return response.data;//返回我们要用的数据      promise.resolve();    }  },  (err) =&gt; {    //httpcode 错误 默认返回200，所以只要处理500以上的服务器问题即可    //发生网络错误后会走到这里    if(err.status&gt;=500){       //统一处理某个httpcode 500以上错误    }  });</code></pre><p>使用了拦截器后我们正常得到的数据格式如下:</p><pre><code class="javascript">{        data:{            userList:[                {id:1}            ]        },        rcode: 300,        message: &quot;操作成功&quot;},</code></pre><p>但我们请求完数据后必须判断rcode是否成功才好操作,否则会报错，例如</p><pre><code class="javascript">let res=await this.api.getUserList();if(res.data.rcode==300){//要先判断是否成功,否则失败下面语句会报错找不到&#39;userList&#39;，接口失败是没有返回userList的        this.userList=res.data.userList;}</code></pre><p>以上就基本大部分公司的写法，也没什么问题。但写多了（例如：100个接口）就会发现,100个接口，前端就要写100个<code>if(res.data.rcode==300)</code>。能不能有办法优化下。</p><p>后来用接触了nodejs 自己写后台接口发现是可以优化的，而且对于接口比较多的项目，效率可以大大的提高，对于前后台都是。那就是用httpcode替换自定义的code。</p><h3 id="先来说说httpcode相对于自定义code的好处"><a href="#先来说说httpcode相对于自定义code的好处" class="headerlink" title="先来说说httpcode相对于自定义code的好处"></a>先来说说httpcode相对于自定义code的好处</h3><ol><li>规范，httpcode的规范有国际的规范，百度搜一下就有。而使用自定义code规范都是自己定的，而且每个项目的定义code的字段，每个值的规范也不一样容易混乱。如果每个项目都用httpcode 都用国际的规范这样是不是会好很多？</li><li>对于后端开发来说使用httpcode可以大大增加效率，例如：</li></ol><ul><li><p>使用自动code时输出数据</p><pre><code>//成功时this.body={  data:{      userList:[{id:1}]  },  rcode:300,  msg:&#39;成功&#39;}//失败时this.body={  rcode:400,  msg:&#39;失败&#39;}</code></pre></li><li><p>使用httpcode是，因为默认输出都是200，只有错误的的是否才需要去定义错误码：</p><pre><code>//成功时this.body={    userList:[{id:1}]}//失败时this.status=400;this.body={    msg:&#39;失败&#39;}</code></pre><p>你可能以为也就简单了那么点事，可是当有100个接口时呢？效率就是从这里来的啊</p></li></ul><p>  对于前端开发来说使用httpcode也可以大大增加效率，例如：</p><p>  拦截器就不用去判断自定义code 而直接判断httpcode：</p><pre><code class="javascript">  response.use(    (response) =&gt; {      if(response.data.rcode===405){        //统一处理某个自定义错误code      }else{        return response.data;//返回我们要用的数据        promise.resolve();      }    },    (err) =&gt; {      //httpcode 错误 默认返回200，所以只要处理500以上的服务器问题即可      //发生网络错误后会走到这里      if(err.status===400){        //统一处理某个httpcode 错误      }else if(err.status&gt;=500){         //统一处理某个httpcode 500以上错误      }    }  );</code></pre><p>然后再来对比下使用httpcode和使用自定义code的数据个操作：</p><pre><code class="javascript">//自定义code时返回数据{        data:{            userList:[                {id:1}            ]        },        rcode: 300,        message: &quot;操作成功&quot;}//httpcode时返回数据{        userList:[                {id:1}            ]},//自定义code时操作let res=await this.api.getUserList();if(res.data.rcode==300){//要先判断是否成功,否则失败下面语句会报错找不到&#39;userList&#39;，接口失败是没有返回userList的        this.userList=res.data.userList;}//httpcode时操作let res=await this.api.getUserList();if(res){//要先判断是否成功,否则失败下面语句会报错找不到&#39;userList&#39;，接口失败是没有返回userList的        this.userList=res.userList;}</code></pre><p>虽然感觉就优化了那么点，但真正写起来，那么多个接口，你就会感觉显明方便多，效率也快乐。</p>]]></content>
     
@@ -189,6 +215,8 @@
     
     
     
+      <category term="frontend" scheme="https://callmesoul.cn/tags/frontend/"/>
+    
   </entry>
   
   <entry>
@@ -196,7 +224,7 @@
     <link href="https://callmesoul.cn/posts/12004/"/>
     <id>https://callmesoul.cn/posts/12004/</id>
     <published>2019-10-21T00:44:58.000Z</published>
-    <updated>2019-12-09T08:04:45.360Z</updated>
+    <updated>2020-06-17T01:21:59.965Z</updated>
     
     <content type="html"><![CDATA[<ul><li>苹果IOS系统分享配置失败，签名错误</li></ul><p>原因：苹果IOS系统下，页面跳转时，路由跳转但地址并没有变，还是进入程序的第一个地址，所以签名的地址！=当前页面地址 所以错误了。</p><p>解决:就是手动把url改了，先建一个mixins插件，然后以后那个页面需要分享就引入这个插件就可以了。</p><pre><code class="javascript">// assign.js//ios端 histiry 模式兼容问题const location = global.locationconst u = navigator.userAgent let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端let baseUrl=process.env.BASE_URL.substring(0,process.env.BASE_URL.length-1); // 兼容自定义 BASE_URLexport default {  beforeRouteEnter(to, from, next) {    if (isiOS &amp;&amp; baseUrl+to.path !== location.pathname) {//只要ios需要处理，其他跳过      // 此处不能使用location.replace        location.assign(baseUrl+to.fullPath)      //location.replace (baseUrl+to.fullPath)       //重定向时用location.replace 其他用location.assign    } else {      next()    }  }}</code></pre><ul><li>IOS 滚动穿透问题：就是非body滚动时，其他其他浮层滚动，会穿透，时body滚动。</li></ul><p>原因：我也不知道啊，为什么这么设计，我也不敢问，也不敢说。</p><p>解决：</p><pre><code class="javascript">// 打开浮层时调用closeTouch阻止body事件，关闭时调用openTouch 恢复{    data:{        //...        handler: function (e) {          e.preventDefault()        }    },    methods:{        /* 解决iphone页面层级相互影响滑动的问题 */      closeTouch: function () {        document.getElementsByTagName(&#39;body&#39;)[0].addEventListener(&#39;touchmove&#39;,          this.handler, { passive: false })// 阻止默认事件      },      openTouch: function () {        document.getElementsByTagName(&#39;body&#39;)[0].removeEventListener(&#39;touchmove&#39;,          this.handler, { passive: false })// 打开默认事件      },    }}</code></pre>]]></content>
     
@@ -215,6 +243,8 @@
     
     
     
+      <category term="frontend" scheme="https://callmesoul.cn/tags/frontend/"/>
+    
   </entry>
   
   <entry>
@@ -222,7 +252,7 @@
     <link href="https://callmesoul.cn/posts/794/"/>
     <id>https://callmesoul.cn/posts/794/</id>
     <published>2019-10-14T08:24:03.000Z</published>
-    <updated>2019-12-09T08:04:45.353Z</updated>
+    <updated>2020-06-17T01:21:45.398Z</updated>
     
     <content type="html"><![CDATA[<p>flex布局使用起来很方便\n而且现在的浏览器也基本支持了<br>大家可放心用起来。<br>但用了flex总会有一些小问题<br>这里总结下再使用flex时遇到的问题：</p><h3 id="flex下-input-宽度无法自适应："><a href="#flex下-input-宽度无法自适应：" class="headerlink" title="flex下 input 宽度无法自适应："></a>flex下 input 宽度无法自适应：</h3><pre><code class="javascript">   &lt;div class=&#39;flex&#39;&gt;            &lt;input class=&#39;flex1&#39;&gt;    &lt;button&gt;提交&lt;/button&gt;  &lt;/div&gt;</code></pre><p>以上代码在有写浏览器上input宽度不能自适应，导致了input和button宽度固定，如果button的自多点就会超出了父div的宽度了。</p><h4 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h4><ul><li><p>添加<code>min-width:0;</code>网上说的，但试了下并不行</p></li><li><p>添加div包裹即可（推荐）</p><pre><code class="javascript">  &lt;div class=&#39;flex&#39;&gt;          &lt;div class=&#39;flex1&#39;&gt;&lt;input style=&#39;width:100%&#39;&gt;&lt;/div&gt;                &lt;button&gt;提交&lt;/button&gt;                    &lt;/div&gt;                      ```### flex 下`text-overflow: ellipsis;`不生效```javascript  &lt;div class=&#39;flex&#39;&gt;          &lt;label&gt;标题&lt;/label&gt;                  &lt;div class=&#39;flex1&#39; style=&#39;text-overflow: ellipsis;overflow:hidden;white-space: nowrap;&#39;&gt;奥术大师多按时发斯蒂芬斯蒂芬斯蒂芬斯蒂芬是否水电费水电费水电费水电费水电费水电费水电费水电费&lt;/div&gt;\n    &lt;/div&gt;\n    ```\n    以上的div还是不能让`text-overflow: ellipsis`生效\n    \n    #### 解决方法\n    \n    - 父flex加`min-width:0;`\n      ```javascript\n        &lt;div class=&#39;flex&#39; style=&#39;min-width:0;&#39;&gt;\n            &lt;label&gt;标题&lt;/label&gt;\n            &lt;div class=&#39;flex1&#39; style=&#39;text-overflow: ellipsis;overflow:hidden;white-space: nowrap;&#39;&gt;奥术大师多按时发斯蒂芬斯蒂芬斯蒂芬斯蒂芬是否水电费水电费水电费水电费水电费水电费水电费水电费&lt;/div&gt;\n        &lt;/div&gt;\n      ```</code></pre></li></ul>]]></content>
     
@@ -237,6 +267,8 @@
     </summary>
     
     
+    
+      <category term="frontend" scheme="https://callmesoul.cn/tags/frontend/"/>
     
   </entry>
   
@@ -269,7 +301,7 @@
     <link href="https://callmesoul.cn/posts/52063/"/>
     <id>https://callmesoul.cn/posts/52063/</id>
     <published>2019-10-14T08:14:57.000Z</published>
-    <updated>2019-12-09T08:04:45.359Z</updated>
+    <updated>2020-06-17T01:21:50.921Z</updated>
     
     <content type="html"><![CDATA[<p>designSize=640 为设计稿大小<br>htmlFontSize=100为当设计稿为640px时html font-size为100px<br>(建议默认100，因为好换算,10也可以，但pc有些浏览器会不支持12px以下字体，所用100最安全)<br>此时1px=0.01rem;</p><pre><code> (function(doc, win, designSize,htmlFontSize) {        var docEl = doc.documentElement,                isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),                dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,                dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';        docEl.dataset.dpr = dpr;        var recalc = function() {          var width = docEl.clientWidth;          if (width / dpr &gt; designSize) {            width = designSize * dpr;          }          docEl.dataset.width = width;          docEl.dataset.percent = htmlFontSize * (width / designSize);          docEl.style.fontSize = htmlFontSize * (width / designSize) + 'px';        };        recalc();        if (!doc.addEventListener) return;        win.addEventListener(resizeEvt, recalc, false);      })(document, window,640,100);      ```</code></pre>"]]></content>
     
@@ -286,6 +318,8 @@ htmlFontSize=100为当设计稿为640px时html font-size为100px&lt;br&gt;
     </summary>
     
     
+    
+      <category term="frontend" scheme="https://callmesoul.cn/tags/frontend/"/>
     
   </entry>
   
@@ -452,31 +486,6 @@ htmlFontSize=100为当设计稿为640px时html font-size为100px&lt;br&gt;
       
       
         &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;第三方评论插件已经死得差不多了，从一开始多说到后来的网易云跟帖，最后剩下了畅言。最近畅言为了活下去，也退出了广告，让用户体验更差了。本来用户
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>装机日志</title>
-    <link href="https://callmesoul.cn/posts/30696/"/>
-    <id>https://callmesoul.cn/posts/30696/</id>
-    <published>2018-05-10T01:14:14.000Z</published>
-    <updated>2019-12-09T08:04:45.364Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3></li></ul><p>​     只从从家里搬出来后，自己带着台小mac air。因为太小了，用惯了台式。这段是时间每天下班都很少开电脑，也就少做事了。</p><p>最近有空想着不能这么闲下去，于是就像买回台台式回来干些事。</p><p>首先自己逛了下组装机市场，感觉低端市场，较少了。好多品牌都主打高端组装机，水冷之类，动不动上万。个人虽也玩玩游戏，但也不是什么游戏骨灰级或发烧级玩家，一般配置也就玩得起我玩得游戏了。没必要那么高。而做稍微低端点市场的品牌都较杂，质量难保证。尤其淘宝，你可以搜下组装电脑，有些一整套才两千多，但跟着他的配置自己去京东捡，远超两千多好不。哪有那么好的事的，硬件的来源渠道和质量可想而知。而且个人对审美较高要求啊，想自己组装个小机箱，不想那么大，占位置，所有最后还是确定自己组装咯。</p><ul><li><h3 id="预算"><a href="#预算" class="headerlink" title="预算"></a>预算</h3><p>价格：4000左右</p><p>作用：玩玩lol啊，吃吃鸡啊（虽然我不吃鸡），开发，ps简单设计等。算是正常的娱乐+工作级别的机器吧。</p></li></ul><ul><li><h3 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h3><ul><li>机箱：<a href="https://item.jd.com/1228541.html" target="_blank" rel="noopener">乔思伯（JONSBO）UMX1-PLUS侧透版本 银色 MINI-ITX机箱（支持ITX主板/全铝外</a>（这机箱合适我这种，没多少预算又追求颜值的，价格刚刚好，能接受，颜值算同价格数一数二了。没颜值追求的可以在机箱省些钱。而且买普通大机箱，其他硬件随便挑）</li><li>主板：<a href="https://item.jd.com/6972980.html" target="_blank" rel="noopener">华擎（ASRock）H310M-ITX/ac主板（Intel H310/LGA 1151）</a>（如果选了小机箱，选主板一定要注意，只能选ITX小主板，不然就装不了翻车了。）</li><li>CPU：<a href="https://item.jd.com/17208743492.html" target="_blank" rel="noopener">英特尔（Intel） 酷睿i3 8100/8350K CPU八代 台式机电脑处理器盒装 板U套装 中文盒装 </a>（为了最求稳定，稳定至上，最后还是选了I系列，为什么选i3，不选i5，i7。有钱我能不选？）</li><li>内存：<a href="https://item.jd.com/2121097.html" target="_blank" rel="noopener">金士顿(Kingston)骇客神条 Fury系列 DDR4 2400 8G 台式机内存</a>*2（开发都是知道了，内存必须16g起步，不然很烦心的，开个PS，开个webStrom，开个chrome都去了不少了。）</li><li>固态硬盘：<a href="https://item.jd.com/4311178.html" target="_blank" rel="noopener">金士顿(Kingston)A400系列 240G SATA3 固态硬盘</a>（这年头没固态不行啊，120能装个系统和一些其他东西，但是我的一些开发工具啊，工作相关的工具都想放在固态上，保证速度，于是乎选个240，应该差不多了。）</li><li>机械硬盘：<a href="https://item.jd.com/3356012.html" target="_blank" rel="noopener">希捷(SEAGATE)酷鱼系列 2TB 7200转64M SATA3 台式机机械硬盘(ST2000DM006)</a>（建议1Tb起步啦，2Tb应该一般用户都足够用，不用愁了。而且机械硬盘便宜到烂了现在。）</li><li>电源：<a href="https://item.jd.com/840370.html" target="_blank" rel="noopener">安钛克(Antec)VP500台式机电脑主机机箱电源500W（40万好评VP系列/台系电容/静音风</a>（小机箱对电源的大小也有要求，要看好咯。这电源好评多，品牌也行，也就这个。）</li><li>键盘：<a href="https://item.jd.com/5028795.html" target="_blank" rel="noopener">雷柏（Rapoo） V500PRO 104键混光机械键盘 游戏键盘 吃鸡键盘 背光键盘 电脑键盘</a>（较便宜的机械键盘了，有的话可以买更好的。不过也够用了。）</li><li>鼠标：<a href="https://item.jd.com/3654535.html" target="_blank" rel="noopener">华擎（ASRock）ASR-M01 幻影之舞 光电游戏鼠标 电竞鼠标</a>（这是是买华擎主板送的，还不错）</li><li>散热器：<a href="https://item.jd.com/6054136.html" target="_blank" rel="noopener">乔思伯（JONSBO）CR-701七彩流光版 CPU散热器 （多平台/5热管/下吹CPU散热器/12CM</a>（买这个主要为了颜值啊，加点氛围，不然的话完全不用买，cpu自带散热风扇的了。一开始买回来只为了颜值，买回来后发现，乔思伯真的很不错，颜值做工用料设计都很用心很有保证，说是追求完美的厂家一点不过分，以后买东西乔思伯有的都可以考虑买乔思伯的。）</li><li>显卡：显卡一开始没买的。因为集显先可以先用着，前期还是开发为主，后面买了条影驰的GTX 760 发现不兼容 win10 因为760最高支持dix11，而win10的dix是 12；后面换了条<a href="https://item.jd.com/3977224.html" target="_blank" rel="noopener">微星（MSI）GeForce GTX 1050 Ti GAMING X 4G 1290-1493MHZ 128BIT GDDR5 PCI-E </a></li></ul></li></ul><p>用760显卡的话总费用是4500左右，算在预算中，后面不兼容换了1050就5000多点，超了点，也还行。个人感觉整体配置旗鼓相当，都是统一等级的硬件，不会说那个硬件买贵了，浪费看了，用不了这么高。但要说唯一的话那就是显卡吧，但是显卡可以长期用，以后升级其他都不用升级显卡。</p><p>有什么好建议，也可以留言，给其他人一些参考。</p><ul><li><h3 id="装机"><a href="#装机" class="headerlink" title="装机"></a>装机</h3><p>京东就是快啊，全部京东送货，隔天就全到了，服务赞赞赞！下面就开始紧张的装机咯！</p><ul><li><img src="http://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/IMG_20181016_185109R.jpg" alt="avatar"></li></ul></li></ul><ol><li><p>拆机箱</p><p>机箱做工设计都完美</p><p><img src="http://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/IMG_20181016_185504R.jpg" alt="avatar"></p><p><img src="http://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/IMG_20181016_185516R.jpg" alt=""></p><p><img src="http://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/IMG_20181016_185529R.jpg" alt=""></p></li></ol><ol start="2"><li><p>装电源</p><p>500w大电源，不怕不够啦。</p><p><img src="http://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/IMG_20181016_190553R.jpg" alt=""></p><p><img src="http://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/IMG_20181016_192354R.jpg" alt=""></p></li></ol><ol start="3"><li><p>拆主版</p><p>主版还行，小身板，麻雀虽小五脏俱全啊。</p><p><img src="http://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/IMG_20181016_192930R.jpg" alt=""></p></li></ol><ol start="4"><li><p>拆CPU</p><p>八代I3，基本够用也稳定。</p><p><img src="http://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/IMG_20181016_192939R.jpg" alt=""></p></li></ol><ol start="5"><li><p>把cpu装主版上</p><p>这部最好小心点，毕竟cpu你懂的~</p><p>那封盖是要拿掉的哦。</p><p><img src="http://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/IMG_20181016_193505R.jpg" alt=""></p></li></ol><ol start="6"><li><p>装Cpu风扇</p><p>自带的风扇没有，用了乔思伯的风扇，做工设计颜值都一流。</p><p><img src="http://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/IMG_20181016_194019R.jpg" alt=""></p><p><img src="http://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/IMG_20181016_203606R.jpg" alt=""></p></li></ol><ol start="7"><li><p>把装好Cpu和风扇的主版装进机箱</p><p>装好主版就连机箱线，电源线等，不懂的百度可以找到教程，跟着教程走没什么难度。</p><p><img src="http://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/IMG_20181016_205834R.jpg" alt=""></p><p>原来这主版自带无限网卡，自带两天线，赞！</p><p><img src="http://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/IMG_20181016_205828R.jpg" alt=""></p></li></ol><ol start="8"><li><p>连好机箱线跟电源线就可以开机了，这里用的是主版的集显。开机试试</p><p>注意的是有些主版cpu要独立供电，我这款就是。</p><p><img src="http://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/IMG_20181017_203914R.jpg" alt=""></p><p><img src="http://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/IMG_20181017_203921R.jpg" alt=""></p><p>能进到主版的bios就证明成功了。</p></li></ol><ol start="9"><li><p>成功，就可以把剩下的机械和固态硬盘装上去了</p><p>机械不用说了，有了固定座。固态硬盘是有些水绵圈，装上后再卡位向下推卡进去的，挺不错的设计。</p><p>显卡最后装，因为比较大。</p><p>装完就可以开机装系统了。</p><p><img src="http://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/IMG_20181023_191519R.jpg" alt=""></p><p><img src="http://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/IMG_20181023_191910R.jpg" alt=""></p></li></ol><h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>好了，装机到此结束了。好久没装机了。一开始卡在了cpu独立供电哪里。因为之前的都是主版供电给Cpu的啊，坑。折腾了很久，主版通电，风扇也转，就是进不去主版的bois。后来发现cpu附近有6口的电源位，后来插上就行了。</p><p>感觉自己组装会更适合自己，配置啊，机箱啊颜值啊。也实惠。也可以增强自己的动手能力。好了，大家也去装机把。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ul&gt;
-&lt;li&gt;&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;​     只从从家里搬出来后，自己带着台小mac air。因为太小了，用惯了台式。这段是时间每天
       
     
     </summary>

@@ -140,6 +140,44 @@
 <!---->
 <!--  <div class="project-card">
   
+    <div class="imgWrap">
+      <img src="../images/sequelize.jpg" alt="" />
+    </div>
+  
+  <div class="ctnWrap">
+    <a href="/posts/4/" class="title">sequelize 问题汇总</a>
+    <section class="desc">
+  Sequelizesequelize 是nodejs里面很成熟的数据库ORM，配合nodejs使用，开发事半功倍。相较于其他语言ORM，sequelize 有着一整套完整的解决方案，包括各种复杂的查询，联表，数据库表的设计与生成等。
+本文主要记录各种负责的数据查询使用sequelize如何实现，还有记录一些坑或bug。
+sequelize include order写过原生sql查询的人都知道，排序都是在最外层排序的，所以一下代码无效:
+ctx.model.User.findAll({
+    include: [
+        {
+            model: ctx.mode.Book,
+            as: &#39;books&#39;,
+            order: [[&#39;createdAt&#39;, &#39;ASC&#39;]]
+        }
+    ],
+    order: [[&#39;createdAt&#39;, &#39;DESC&#39;]]
+})以上查询最外层的order是有效的， 但是里面include层的books数组排序是无效的，会导致每次查询的数据顺序不一样，要指定include里面数据的排序，应该这样写
+ctx.model.User.findAll({
+    include: [
+        {
+            model: ctx.mode.Book,
+            as: &#39;books&#39;
+        }
+    ],
+    order: [[&#39;createdAt&#39;, &#39;DESC&#39;], order: [[&#39;books&#39;, &#39;createdAt&#39;, &#39;ASC&#39;]]]
+})类似于原生查询的A.createdAt
+
+
+</section>
+    <p class="sub">6月 17, 2020</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
   <div class="ctnWrap">
     <a href="/posts/3/" class="title">关于Vue-router=&gt;addRoutes 方法的一些坑</a>
     <section class="desc">
@@ -1730,6 +1768,58 @@ graphql返回的字段，一定会有data，无论成功后失败。只是有错
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 
+                    <a title="sequelize 问题汇总" alt="sequelize 问题汇总" href="/posts/4/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="sequelize 问题汇总" alt="sequelize 问题汇总" src="../images/sequelize.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; sequelize 问题汇总 &gt;</div>
+                            <div class="content flex1">
+                                
+  Sequelizesequelize 是nodejs里面很成熟的数据库ORM，配合nodejs使用，开发事半功倍。相较于其他语言ORM，sequelize 有着一整套完整的解决方案，包括各种复杂的查询，联表，数据库表的设计与生成等。
+本文主要记录各种负责的数据查询使用sequelize如何实现，还有记录一些坑或bug。
+sequelize include order写过原生sql查询的人都知道，排序都是在最外层排序的，所以一下代码无效:
+ctx.model.User.findAll({
+    include: [
+        {
+            model: ctx.mode.Book,
+            as: &#39;books&#39;,
+            order: [[&#39;createdAt&#39;, &#39;ASC&#39;]]
+        }
+    ],
+    order: [[&#39;createdAt&#39;, &#39;DESC&#39;]]
+})以上查询最外层的order是有效的， 但是里面include层的books数组排序是无效的，会导致每次查询的数据顺序不一样，要指定include里面数据的排序，应该这样写
+ctx.model.User.findAll({
+    include: [
+        {
+            model: ctx.mode.Book,
+            as: &#39;books&#39;
+        }
+    ],
+    order: [[&#39;createdAt&#39;, &#39;DESC&#39;], order: [[&#39;books&#39;, &#39;createdAt&#39;, &#39;ASC&#39;]]]
+})类似于原生查询的A.createdAt
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                                    <span href="" class="">
+                      # frontend
+                    </span>
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>6月 17, 2020</span>
+                            </div>
+                        </div>
+                    </a>
+                
                     <a title="关于Vue-router=&gt;addRoutes 方法的一些坑" alt="关于Vue-router=&gt;addRoutes 方法的一些坑" href="/posts/3/"
                        class="post-item swiper-slide flex flex-v">
                         <div class="image">
@@ -1907,6 +1997,10 @@ html-loader 大部分人都有用，甚至在解决这个问题前我自己也�
 
                             </div>
                             <div class="post-tags">
+                                
+                                    <span href="" class="">
+                      # frontend
+                    </span>
                                 
                             </div>
                             <div class="other">
@@ -2351,6 +2445,10 @@ if(res){//要先判断是否成功,否则失败下面语句会报错找不到&#3
                             </div>
                             <div class="post-tags">
                                 
+                                    <span href="" class="">
+                      # frontend
+                    </span>
+                                
                             </div>
                             <div class="other">
                                 <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
@@ -2429,6 +2527,10 @@ IOS 滚动穿透问题：就是非body滚动时，其他其他浮层滚动，会
                             </div>
                             <div class="post-tags">
                                 
+                                    <span href="" class="">
+                      # frontend
+                    </span>
+                                
                             </div>
                             <div class="other">
                                 <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
@@ -2478,6 +2580,10 @@ flex下 input 宽度无法自适应：   &lt;div class=&#39;flex&#39;&gt;
 
                             </div>
                             <div class="post-tags">
+                                
+                                    <span href="" class="">
+                      # frontend
+                    </span>
                                 
                             </div>
                             <div class="other">
@@ -2563,6 +2669,10 @@ htmlFontSize=100为当设计稿为640px时html font-size为100px
 
                             </div>
                             <div class="post-tags">
+                                
+                                    <span href="" class="">
+                      # frontend
+                    </span>
                                 
                             </div>
                             <div class="other">
