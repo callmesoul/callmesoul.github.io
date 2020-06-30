@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://callmesoul.cn/"/>
-  <updated>2020-06-17T01:46:11.565Z</updated>
+  <updated>2020-06-30T08:30:07.126Z</updated>
   <id>https://callmesoul.cn/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>理财入门—懒人记账</title>
+    <link href="https://callmesoul.cn/posts/6/"/>
+    <id>https://callmesoul.cn/posts/6/</id>
+    <published>2020-06-30T08:20:29.000Z</published>
+    <updated>2020-06-30T08:30:07.126Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>为了生活更美好，最近开始学起了理财。<br>穷人家的孩子，从小到大没人告诉过你理财的重要性，自然也就没那习惯了，后来自己出来赚钱了。自然开心啊，自己的钱次怎么花就怎么花。之前喝瓶可乐都要问老爸老妈，现在直接一箱箱买，想喝就喝，快哉快哉。<br>长期这么自由自在真的很爽，可存款却永远在原地踏步，不见增长。眼看身边的人都买车买楼了，而自己还一无所有。可见凡事都有代价的。<br>总结下原因就是不会理财、大花、月光族等等。于是痛下决心开始理财，控制自己的消费。<br>第一步就当然是记账啦。记账可以知道自己每个月的消费、收入，清晰知道自己主要消费在哪里？哪些消费过度了，应该控制下的。但这一步也是艰难的一步啊！</p><h2 id="市面上的记账软件"><a href="#市面上的记账软件" class="headerlink" title="市面上的记账软件"></a>市面上的记账软件</h2><p>说到记账，第一步就是找个好用的记账软件了。<br>市面上的记账软件很多，基本都满足需求。但！就是坚持不下去，因为每次的消费都要手工在软件上记下去，坚持了10 天坚持不了15天。换了很多了记账软件都这样，功能是满足了，但没解决我的懒惰啊。而已有时很匆忙的一笔微信转账，一下就忘了记账了。<br>于是乎我在继续寻找适合我的记账。我的设想就是有没有可以读取信息的记账软件，然后我以后的消费都走银行卡，消费了收到信息，软件自动记录，是不是很方便？<br>但在市面找了一圈后发现，有些记账软件是可以读取短信消费记录的，但它并不知道消费的分类，需要自己的手选是个大工程。然后各种卡的话也容易混淆。原本想自己找时间写一个的，读读短信信息应该没什么难度。但后来我找到了一个比较理想比较适合我的记账软件，也就省得我自己开发了。</p><h2 id="微信记账本"><a href="#微信记账本" class="headerlink" title="微信记账本"></a>微信记账本</h2><p>我的最终选择就是微信记账本。是一个小程序很方便也不用安装。他可以读取你的微信各种消费和各种收入信息，我本来的比较多的也就是微信支付，除了keep会员是华为支付，京东购物用的是京东支付外，都是走的微信支付，自动记录。现在我只要要用其他不走微信支付的支付方式改成微信支付就好了。比如取消keep在华为支付的自动续费，改微信支付自动续费。京东购物也不用京东支付了，直接走微信支付，这样就搞定了，是不是很方便？<br>而且微信记账本有一个好处就是商家走微信支付时，每一笔的消费都已分好了消费类目，所以可以自动给每笔消费分类，而且你的微信转账，收发红包都会一一帮你记录，实在太适合了。微信的确定就是淘宝购物吧，好像不支持微信支付的，需要手动去添加记录。还有就是银行卡的收入比如工资，也要自己手动去添加记录，还好的是微信记账功能有个提醒功能，比如工资，你可以设置个提醒，每个月发工资时提醒添加工资收入记录。而且在微信的生态里，我们平时用得最多的就是微信了，可不大可能会错过没看到提醒。<br>如果你觉得也很懒，不妨按照我的方式试下微信记账本吧。<br>如果你觉得对你有帮助，可以请我喝杯奶茶哦😬</p><p><img src="../../images/20200630162419.jpg" alt="微信记账本"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;为了生活更美好，最近开始学起了理财。&lt;br&gt;穷人家的孩子，从小到大没人告诉过你理财的重要性，自然也就没那习惯了，后来自己出来赚钱了。自然开心
+      
+    
+    </summary>
+    
+    
+    
+      <category term="life" scheme="https://callmesoul.cn/tags/life/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AE渲染成视频第一句语音渲染变声问题</title>
+    <link href="https://callmesoul.cn/posts/5/"/>
+    <id>https://callmesoul.cn/posts/5/</id>
+    <published>2020-06-30T08:01:31.000Z</published>
+    <updated>2020-06-30T08:17:02.877Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近在玩AE做动画，导到ME,然后渲染生成视频, 视频有配音是AI合成的。<br>在AE预览的时候是没问题的，但是在ME渲染成视频后，视频的第一句音频渲染总是有问题的，很快，也变了调。而且只有第一句有问题，后面的语音音频都正常。</p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>这个问题找了很久<br>一开始以为是AI生成的语音音频有问题，几重新生成了次，换个格式都不行，把后面正常语音替换第一句语音，发现还是一样，确认和音频无关。<br>然后我才猜想是不是渲染的格式或者用来渲染的某些选项问题呢？后来试了很多都不行。<br>最后想为什么只有第一句怕的，然后我把第一句语音删了，发现不怕了，可能就是因为第一句太靠前了，视频刚开始就有一段语音音频，<br>然后我尝试把吧原来的第一段语音音频，拖后面一点，最后没玩解决的！<br>记录下，也方便遇到同样问题的人</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;最近在玩AE做动画，导到ME,然后渲染生成视频, 视频有配音是AI合成的。&lt;br&gt;在AE预览的时候是没问题的，但是在ME渲染成视频后，视频的
+      
+    
+    </summary>
+    
+    
+    
+      <category term="frontend" scheme="https://callmesoul.cn/tags/frontend/"/>
+    
+  </entry>
   
   <entry>
     <title>sequelize 问题汇总</title>
@@ -437,55 +485,6 @@ htmlFontSize=100为当设计稿为640px时html font-size为100px&lt;br&gt;
 &lt;p&gt;但其实早在四年前左右吧，大概忘记了，就有了石墨文档了。&lt;/p&gt;
 &lt;p&gt;没用过石墨文档的，直接用腾讯文档可能觉得腾讯文档很6，下面就来对比两款产品。&lt;/p&gt;
 &lt;h3 i
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>歧江吹风随便拍拍</title>
-    <link href="https://callmesoul.cn/posts/41651/"/>
-    <id>https://callmesoul.cn/posts/41651/</id>
-    <published>2018-09-10T01:13:14.000Z</published>
-    <updated>2019-12-09T08:04:45.363Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>拍照时间：2018-04-04</li><li>拍照设备手机（坚果Pro2）</li><li>地点在歧江河边的末端，较兴中更安静，人会少点，没有市区人多的吵杂，更清静。</li></ul><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180408/3a4Af8lL9m.jpg?imageslim" alt="mark"></p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180408/KCE7mhLIi5.jpg?imageslim" alt="mark"></p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180408/GiHABalGaH.jpg?imageslim" alt="mark"></p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180408/if7aKh21h9.jpg?imageslim" alt="mark"></p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180408/aeci1e8F6c.jpg?imageslim" alt="mark"></p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180408/50kb333105.jpg?imageslim" alt="mark"></p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180408/LDEgJAmeKa.jpg?imageslim" alt="mark"></p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180408/2g9fm1gb9F.jpg?imageslim" alt="mark"></p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180408/3fH3KIJaj1.jpg?imageslim" alt="mark"></p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180408/9HcI9hmKc1.jpg?imageslim" alt="mark"></p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180408/mkBkdLeLbK.jpg?imageslim" alt="mark"></p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180408/G1hmKEJkBD.jpg?imageslim" alt="mark"><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180408/I2Ig73lAhd.jpg?imageslim" alt="mark"></p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180408/IaFim2GHE8.jpg?imageslim" alt="mark"></p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180408/BmjGD53e3c.jpg?imageslim" alt="mark"></p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180408/22li1gkmKI.jpg?imageslim" alt="mark"></p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180408/H64lf06aK5.jpg?imageslim" alt="mark"></p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180408/5cDeiA382A.jpg?imageslim" alt="mark"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ul&gt;
-&lt;li&gt;拍照时间：2018-04-04&lt;/li&gt;
-&lt;li&gt;拍照设备手机（坚果Pro2）&lt;/li&gt;
-&lt;li&gt;地点在歧江河边的末端，较兴中更安静，人会少点，没有市区人多的吵杂，更清静。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&quot;http://oyz3pjs26.bkt
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>使用**gitalk** 代替其他第三方评论插件</title>
-    <link href="https://callmesoul.cn/posts/47402/"/>
-    <id>https://callmesoul.cn/posts/47402/</id>
-    <published>2018-06-10T01:14:14.000Z</published>
-    <updated>2019-12-09T08:04:45.371Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>第三方评论插件已经死得差不多了，从一开始多说到后来的网易云跟帖，最后剩下了畅言。最近畅言为了活下去，也退出了广告，让用户体验更差了。本来用户体验就不咋地。可惜碍于找不到其他更好的代替者就只好将就一下了。</p><p>知道今天找到gitalk，坚定不移地把畅言给换了。</p><h3 id="关于gitalk"><a href="#关于gitalk" class="headerlink" title="关于gitalk"></a>关于gitalk</h3><p>Gitalk 是一个基于 GitHub Issue 和 Preact 开发的评论插件。 </p><ul><li>使用 GitHub 登录</li><li>支持多语言 [en, zh-CN, zh-TW, es-ES, fr, ru]</li><li>支持个人或组织</li><li>无干扰模式（设置 distractionFreeMode 为 true 开启）</li><li>快捷键提交评论 （cmd|ctrl + enter）</li></ul><p><a href="https://github.com/gitalk/gitalk/blob/master/readme.md" target="_blank" rel="noopener">Readme</a> <a href="https://gitalk.github.io/" target="_blank" rel="noopener">在线示例</a></p><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ol><li><p>在需要插入评论的地方给个占位<code>&lt;div id=&quot;gitalk-container&quot;&gt;&lt;/div&gt;</code></p></li><li><p>接着在占位下方引入插件</p><pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/gitalk/dist/gitalk.css&quot;&gt;&lt;script src=&quot;https://unpkg.com/gitalk/dist/gitalk.min.js&quot;&gt;&lt;/script&gt;</code></pre><p>也可以js文件和css文件下载下来自己引入</p></li><li><p>创建 <strong>GitHub Application</strong>，如果没有 <a href="https://github.com/settings/applications/new" target="_blank" rel="noopener">点击这里申请</a> </p><ul><li><img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/TIM%E6%88%AA%E5%9B%BE20180713151231.png" alt="avatar"></li></ul></li><li><p>在自己的GitHub账号创建一个库来放评论，库名称填上一步的应用名称</p></li><li><p>在博客的引用插件下方填写配置</p><pre><code class="javascript">var gitalk = new Gitalk({                clientID: &#39;9f89xxxxxxde0f46&#39;, ///步骤3创建后得到的                clientSecret: &#39;22fc21a22xxxxxxf599fd41746ff54f&#39;,///步骤3创建后得到的                repo: &#39;myblog_comment&#39;,///步骤4创建的库名                owner: &#39;callmesoul&#39;,//自己的GitHub用户名                admin: [&#39;callmesoul&#39;],//自己的GitHub用户名                id: &#39;{{id}}&#39;, // 唯一标示，一般是文章id也可以是文章url                distractionFreeMode: false  // Facebook-like distraction free mode            })            gitalk.render(&#39;gitalk-container&#39;)</code></pre></li><li><p>以上完成后就可以上传上自己的博客了。</p><p>上传完，第一次进入相应页面会出现一个初始化提示。</p><p>根据操作登录自己的GitHub授权就可以了。</p></li></ol><p>值得一说的就一有评论就相当于项目有issue，gitthub就自动会有邮件提示。</p><p>比畅言好多了，畅言你不登录它后台看都不知道有新的评论。</p><p>以上就完成了，有什么问题不懂得可以在评论处提问。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;第三方评论插件已经死得差不多了，从一开始多说到后来的网易云跟帖，最后剩下了畅言。最近畅言为了活下去，也退出了广告，让用户体验更差了。本来用户
       
     
     </summary>
