@@ -140,6 +140,31 @@
 <!---->
 <!--  <div class="project-card">
   
+  <div class="ctnWrap">
+    <a href="/posts/1590/" class="title">mysql Group by获取每个分组最新的记录</a>
+    <section class="desc">
+  GROUP BY 查询默认是去每个分组第一条很多时候我们需要获取每个分组的最后一条，例如查当前用户于其他用户的聊天记录的最后一条。
+原始sql:
+SELECT * FROM table  GROUP BY type  ORDER BY createdAt DESC这里的ORDER BY是不生效的，因为GROUP BY 的执行会先于 ORDER BY
+于是我们可以先排序后再来GROUP BY：
+SELECT * FROM (
+  SELECT * FROM table ORDER BY createdAt DESC
+) as result
+GROUP BY result.type大功告成！但是在某些mysql版本group by虽然不是拿了第一条，但也不是最后一条，奇了怪了。排查下，排序的查询是没问题，GROUP BY 后就出问题了。后来百度以一段时间啊，好像有些兼容性，排序查询的时间要加上LIMIT就可以了
+完整的正确写法:
+SELECT * FROM (
+  SELECT * FROM table ORDER BY createdAt DESC LIMIT 9999
+) as result
+GROUP BY result.typeNices!
+
+
+</section>
+    <p class="sub">9月 2, 2020</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
     <div class="imgWrap">
       <img src="../images/20200630162413.jpg" alt="" />
     </div>
@@ -1805,6 +1830,46 @@ onLoad(params){
     <div class="box-content flex1">
         <div class="swiper-container">
             <div class="swiper-wrapper">
+                
+                    <a title="mysql Group by获取每个分组最新的记录" alt="mysql Group by获取每个分组最新的记录" href="/posts/1590/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="mysql Group by获取每个分组最新的记录" alt="mysql Group by获取每个分组最新的记录"
+                                     src="/images/default.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; mysql Group by获取每个分组最新的记录 &gt;</div>
+                            <div class="content flex1">
+                                
+  GROUP BY 查询默认是去每个分组第一条很多时候我们需要获取每个分组的最后一条，例如查当前用户于其他用户的聊天记录的最后一条。
+原始sql:
+SELECT * FROM table  GROUP BY type  ORDER BY createdAt DESC这里的ORDER BY是不生效的，因为GROUP BY 的执行会先于 ORDER BY
+于是我们可以先排序后再来GROUP BY：
+SELECT * FROM (
+  SELECT * FROM table ORDER BY createdAt DESC
+) as result
+GROUP BY result.type大功告成！但是在某些mysql版本group by虽然不是拿了第一条，但也不是最后一条，奇了怪了。排查下，排序的查询是没问题，GROUP BY 后就出问题了。后来百度以一段时间啊，好像有些兼容性，排序查询的时间要加上LIMIT就可以了
+完整的正确写法:
+SELECT * FROM (
+  SELECT * FROM table ORDER BY createdAt DESC LIMIT 9999
+) as result
+GROUP BY result.typeNices!
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>9月 2, 2020</span>
+                            </div>
+                        </div>
+                    </a>
                 
                     <a title="理财入门—懒人记账" alt="理财入门—懒人记账" href="/posts/6/"
                        class="post-item swiper-slide flex flex-v">

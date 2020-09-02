@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://callmesoul.cn/"/>
-  <updated>2020-06-30T08:30:07.126Z</updated>
+  <updated>2020-09-02T07:24:10.385Z</updated>
   <id>https://callmesoul.cn/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mysql Group by获取每个分组最新的记录</title>
+    <link href="https://callmesoul.cn/posts/1590/"/>
+    <id>https://callmesoul.cn/posts/1590/</id>
+    <published>2020-09-02T06:54:58.000Z</published>
+    <updated>2020-09-02T07:24:10.385Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>GROUP BY</code> 查询默认是去每个分组第一条<br>很多时候我们需要获取每个分组的最后一条，例如查当前用户于其他用户的聊天记录的最后一条。</p><p>原始sql:</p><pre><code>SELECT * FROM table  GROUP BY type  ORDER BY createdAt DESC</code></pre><p>这里的<code>ORDER BY</code>是不生效的，因为<code>GROUP BY</code> 的执行会先于 <code>ORDER BY</code></p><p>于是我们可以先排序后再来<code>GROUP BY</code>：</p><pre><code>SELECT * FROM (  SELECT * FROM table ORDER BY createdAt DESC) as resultGROUP BY result.type</code></pre><p>大功告成！但是在某些mysql版本group by虽然不是拿了第一条，但也不是最后一条，奇了怪了。排查下，排序的查询是没问题，<code>GROUP BY</code> 后就出问题了。<br>后来百度以一段时间啊，好像有些兼容性，排序查询的时间要加上<code>LIMIT</code>就可以了</p><p>完整的正确写法:</p><pre><code>SELECT * FROM (  SELECT * FROM table ORDER BY createdAt DESC LIMIT 9999) as resultGROUP BY result.type</code></pre><p>Nices!</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;code&gt;GROUP BY&lt;/code&gt; 查询默认是去每个分组第一条&lt;br&gt;很多时候我们需要获取每个分组的最后一条，例如查当前用户于其他用户的聊天记录的最后一条。&lt;/p&gt;
+&lt;p&gt;原始sql:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT * FROM table  GROU
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>理财入门—懒人记账</title>
@@ -463,32 +487,6 @@ htmlFontSize=100为当设计稿为640px时html font-size为100px&lt;br&gt;
     
     
       <category term="wxapp" scheme="https://callmesoul.cn/categories/wxapp/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>石墨文档 Vs 腾讯文档</title>
-    <link href="https://callmesoul.cn/posts/4649/"/>
-    <id>https://callmesoul.cn/posts/4649/</id>
-    <published>2018-09-10T01:14:14.000Z</published>
-    <updated>2019-12-09T08:04:45.371Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近腾讯大力再推一个新产品—腾讯文档。</p><p>朋友圈也纷纷转发感觉是一个不错的产品。</p><p>但其实早在四年前左右吧，大概忘记了，就有了石墨文档了。</p><p>没用过石墨文档的，直接用腾讯文档可能觉得腾讯文档很6，下面就来对比两款产品。</p><h3 id="大家都主打的功能"><a href="#大家都主打的功能" class="headerlink" title="大家都主打的功能"></a>大家都主打的功能</h3><ol><li><p>在线文档</p><p>在线编辑，word，excel文档。即时保存，不用手动保存，即使电脑死机奔溃，记录都在。大家应该都试过谢了一篇很长的文章就突然死机等原因就需要重写了吧。在这两款产品都可以很好的解决这问题。</p></li><li><p>多人协助</p><p>这也是我最开始用石墨文档的原因。我是做开发，经常有一些开发需求，或bug需要修复。产品就会把需要做的东西用word文档列好发给我。</p><p>然后我做着做着发现有一些问题出现</p><p>· 不是我的问题  —我发文档给源问题人。</p><p>· 多人同时处理   —-需要分工，然后把问题的文档也得发他一份。</p><p>· 做完要给回人复验 — 又要把文档发给别人，因为我再文档做了标注哪些问题之类的。</p><p>· 最重要的是进度没有一个全局的把控。 — 一份文档多人再分工。进度需要查看多人的文档处理的和</p><p>· 等等等~~  项目大，人越多就会有越多的问题出题在沟通成本上。</p></li></ol><p>但用了这两个产品后。多人同时编辑一个文档，有新的内容需求，直接加，所有都可以看到。不用再另外再给没人发一份新添加的需求文档这样。</p><p>用石墨文档首页的介绍，很好地介绍了多人协作文档的强大！</p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180424/bCE9Lf3DIf.gif" alt="mark"></p><p>这里的动画是gif比较不顺畅。可以看石墨官网的原展示介绍(<a href="https://shimo.im/)[https://shimo.im/]" target="_blank" rel="noopener">https://shimo.im/)[https://shimo.im/]</a></p><h3 id="界面对比"><a href="#界面对比" class="headerlink" title="界面对比"></a>界面对比</h3><p>没用石墨文档的人可能没感觉，但用过石墨文档的人在用腾讯文档。就会感觉的怎么就一个翻本石墨文档呢？可能我想多了吧。但企鹅的抄袭却是不是盖的。</p><h4 id="腾讯文档word界面"><a href="#腾讯文档word界面" class="headerlink" title="腾讯文档word界面"></a>腾讯文档word界面</h4><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180424/gBhhDL0g2G.png?imageslim" alt="mark"></p><h4 id="石墨文档word界面"><a href="#石墨文档word界面" class="headerlink" title="石墨文档word界面"></a>石墨文档word界面</h4><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180424/6HAbhKl34H.png?imageslim" alt="mark"></p><h4 id="石墨word-vs-腾讯word"><a href="#石墨word-vs-腾讯word" class="headerlink" title="石墨word vs 腾讯word"></a>石墨word vs 腾讯word</h4><p>可以看书界面布局几乎差不多，但是可以看出石墨的设计更细致写，有一种沉浸式写作的感觉，毕竟上线一段时间了，有一定的优化。相对腾讯刚上线，页面相对比粗糙简单。</p><p>可看到功能基本差不多</p><p>腾讯文档word多了 水印和翻译功能。 试了下翻译功能好像挺不错。</p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180424/eGIG8Ke4ll.png?imageslim" alt="mark"></p><p>而石墨文档word功能会多了一个特殊格式的片段，如代码片段，引用片段等。不同的内容有不同的段落样式，可读性会高很多。</p><p>markdown功能是两个文档的缺陷。两个产品都支持一些很简单的写法不能很好的兼容markdown。</p><p>还有以下几点：</p><ol><li><p>石墨文档有修改记录，也有手动保存的版本记录两种。而腾讯只有修改记录。</p></li><li><p>石墨文档多个评论的功能。使文档变得可交互交流。</p></li><li><p>石墨文档的每个小功能都有一个简单的视频操作介绍，点右下角的问号可找到</p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180424/98Lh06kdl5.png?imageslim" alt="mark"></p></li><li><p>石墨文档支持快捷键，也有快捷列表可以看，同样右下角问号</p></li></ol><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180424/B92LeHFl7j.png?imageslim" alt="mark"></p><ol start="5"><li>多人协助的文档，石墨可看到每一个部分的的编写者，这个还是很强大的。</li><li>石墨贴心的的免打扰，不过网页的消息一般会比较少。</li></ol><h3 id="石墨-excel-Vs-腾讯excel"><a href="#石墨-excel-Vs-腾讯excel" class="headerlink" title="石墨 excel Vs  腾讯excel"></a>石墨 excel Vs  腾讯excel</h3><p>和word文档对比差不多。</p><p>布局风格，功能都差不多。</p><p>石墨多了些高级点的功能如：根据表格信息生产图表。也可以创建表单收集信息等。</p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180424/kCb4G01Daa.png?imageslim" alt="mark"></p><p><img src="http://oyz3pjs26.bkt.clouddn.com/blog/180424/JLi60Bb7CL.png?imageslim" alt="mark"></p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>以上可以出，石墨是个很用心的产品，无论从设计还是功能的研发还是一些交互。而且石墨也有了一段时间的沉淀优化，所以石墨总体还是比腾讯文档更细致一些。感觉腾讯文档就如早其版本的石墨吧。</p><p>但是后面也难说，腾讯有这么大的流量各种优势，后面会变怎样很难说。替石墨抓鸡了…</p><h3 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h3><p>有现场的比较完善的石墨文档腾讯为何还要自研发一款呢？</p><p>其实原因的显而易见的。QQ脱离了日常沟通，变成了工作交流的主流功能，每天不知道都有多少工作文件在qq传来传去。</p><p>再从qq到TIM的转变都可以看出qq在日常娱乐社交工具慢慢转向一个专注工作交流的工具。</p><p>而在线文档这么核心的功能是不太可能接入第三家的，第一费用大。长期的这么多分享。第二资源外泄。</p><p>其实我会更看好腾讯收购石墨文档，然后用石墨文档。这样就双赢了。</p><p>以上只针对web端的简单评测。</p><p>##你还在用word，excel？？？欧特曼啦！！</p><p>##快来用用在线文档吧。</p><p>*不过一些非常私隐性，安全要求比较高的文档还是线下吧</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;最近腾讯大力再推一个新产品—腾讯文档。&lt;/p&gt;
-&lt;p&gt;朋友圈也纷纷转发感觉是一个不错的产品。&lt;/p&gt;
-&lt;p&gt;但其实早在四年前左右吧，大概忘记了，就有了石墨文档了。&lt;/p&gt;
-&lt;p&gt;没用过石墨文档的，直接用腾讯文档可能觉得腾讯文档很6，下面就来对比两款产品。&lt;/p&gt;
-&lt;h3 i
-      
-    
-    </summary>
-    
     
     
   </entry>
