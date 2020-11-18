@@ -13,9 +13,10 @@ node_sass:
 # Two kinds of card style: 'project-card', 'article-card',
 # Never mind the name.
 menu:
-  - { name: 首页, description: Home Page, link: / }
-  - { name: 归档, description: Archive Page, link: /archives }
-  - { name: 关于我, description: About Me, link: /about }
+  - { name: 首页, description: Home Page, link: /, icon: home }
+  - { name: 归档, description: Archive Page, link: /archives, icon: archives }
+  - { name: 目录, description: Archive Page, link: /categories, icon: category }
+  - { name: 关于我, description: About Me, link: /about, icon: about }
 
 
 # 网站统计
@@ -59,3 +60,4 @@ highlight:
   enable: false
 prismjs:
   enable: false
+
