@@ -2,9 +2,9 @@
 title: 自主项目【51领养】
 date: 2019-12-25 10:10:03
 abbrlink: 2
-photos:
-  - >-
-    https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/51adopt/banner.png
+categories:
+  - 前端开发
+cover: https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/51adopt/banner.png
 tags:
 ---
 ### 前言

@@ -3,6 +3,9 @@ title: webpack使用html-loader引入html模板
 abbrlink: 100000
 date: 2019-12-04 16:32:57
 tags: frontend
+cover: 
+categories:
+  - 前端开发
 ---
 ### 前言
 

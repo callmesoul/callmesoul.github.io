@@ -1,0 +1,41 @@
+.post{
+  background: #ffffff;
+  padding: 0.3rem;
+  display: flex;
+}
+article{
+  flex: 1;
+  margin-right: 0.3rem;
+  min-width: 0;
+}
+pre{
+  word-break: break-all !important;
+  word-wrap: break-word !important;
+}
+img{
+  max-width: 100%;
+}
+
+.toc-item{
+  display: none;
+}
+
+.toc{
+  border-left: 1px solid #eeeeee;
+  list-style: none;
+  width: 20%;
+  a{
+    color: inherit;
+    text-decoration: none;
+    line-height: 0.3rem;
+  }
+  .toc-item{
+    display: list-item;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .post{
+    flex-direction: column-reverse;
+  }
+}

@@ -1,0 +1,63 @@
+
+<div class="post-list" id="post-list">
+  <% page.posts.each(function(post,index) { %>
+    <div class="post-item">
+      <div class="post-item-warp">
+        <div class="title"> <%= post.title %></div>
+        <% if (index % 2 === 0) { %>
+          <% if (post.cover) { %>
+            <img class="cover" title="<%= post.title %>" alt="<%= post.title %>" src="<%= post.cover %>"></img>
+          <% } else { %>
+              <img class="cover" title="<%= post.title %>" alt="<%= post.title %>" src="/images/default.jpg"></img>
+          <% } %>
+        <% } %>
+        <div class="content flex1" title="<%= post.more %>" alt="<%= post.more %>">
+          <%- strip_html(post.more) %>
+        </div>
+        <% if (index % 2 !== 0) { %>
+          <% if (post.cover) { %>
+            <img class="cover" title="<%= post.title %>" alt="<%= post.title %>" src="<%= post.cover %>"></img>
+          <% } else { %>
+              <img class="cover" title="<%= post.title %>" alt="<%= post.title %>" src="/images/default.jpg"></img>
+          <% } %>
+        <% } %>
+        <a class="link" href="<%= url_for(post.path) %>">阅读全文</a>
+        <div class="time"><%- date(post.date, 'YYYY-MM-DD HH:mm') %></div>
+      </div>
+    </div>
+  <% }); %>
+
+
+  <!-- more -->
+  <% if (page.next) { %>
+  <div class="post-item">
+    <div class="title"></div>
+    <img class="cover"  src="/images/default.jpg"></img>
+    <div class="content flex1">test test test testtest testtest testtest testtest testtest testtest testtest testtest testtest testtest testtest testtest testtest testtest testtest testtest testtest testtest test</div>
+    <a class="link" href="">阅读全文</a>
+    <div class="time">111</div>
+    <div class="more" onClick="getMorePost(<%= page.next %>)">
+      <div class="more-warp">
+        <div class="icon"><img class="icon" src="/svg/more.svg" /></div>
+        <div class="title-name">加载更多</div>
+      </div>
+    </div>
+  </div>
+  <% } %>
+</div>
+
+
+<script>
+  function getMorePost (page) {
+    fetch('/page/' + page + '/', {'Content-Type': 'text/html'}).then(res=>res.text()).then(function(html) {
+      const parser = new DOMParser();
+      const dom = parser.parseFromString(html, "text/html");
+      const boydPostList = document.querySelectorAll('.post-item')
+      boydPostList[boydPostList.length -1].remove()
+      const postList = dom.querySelectorAll('.post-item')
+      for(var i = 0; i < postList.length; i++) {
+        document.getElementById("post-list").appendChild(postList[i])
+      }
+    })
+  }
+</script>

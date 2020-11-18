@@ -2,6 +2,8 @@
 title: 使用**gitalk** 代替其他第三方评论插件
 abbrlink: 47402
 date: 2018-06-10 09:14:14
+categories:
+  - 工具周边
 tags:
 ---
 ###  前言

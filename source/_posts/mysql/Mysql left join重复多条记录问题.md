@@ -2,6 +2,8 @@
 title: 重复多条记录问题
 abbrlink: 41967
 date: 2019-10-21 08:52:53
+categories:
+  - mysql
 tags:
 ---
 # mysql group by 和 order by 一起用失效

@@ -3,10 +3,11 @@ title: AE渲染成视频第一句语音渲染变声问题
 date: 2020-06-30 16:01:31
 tags: frontend
 abbrlink: 5
-photos:
-  - >-
-    ../images/ae.png
+categories:
+  - 前端开发
+cover: ../images/ae.png
 ---
+
 ## 背景
 最近在玩AE做动画，导到ME,然后渲染生成视频, 视频有配音是AI合成的。
 在AE预览的时候是没问题的，但是在ME渲染成视频后，视频的第一句音频渲染总是有问题的，很快，也变了调。而且只有第一句有问题，后面的语音音频都正常。

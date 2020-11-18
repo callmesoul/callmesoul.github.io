@@ -1,0 +1,23 @@
+<%- css('css/atelier-cave-light.min') %>
+<%- css('css/post') %>
+<div class="post">
+  <article>
+    <%- page.content %>
+  </article>
+  <%- toc(page.content) %>
+</div>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  window.onload = function() { 
+    const pres = document.getElementsByTagName('pre')
+    for (var i = 0; i < pres.length; i++) {
+      pres[i].className = 'prettyprint linenums'
+      pres[i].style.overflow = 'auto'
+    }
+    prettyPrint()
+    setTimeout(() => {
+    document.getElementById('loading').style.display = 'none';
+  }, 500);
+  }
+</script>

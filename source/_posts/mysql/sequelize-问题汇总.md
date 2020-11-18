@@ -2,10 +2,10 @@
 title: sequelize 问题汇总
 date: 2020-06-17 09:20:33
 tags: frontend
+categories:
+  - mysql
 abbrlink: 4
-photos:
-  - >-
-    ../images/sequelize.jpg
+cover: ../images/sequelize.jpg
 ---
 ## Sequelize
 `sequelize` 是`nodejs`里面很成熟的数据库`ORM`，配合`nodejs`使用，开发事半功倍。相较于其他语言`ORM`，`sequelize` 有着一整套完整的解决方案，包括各种复杂的查询，联表，数据库表的设计与生成等。

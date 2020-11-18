@@ -1,7 +1,10 @@
 ---
 title: 关于Vue-router=>addRoutes 方法的一些坑
 date: 2020-02-28 08:07:10
+cover: 
 abbrlink: 3
+categories:
+  - 前端开发
 tags:
 ---
 # 关于Vue-router=>addRoutes 方法的一些坑

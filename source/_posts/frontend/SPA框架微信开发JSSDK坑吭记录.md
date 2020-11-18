@@ -3,6 +3,9 @@ title: 坑吭记录
 abbrlink: 12004
 date: 2019-10-21 08:44:58
 tags: frontend
+cover: 
+categories:
+  - 前端开发
 ---
 - 苹果IOS系统分享配置失败，签名错误
 

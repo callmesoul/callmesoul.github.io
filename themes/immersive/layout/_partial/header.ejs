@@ -1,0 +1,10 @@
+<header>
+  <div class="logo">
+    <a href="/"><img src="<%= theme.logo %>" /></a>
+  </div>
+  <nav>
+    <% for(var i = 0; i < theme.menu.length; i++){ %>
+      <a class="<%- is_current(theme.menu[i].link) ? 'active' : '' %>" href="<%- is_current(theme.menu[i].link) ? 'javascript:;' : theme.menu[i].link %>"><%= theme.menu[i].name %></a>
+    <% } %>
+  </nav>
+</header>

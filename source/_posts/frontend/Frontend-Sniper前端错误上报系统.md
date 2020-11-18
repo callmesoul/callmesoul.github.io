@@ -2,7 +2,10 @@
 title: Frontend-Sniper前端错误上报系统
 abbrlink: 64826
 date: 2019-10-21 08:57:01
+cover: 
 tags:
+categories:
+  - 前端开发
 ---
 ### 前端错误监控系统服务端
 其实线上已经有很多监控系统了，例如[fundebug](https://www.fundebug.com/)。试用了一下还是挺不错的。

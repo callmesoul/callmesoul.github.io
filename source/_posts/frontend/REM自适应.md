@@ -3,6 +3,9 @@ title: REM自适应
 abbrlink: 52063
 date: 2019-10-14 16:14:57
 tags: frontend
+cover: 
+categories:
+  - 前端开发
 ---
 <p>designSize=640 为设计稿大小<br>
 htmlFontSize=100为当设计稿为640px时html font-size为100px<br>

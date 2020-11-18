@@ -1,0 +1,61 @@
+title: "CallMeSoul"
+subTitle: "Front-end developer"
+logo: "/images/logo.svg"
+favicon: "/images/icon.png"
+
+node_sass:
+  outputStyle: nested
+  precision: 5
+  sourceComments: false
+
+
+# Custom menu. You can specific the path or the card style (only useful for category page).
+# Two kinds of card style: 'project-card', 'article-card',
+# Never mind the name.
+menu:
+  - { name: 首页, description: Home Page, link: / }
+  - { name: 归档, description: Archive Page, link: /archives }
+  - { name: 关于我, description: About Me, link: /about }
+
+
+# 网站统计
+statistics:
+  # 百度统计
+  baidu: f4e4f3d9d2532faa71e451f2ab41cbb6
+
+# Social media
+# best four
+social:
+  weibo: https://weibo.com/tellmesoul/home?wvr=5
+  GitHub: https://github.com/callmesoul
+  Dribbble: ''
+#  Behance: ''
+#  Facebook: ''
+#  twitter: ''
+#  wechat: ''
+#  zhihu: ''
+#  qq: ''
+
+# Custom footer
+mail: callmesoul@foxmail.com
+copyright: 2019 CallMeSoul
+beian: 粤ICP备15053557号
+
+
+gitalk:
+  clientID: 85810192d72d7f763a9a
+  clientSecret: e9867192041e53ad9f4581db6e50bbe7373a090d
+  repo: myblog
+  owner: callmesoul
+  admin: callmesoul
+  distractionFreeMode: false
+
+
+  # Pagination
+## Set per_page to 0 to disable pagination
+
+
+highlight:
+  enable: false
+prismjs:
+  enable: false

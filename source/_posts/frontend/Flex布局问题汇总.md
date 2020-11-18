@@ -3,6 +3,9 @@ title: Flex 布局问题汇总
 abbrlink: 794
 date: 2019-10-14 16:24:03
 tags: frontend
+cover: 
+categories:
+  - 前端开发
 ---
 flex布局使用起来很方便\n而且现在的浏览器也基本支持了
 大家可放心用起来。
