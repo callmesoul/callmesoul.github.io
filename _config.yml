@@ -15,7 +15,7 @@ timezone:
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://callmesoul.cn
 root: /
-permalink: posts/:abbrlink/
+permalink: posts/:uuid/
 permalink_defaults:
 
 # Directory
@@ -38,6 +38,7 @@ render_drafts: false
 post_asset_folder: false
 relative_link: false
 future: true
+# 自带高亮  关闭
 highlight:
   enable: false
   line_number: false
@@ -64,23 +65,18 @@ tag_map:
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
 
-# Pagination
-## Set per_page to 0 to disable pagination
-per_page: 100
-pagination_dir: page
-
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 plugins:
   hexo-generator-feed
 #Feed Atom
 feed:
-  type: atom
+  type: rss2
   path: atom.xml
   limit: 20
 
 ## Themes: https://hexo.io/themes/
-theme: immersive
+theme: soul
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

@@ -1,19 +1,34 @@
-# Custom nav
-
 title: "CallMeSoul"
 subTitle: "Front-end developer"
 logo: "/images/logo.svg"
 favicon: "/images/icon.png"
 
-# Custom background
-background:
-  color: "#eff0f6"
-  image: ""
+node_sass:
+  outputStyle: nested
+  precision: 5
+  sourceComments: false
+
+
+# Custom menu. You can specific the path or the card style (only useful for category page).
+# Two kinds of card style: 'project-card', 'article-card',
+# Never mind the name.
+menu:
+  - { name: 首页, description: Home Page, link: /, icon: home }
+  - { name: 归档, description: Archive Page, link: /archives, icon: archives }
+  - { name: 目录, description: Archive Page, link: /categories, icon: category }
+  - { name: 关于我, description: About Me, link: /about, icon: about }
+
+
+musics:
+  - { name: '说好不哭', singer: '周杰伦', url: 'https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/music/%E5%91%A8%E6%9D%B0%E4%BC%A6%20-%20%E8%AF%B4%E5%A5%BD%E4%B8%8D%E5%93%AD.mp3'}
+  - { name: '爱在西元前', singer: '周杰伦', url: 'https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/music/%E5%91%A8%E6%9D%B0%E4%BC%A6%20-%20%E7%88%B1%E5%9C%A8%E8%A5%BF%E5%85%83%E5%89%8D%20%5Bmqms2%5D.mp3'}
+  - { name: '龙拳', singer: '周杰伦', url: 'https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/music/%E5%91%A8%E6%9D%B0%E4%BC%A6%20-%20%E9%BE%99%E6%8B%B3%20%5Bmqms2%5D.mp3'}
+
 
 # 网站统计
 statistics:
   # 百度统计
-  baidu: "f4e4f3d9d2532faa71e451f2ab41cbb6"
+  baidu: f4e4f3d9d2532faa71e451f2ab41cbb6
 
 # Social media
 # best four
@@ -29,7 +44,7 @@ social:
 #  qq: ''
 
 # Custom footer
-mail: d.guangying@foxmail.com
+mail: callmesoul@foxmail.com
 copyright: 2019 CallMeSoul
 beian: 粤ICP备15053557号
 
@@ -42,49 +57,13 @@ gitalk:
   admin: callmesoul
   distractionFreeMode: false
 
-# Custom menu. You can specific the path or the card style (only useful for category page).
-# Two kinds of card style: 'project-card', 'article-card',
-# Never mind the name.
-menu:
-  - { name: 首页, description: Home Page, link: /, icon: home }
-  - { name: 归档, description: Archive Page, link: /archives, icon: archives }
-  - { name: 关于我, description: About Me, link: /about, icon: about }
 
-musics:
-  - { name: '说好不哭', singer: '周杰伦', url: 'https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/music/%E5%91%A8%E6%9D%B0%E4%BC%A6%20-%20%E8%AF%B4%E5%A5%BD%E4%B8%8D%E5%93%AD.mp3'}
-  - { name: '爱在西元前', singer: '周杰伦', url: 'https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/music/%E5%91%A8%E6%9D%B0%E4%BC%A6%20-%20%E7%88%B1%E5%9C%A8%E8%A5%BF%E5%85%83%E5%89%8D%20%5Bmqms2%5D.mp3'}
-  - { name: '龙拳', singer: '周杰伦', url: 'https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/music/%E5%91%A8%E6%9D%B0%E4%BC%A6%20-%20%E9%BE%99%E6%8B%B3%20%5Bmqms2%5D.mp3'}
-
-# Specific default categories or tags of home page.
-# Post which belongs to `category` or `tag` and don't belongs to `except_category` or `except_tag` will be filtered.
-home:
-  # set card style of home page
-  # category: Projects
-  # tag: 算法
-  # except_category: 树
-  # except_tag:
-  #   - 总结
-  #   - css
-
-card_style:
-  home: project-card
-  archive: article-card
-  tag: article-card
-  category: article-card
-
-# category page
-category_generator:
-  category_per_page: 3
-  post_per_category: 3
-
-node_sass:
-  outputStyle: nested
-  precision: 5
-  sourceComments: false
+  # Pagination
+## Set per_page to 0 to disable pagination
 
 
-# Code Highlight theme
-# Available value:
-#    normal | night | night eighties | night blue | night bright
-# https://github.com/chriskempson/tomorrow-theme
-highlight_theme: night
+highlight:
+  enable: false
+prismjs:
+  enable: false
+

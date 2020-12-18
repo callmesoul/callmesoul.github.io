@@ -1,10 +1,10 @@
 ---
+uuid: 1d300b40-4102-11eb-b113-9717c2aea740
 title: 自主项目【51领养】
-date: 2019-12-25 10:10:03
-abbrlink: 2
 categories:
   - 前端开发
-cover: https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/51adopt/banner.png
+cover: 'https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/51adopt/banner.png'
+date: 2019-12-25 10:10:03
 tags:
 ---
 ### 前言

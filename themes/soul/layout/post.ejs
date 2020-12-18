@@ -1,1 +1,41 @@
-<%- partial('_partial/article', { post: page }) %>
+<div class="post flex">
+  <%- css('css/sons-of-obsidian') %>
+  <%- css('css/post') %>
+  <div class="post-warp flex1">
+    <% if (is_post()){ %>
+    <a class="iconfont icon-up hide-modal-btn" alt="返回" title="返回" onclick="hienPostDetailModal()"></a>
+    <% } %>
+    <div class="post-content">
+      <% if (is_post()){ %>
+      <div class="title"><%= page.title %></div>
+      <div class="msg">
+        <%- date(page.date, 'YYYY/M/D hh:mm') %>
+        <!-- tag-list -->
+        <% if (page.tags){ %>
+          <% page.tags.each(function(tag) { %>
+            <a class="tag"><%- tag.name %></a>
+          <% }); %>
+        <% } %>
+      </div>
+      <% } %>
+      <!-- 导航目录 -->
+      <% if (is_post()){ %>
+      <div class="menu-tree">
+        <h2 class="name">目录</h2>
+        <%- toc(page.content) %>
+      </div>
+      <% } %>
+      <article>
+        <%- page.content %>
+      </article>
+    </div>
+  </div>
+
+  <!-- 关联文章 -->
+  <!-- list_posts -->
+  <div class="more-post">
+    <div class="more-post-header">其他文章推荐</div>
+    <%- list_posts({class: 'more-post', amount: 12}) %>
+  </div>
+</div>
+

@@ -1,13 +1,13 @@
 ---
+uuid: be33f160-4101-11eb-b113-9717c2aea740
 title: Frontend-Sniper前端错误上报系统
-abbrlink: 64826
 date: 2019-10-21 08:57:01
 cover: 
 tags:
 categories:
   - 前端开发
 ---
-### 前端错误监控系统服务端
+# 前端错误监控系统服务端
 其实线上已经有很多监控系统了，例如[fundebug](https://www.fundebug.com/)。试用了一下还是挺不错的。
 可惜都是收费的，免费的只能创建一个项目，收费也不便宜。
 对于一些小公司来说很难花钱去搞，而且对小公司来说功能也不需要太复杂。
@@ -19,14 +19,14 @@ categories:
 对服务端还是新手所以代码质量....graphql也是试手。
 但好在错误监控系统一般内部人使用，独立不影响线上项目和用户。所以大胆地使用吧。
 
-## 项目集
+# 项目集
 
 - 服务端 [frontend-sniper-server](https://github.com/callmesoul/frontend-sniper-server)
 - 管理后台 [frontend-sniper-admin](https://github.com/callmesoul/frontend-sniper-admin)
 - 错误探针 [better-js](https://github.com/callmesoul/better-js)
 
 
-## todo
+# todo
 
 - [x] 支持vue
 - [x] 邮件通知（新错误报错，旧错误5n次发邮件报错）

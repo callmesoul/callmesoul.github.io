@@ -1,9 +1,9 @@
 ---
+uuid: 5b9eb5c0-4102-11eb-b113-9717c2aea740
 title: 重复多条记录问题
-abbrlink: 41967
-date: 2019-10-21 08:52:53
 categories:
   - mysql
+date: 2019-10-21 08:52:53
 tags:
 ---
 # mysql group by 和 order by 一起用失效

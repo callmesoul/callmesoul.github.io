@@ -1,46 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <%
-  var title = page.title;
 
-  if (is_archive()){
-    title = __('archive_a');
-
-    if (is_month()){
-      title += ': ' + page.year + '/' + page.month;
-    } else if (is_year()){
-      title += ': ' + page.year;
-    }
-  } else if (is_category()){
-    title = __('category') + ': ' + page.category;
-  } else if (is_tag()){
-    title = __('tag') + ': ' + page.tag;
+<%
+var title = page.title;
+if (is_archive()){
+  title = __('归档');
+  if (is_month()){
+    title += ': ' + page.year + '/' + page.month;
+  } else if (is_year()){
+    title += ': ' + page.year;
   }
-  %>
-  <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-  <%- open_graph({twitter_id: theme.twitter, google_plus: theme.google_plus, fb_admins: theme.fb_admins, fb_app_id: theme.fb_app_id}) %>
-  <% if (theme.favicon){ %>
-    <link rel="icon" href="<%- theme.favicon %>">
-  <% } %>
-  <%- css('css/index') %>
-
-
-  <!-- 百度站長統計-->
-  <% if (theme.statistics && theme.statistics.baidu && theme.statistics.baidu !== ''){ %>
-  <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?<%- theme.statistics.baidu %>";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-  <% } %>
-  <meta name="sogou_site_verification" content="hHwAVZfHTs"/>
-  <script data-ad-client="ca-pub-2041041323733631" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-</head>
+} else if (is_category()){
+  title = __('目录') + ': ' + page.category;
+} else if (is_tag()){
+  title = __('标签') + ': ' + page.tag;
+}
+%>
+<title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
+<meta charset="UTF-8">
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content=""/>
+<meta name="description" content="不超过150个字符"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="msapplication-tap-highlight" content="no">
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.1/css/regular.css" rel="stylesheet">
+<link href="//at.alicdn.com/t/font_209819_ds8dhnnd8vo.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.1/js/regular.js"></script>
+<% if (theme.favicon){ %>
+  <link rel="icon" href="<%- theme.favicon %>">
+<% } %>
+<%- js('js/rem') %>
+<%- css('css/common') %>

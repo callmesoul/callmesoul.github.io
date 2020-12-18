@@ -1,9 +1,10 @@
 ---
+uuid: 845a69f0-4102-11eb-b113-9717c2aea740
 title: 小程序开发-PC网页端扫小程序码登陆解决方案
 categories:
   - 小程序
-cover: https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B.jpg
-abbrlink: 22147
+cover: >-
+  https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B.jpg
 date: 2019-09-10 09:13:14
 tags:
 ---

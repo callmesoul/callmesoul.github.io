@@ -1,9 +1,10 @@
 ---
+uuid: 635ecf70-4102-11eb-b113-9717c2aea740
 title: 产品经理使用git发布/部署Axure原型
 categories:
   - 其他周边
-cover: https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E4%BD%BF%E7%94%A8git%E5%8F%91%E5%B8%83%E9%83%A8%E7%BD%B2Axure%E5%8E%9F%E5%9E%8B.jpg
-abbrlink: 45115
+cover: >-
+  https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E4%BD%BF%E7%94%A8git%E5%8F%91%E5%B8%83%E9%83%A8%E7%BD%B2Axure%E5%8E%9F%E5%9E%8B.jpg
 date: 2019-09-10 09:14:14
 tags:
 ---

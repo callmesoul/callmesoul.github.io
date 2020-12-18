@@ -1,11 +1,11 @@
 ---
+uuid: 89465500-4102-11eb-b113-9717c2aea740
 title: AE渲染成视频第一句语音渲染变声问题
-date: 2020-06-30 16:01:31
 tags: frontend
-abbrlink: 5
 categories:
   - 前端开发
 cover: ../images/ae.png
+date: 2020-06-30 16:01:31
 ---
 
 ## 背景

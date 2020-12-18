@@ -1,10 +1,10 @@
 ---
+uuid: 21e9c2c0-4102-11eb-b113-9717c2aea740
 title: 关于Vue-router=>addRoutes 方法的一些坑
-date: 2020-02-28 08:07:10
-cover: 
-abbrlink: 3
 categories:
   - 前端开发
+date: 2020-02-28 08:07:10
+cover:
 tags:
 ---
 # 关于Vue-router=>addRoutes 方法的一些坑

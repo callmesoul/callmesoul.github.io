@@ -1,0 +1,12 @@
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div class="music-list">
+  <div id="musiclist">
+    <% theme.musics.forEach(function(music,index) { %>
+      <a class="music-item flex flex-align-center" data-name="<%= music.singer %> - <%= music.name %>" data-url="<%= music.url %>" onclick="changePlayIndex(<%- index %>)" >
+        <span class="iconfont" class="icon-kaishi"></span>
+        <span class="title flex1"><%= music.name %> - <%= music.singer %></span>
+      </a>
+    <% }); %>
+    <%- js('js/music') %>
+  </div>
+</div>

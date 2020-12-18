@@ -1,18 +1,18 @@
 ---
+uuid: 5fce2ea0-4102-11eb-b113-9717c2aea740
 title: sequelize 问题汇总
-date: 2020-06-17 09:20:33
 tags: frontend
 categories:
   - mysql
-abbrlink: 4
 cover: ../images/sequelize.jpg
+date: 2020-06-17 09:20:33
 ---
-## Sequelize
+# Sequelize 简介
 `sequelize` 是`nodejs`里面很成熟的数据库`ORM`，配合`nodejs`使用，开发事半功倍。相较于其他语言`ORM`，`sequelize` 有着一整套完整的解决方案，包括各种复杂的查询，联表，数据库表的设计与生成等。
 
 本文主要记录各种负责的数据查询使用`sequelize`如何实现，还有记录一些坑或bug。
 
-### sequelize include order
+# sequelize include order
 写过原生sql查询的人都知道，排序都是在最外层排序的，所以一下代码无效:
 ```
 ctx.model.User.findAll({

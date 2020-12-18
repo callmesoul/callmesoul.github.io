@@ -1,11 +1,11 @@
 ---
+uuid: 47a41dd0-4102-11eb-b113-9717c2aea740
 title: webpack使用html-loader引入html模板
-abbrlink: 100000
-date: 2019-12-04 16:32:57
 tags: frontend
-cover: 
 categories:
   - 前端开发
+date: 2019-12-04 16:32:57
+cover:
 ---
 ### 前言
 

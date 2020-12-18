@@ -1,175 +1,127 @@
-<%- partial('_partial/head') %>
-<div class="main height-100 flex flex-v">
-  <div class="phone-header">
-    <a to="/home" class="mobile-logo" > <img src="<%= theme.logo %>" /> </a>
-    <a class="menu iconfont icon-menu" onclick="toggleMenu()"></a>
-  </div>
-  <div class="main-top flex flex1">
-    <nuxt-link  to="/home" class="mobile-nav-btn iconfont icon-fenlei"></nuxt-link>
-    <!--主页上左部分-->
-    <div class="height-100 main-left  flex flex-v">
-      <div class="main-left-top flex1">
-        <a class="logo">
-          <img src="<%= theme.logo %>" />
-          <div class="sub-title"><%= theme.subTitle %></div>
-        </a>
-        <%- partial('_partial/nav') %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .loading{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  background: #ffffff;
+}
+.loading .loading-warp{
+    margin: 0 auto;
+}
+.loading .loading-warp img{
+  width: 3em;
+  height: 3em;
+  animation: loading 1s;
+  animation-iteration-count: infinite;
+}
+@keyframes loading{
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+    </style>
+    <%- partial('_partial/head') %>
+  </head>
+  <body>
+
+    <!-- loading -->
+    <div class="loading" id="loading">
+      <div class="loading-warp">
+        <img src="/svg/loading-logo.svg" />
       </div>
+    </div>
 
-      <view class="website-msg">
-        <div class="beian"><a target="_blank" href="http://www.miitbeian.gov.cn/"><%= theme.beian %></a></div>
-        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-        <div class="beian"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></div>
-        <div class="theme-drsc">PowerBy:<a href="https://hexo.io" target="_blank">Hexo</a> ThemeBy:<a href="" target="_blank">Soul</a></div>
-        <div class="copyright">Copyright &#169 <a href="mailto:<%= theme.mail %>"><%= theme.copyright %></a> </div>
-      </view>
-
-      <div class="social flex flex-align-center ">
-        <% if (theme.social) { %>
-          <% _.forEach(theme.social, function(value, key) { %>
-            <% if (value) { %>
-              <a class="flex1 text-center" href="<%= url_for(value) %>" target="_blank" title="<%= key %>" alt="<%= key %>">
-                <div class="icon relative">
-                  <i class="iconfont icon-<%= key.toLowerCase() %>"></i>
-                </div>
-              </a>
+    <!-- main -->
+    <div class="main height-100 flex flex-v">
+      <div class="main-top flex flex1">
+        <nuxt-link  to="/home" class="mobile-nav-btn iconfont icon-fenlei"></nuxt-link>
+        <!--主页上左部分-->
+        <div class="height-100 main-left  flex flex-v">
+          <div class="main-left-top flex1">
+            <a class="logo">
+              <img src="<%= theme.logo %>" />
+              <div class="sub-title"><%= theme.subTitle %></div>
+            </a>
+            <%- partial('_partial/nav') %>
+          </div>
+    
+          <view class="website-msg">
+            <div class="beian"><a target="_blank" href="http://www.miitbeian.gov.cn/"><%= theme.beian %></a></div>
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="beian"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></div>
+            <div class="theme-drsc">PowerBy:<a href="https://hexo.io" target="_blank">Hexo</a> ThemeBy:<a href="" target="_blank">Soul</a></div>
+            <div class="copyright">Copyright &#169 <a href="mailto:<%= theme.mail %>"><%= theme.copyright %></a> </div>
+          </view>
+          <div class="social flex flex-align-center ">
+            <% if (theme.social) { %>
+              <% _.forEach(theme.social, function(value, key) { %>
+                <% if (value) { %>
+                  <a class="flex1 text-center" href="<%= url_for(value) %>" target="_blank" title="<%= key %>" alt="<%= key %>">
+                    <div class="icon relative">
+                      <i class="iconfont icon-<%= key.toLowerCase() %>"></i>
+                    </div>
+                  </a>
+                <% } %>
+              <% }); %>
             <% } %>
-          <% }); %>
-        <% } %>
-      </div>
-    </div>
-    <!--主页上右部分-->
-    <%- body %>
-  </div>
-  <div class="main-bottom">
-    <div class="music flex flex-pack-justify flex-align-center">
-      <div class="control">
-        <a onclick="preSong()"><span class="iconfont icon-shangyishou"></span></a>
-        <a onclick="playControl()"><span class="iconfont play-icon icon-kaishi1"></span></a>
-        <a onclick="nextSong()"><span class="iconfont icon-xiayishou-copy"></span></a>
-      </div>
-      <div class="msg">
-        <span class="time"></span>
-        <div class="line" ref="progress-line-warp">
-          <div class="song-msg"><%= theme.musics[0].singer %> - <%= theme.musics[0].name %></div>
-          <!--<div class="current-line" ref="progress-line">
-            <a tag="a" class="target" v-on:mousedown.prevent="mousedown"></a>
-          </div>-->
+          </div>
         </div>
-        <span class="all-time"></span>
+        <!--主页上右部分-->
+
+        <div class="main-right flex1">
+          <div id="main-body">
+            <%- body %>
+          </div>
+
+          <div id="main-body-loading" class="flex flex-align-center flex-pack-center">
+            <div class="loading-warp">
+              <img src="/svg/loading-logo.svg" />
+            </div>
+          </div>
+        </div>
+        
       </div>
-      <div class="right-control">
-        <a class="order-btn flex flex-align-center" onclick="toogleShowMusicList()">
-          <span class="iconfont icon-ttpodicon"></span>
-          <span class="number flex1"><%= theme.musics.length %></span>
-        </a>
+      <div class="main-bottom">
+        <div class="music flex flex-pack-justify flex-align-center">
+          <div class="control">
+            <a onclick="preSong()"><span class="iconfont icon-shangyishou"></span></a>
+            <a onclick="playControl()"><span class="iconfont play-icon icon-kaishi1"></span></a>
+            <a onclick="nextSong()"><span class="iconfont icon-xiayishou-copy"></span></a>
+          </div>
+          <div class="msg flex1 flex flex-align-center">
+            <span class="time">00:00</span>
+            <div class="line-warp flex1">
+              <div class="song-msg"><%= theme.musics[0].singer %> - <%= theme.musics[0].name %></div>
+              <div class="line" ref="progress-line-warp">
+                <div class="current-line" ref="progress-line">
+                  <a tag="a" class="target" v-on:mousedown.prevent="mousedown"></a>
+                </div>
+              </div>
+            </div>
+            <span class="all-time">00:00</span>
+          </div>
+          <div class="right-control">
+            <a class="order-btn flex flex-align-center" onclick="toogleShowMusicList()">
+              <span class="iconfont icon-ttpodicon"></span>
+              <span class="number flex1"><%= theme.musics.length %></span>
+            </a>
+          </div>
+          <audio id="audio" class="mian-audio" src="<%= theme.musics[0].url %>">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
       </div>
-      <audio id="audio" class="mian-audio" src="<%= theme.musics[0].url %>">
-        Your browser does not support the audio element.
-      </audio>
+      <!-- 音乐播放器 -->
+      <%- partial('_partial/music') %>
     </div>
-  </div>
-  <div class="music-list">
-    <div id="musiclist">
-      <% theme.musics.forEach(function(music,index) { %>
-        <a class="music-item flex flex-align-center" data-name="<%= music.singer %> - <%= music.name %>" data-url="<%= music.url %>" onclick="changePlayIndex(<%- index %>)" >
-          <span class="iconfont" class="icon-kaishi"></span>
-          <span class="title flex1"><%= music.name %> - <%= music.singer %></span>
-        </a>
-      <% }); %>
-    </div>
-  </div>
-</div>
 
-<script>
-  var playIndex = localStorage.getItem('playIndex') ? parseInt(localStorage.getItem('playIndex')) : 0
-  let musics = $('.music-item')
-  musics.eq(playIndex).addClass('active')
-  var audio = document.getElementById("audio");
-
-  $('.song-msg').html(musics[playIndex].dataset.name)
-  audio.src = musics[playIndex].dataset.url
-
-
-  var playbtn = document.getElementsByClassName("play-icon")[0];
-  var playing = false;
-  audio.loop = false;
-  audio.addEventListener('ended', function () {
-    playbtn.classList.remove("icon-kaishi")
-    playbtn.classList.add("icon-kaishi1")
-    playing = false
-  }, false);
-  audio.addEventListener('play', function () {
-    playbtn.classList.remove("icon-kaishi1")
-    playbtn.classList.add("icon-kaishi")
-    playing= true
-  }, false);
-  audio.addEventListener('pause', function () {
-    playbtn.classList.remove("icon-kaishi")
-    playbtn.classList.add("icon-kaishi1")
-    playing = false
-  }, false);
-  function toogleShowMusicList() {
-    var musiclist = document.getElementsByClassName("music-list")[0];
-    if(musiclist.className.indexOf("active") === -1){
-      musiclist.classList.add("active")
-    }else{
-      musiclist.classList.remove("active");
-    }
-  }
-
-  function playControl() {
-    if(playing){
-      audio.pause()
-    }else{
-      audio.play()
-    }
-  }
-
-  function changePlayIndex(index) {
-    if(playIndex !== index){
-      localStorage.setItem('playIndex',index)
-      playIndex = index
-      musics.removeClass('active')
-      musics.eq(playIndex).addClass('active')
-      $('.song-msg').html(musics[playIndex].dataset.name)
-      audio.src = musics[playIndex].dataset.url
-      audio.play()
-    }else{
-      playControl()
-    }
-  }
-
-  function preSong() {
-    var index
-    if(playIndex === 0){
-      index = musics.length - 1
-    }else{
-      index = playIndex - 1
-    }
-    changePlayIndex(index)
-  }
-
-  function nextSong() {
-    var index
-    if(playIndex === musics.length - 1){
-      index = 0
-    }else{
-      index = playIndex + 1
-    }
-    changePlayIndex(index)
-  }
-
-  function toggleMenu() {
-    var mainLeft = $('.main-left')
-    if(mainLeft.hasClass('active')){
-      mainLeft.removeClass('active')
-      $('.menu').removeClass('icon-close')
-      $('.menu').addClass('icon-menu')
-    }else{
-      mainLeft.addClass('active')
-      $('.menu').removeClass('icon-menu')
-      $('.menu').addClass('icon-close')
-    }
-  }
-</script>
+  </body>
+</html>

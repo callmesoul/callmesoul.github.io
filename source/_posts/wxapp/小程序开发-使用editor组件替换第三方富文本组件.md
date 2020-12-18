@@ -1,9 +1,10 @@
 ---
+uuid: 783e2210-4102-11eb-b113-9717c2aea740
 title: 小程序开发-使用editor组件替换第三方富文本组件
 categories:
   - 小程序
-cover: https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B.jpg
-abbrlink: 43892
+cover: >-
+  https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B.jpg
 date: 2019-10-09 00:44:19
 tags:
 ---
