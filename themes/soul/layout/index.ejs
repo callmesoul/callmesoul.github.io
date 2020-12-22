@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
+<script id="swiperJs" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
 <div id="post-list" class="post-list flex flex-v">
     <div class="box-content flex1">
         <div class="swiper-container">
@@ -37,8 +37,13 @@
                 <% }); %>
                 <!-- more -->
                 <% if (page.next) { %>
-                <a title="加载更多" alt="加载更多" onClick="getMorePost(<%= page.next %>)"class="post-item swiper-slide flex flex-align-center flex-pack-center more">
+                <a title="加载更多" alt="加载更多"  onClick="getMorePost(<%= page.next %>)"class="post-item swiper-slide flex flex-align-center flex-pack-center more">
                     <span class="iconfont icon-more"></span>
+                    <div id="more-loading" class="flex flex-align-center flex-pack-center">
+                        <div class="loading-warp">
+                          <img src="/svg/loading-logo.svg" />
+                        </div>
+                    </div>
                  </a>
                  <% } %>
             </div>
@@ -48,99 +53,4 @@
 </div>
 <!-- 文章详情弹窗 -->
 <div id="post-detail-modal"></div>
-<script>
-    function getSwiperPrams() {
-        var windowsWidth = document.documentElement.clientWidth
-        var slidesPerView
-        var direction;
-        if(windowsWidth > 1500){
-            direction = 'horizontal'
-            slidesPerView = 4
-        }else if(windowsWidth > 1100){
-            direction = 'horizontal'
-            slidesPerView = 3
-        }else if(windowsWidth > 1000){
-            direction = 'horizontal'
-            slidesPerView = 2
-        }else{
-            slidesPerView = 1
-            direction = 'vertical'
-        }
-        return {
-            direction: direction,
-            slidesPerView: slidesPerView
-        }
-    }
-    var params = getSwiperPrams()
-  var mySwiper = new Swiper('.swiper-container', {
-    direction: params.direction, // 垂直切换选项
-    mousewheel: true,
-    slidesPerView: params.slidesPerView,
-    spaceBetween: 30,
-    scrollbar: {
-      el: '.swiper-scrollbar'
-    },
-    on: {
-        resize: function(){
-        },
-    },
-    // 如果需要滚动条
-    scrollbar: {
-      el: '.swiper-scrollbar',
-    },
-  })
-
-  // 获取更多文章
-  function getMorePost (page) {
-    document.getElementById('main-body-loading').style.left = 0
-    fetch('/page/' + page + '/', {'Content-Type': 'text/html'}).then(res=>res.text()).then(function(html) {
-      const parser = new DOMParser();
-      const dom = parser.parseFromString(html, "text/html");
-      const boydPostList = document.querySelectorAll('.post-item')
-      mySwiper.removeSlide(boydPostList.length -1)
-      const postList = dom.querySelectorAll('.post-item')
-      for(var i = 0; i < postList.length; i++) {
-        mySwiper.appendSlide(postList[i]);
-      }
-      setTimeout(() => {
-        document.getElementById('main-body-loading').style.left = '-100%'
-      }, 1000)
-    })
-  }
-
-
-  // 显示文章详情
-  function showpostDetail (page) {
-    var head = document.getElementsByTagName('head')[0]
-    // 先加载文章详情要使用的代码高亮 prettify
-    const prettifyJs = document.getElementById('prettifyJs')
-    if (!prettifyJs) {
-        var script = document.createElement('script');
-        script.src = 'https://cdn.bootcdn.net/ajax/libs/prettify/r298/prettify.min.js';
-        script.id = 'prettifyJs';
-        script.type = 'text/javascript';
-        head.appendChild(script);
-    }
-    fetch(page, {'Content-Type': 'text/html'}).then(res=>res.text()).then(function(html) {
-        const parser = new DOMParser();
-        const dom = parser.parseFromString(html, "text/html");
-        const postDetailHtml = dom.querySelectorAll('.post')
-        // 插入文章详情
-        $("#post-detail-modal").html(postDetailHtml)
-        // 设置代码高亮
-        const pres = document.getElementsByTagName('pre')
-        for (var i = 0; i < pres.length; i++) {
-            pres[i].className = 'prettyprint linenums'
-            pres[i].style.overflow = 'auto'
-        }
-        prettyPrint()
-        // 显示弹窗
-        document.getElementById('post-detail-modal').style.bottom = 0
-    })
-  }
-
-  // 隐藏文章详情弹窗
-  function hienPostDetailModal () {
-    document.getElementById('post-detail-modal').style.bottom = '-100%'
-  }
-</script>
+<%- js('js/index') %>

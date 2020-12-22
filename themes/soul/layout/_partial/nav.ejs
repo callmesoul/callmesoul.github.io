@@ -2,8 +2,8 @@
 
   <% if (theme.menu) { %>
     <% theme.menu.forEach(function(nav) { %>
-      <a title="<%= nav.name %>"  alt="<%= nav.name %>"  v-for="(menu,index) in menus" href="<%= nav.link %>">
-        <div class="icon"><i class="iconfont icon-<%= nav.icon %>"></i></div>
+      <a title="<%= nav.name %>"  alt="<%= nav.name %>" link="<%= nav.link %>"  onclick="navigation('<%= nav.link %>')"  class="<%- is_current(nav.link) ? 'active' : '' %>">
+        <i class="iconfont icon-<%= nav.icon %>"></i>
         <div class="name">
           <div class="cnname"><%= nav.name %></div>
           <div class="enname"><%= nav.description %></div>
@@ -20,3 +20,41 @@
     </div>
   </a>-->
 </nav>
+
+<script>
+  var currentPage = window.location.pathname
+  console.log(window.location)
+  function navigation (url) {
+    if (currentPage === url) {
+      return false
+    }
+    $('#main-body-loading').css('display', 'flex')
+    $('nav a').removeClass('active')
+    const index =$('nav a').filter(index => {
+      if ($('nav a').eq(index).attr('link') === url) {
+        $('nav a').eq(index).addClass('active')
+        return index
+      }
+    })
+    
+    fetch(url, {'Content-Type': 'text/html'}).then(res=>res.text()).then(function(html) {
+            const parser = new DOMParser();
+            const dom = parser.parseFromString(html, "text/html");
+            const newDom = dom.getElementById('main-body').children
+            $('#main-body').html(newDom)
+            if (url === '/') {
+              let script = document.createElement('script');
+              script.type= 'text/javascript';
+              let scriptSrc='/js/index.js';
+              script.src= scriptSrc;
+              var head = document.getElementsByTagName('head')[0];
+              head.appendChild(script);
+            }
+            window.history.replaceState(window.history.state, '', window.location.origin + url)
+            currentPage = url
+            setTimeout(() => {
+              $('#main-body-loading').fadeOut()
+            }, 500)
+    })
+  }
+</script>

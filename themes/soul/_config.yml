@@ -14,9 +14,9 @@ node_sass:
 # Never mind the name.
 menu:
   - { name: 首页, description: Home Page, link: /, icon: home }
-  - { name: 归档, description: Archive Page, link: /archives, icon: archives }
-  - { name: 目录, description: Archive Page, link: /categories, icon: category }
-  - { name: 关于我, description: About Me, link: /about, icon: about }
+  - { name: 归档, description: Archive Page, link: /archives/, icon: archives }
+  - { name: 目录, description: Archive Page, link: /categories/, icon: category }
+  - { name: 关于我, description: About Me, link: /about/, icon: about }
 
 
 musics:

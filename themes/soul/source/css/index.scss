@@ -14,8 +14,23 @@
     color: #ffffff;
     font-size: 30px;
     cursor: pointer;
+    position: relative;
     &:hover{
       background: rgba(234, 80, 56, 0.6);
+    }
+    #more-loading{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      display: none;
+      img{
+        width: 0.8rem;
+        height: 0.8rem;
+        animation: loading 1s;
+        animation-iteration-count: infinite;
+      }
     }
   }
   .image {

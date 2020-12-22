@@ -74,6 +74,8 @@ feed:
   type: rss2
   path: atom.xml
   limit: 20
+  template:
+    - ./source/rss2.xml
 
 ## Themes: https://hexo.io/themes/
 theme: soul
