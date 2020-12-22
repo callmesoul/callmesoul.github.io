@@ -23,8 +23,8 @@
 
 <script>
   var currentPage = window.location.pathname
-  console.log(window.location)
-  function navigation (url) {
+  // 异步加载页面
+  function navigation (url, isPopstate) {
     if (currentPage === url) {
       return false
     }
@@ -36,25 +36,43 @@
         return index
       }
     })
-    
-    fetch(url, {'Content-Type': 'text/html'}).then(res=>res.text()).then(function(html) {
+    fetch(url, {'Content-Type': 'text/html'})
+    .then(res=>res.text()).then(function(html) {
             const parser = new DOMParser();
             const dom = parser.parseFromString(html, "text/html");
             const newDom = dom.getElementById('main-body').children
             $('#main-body').html(newDom)
-            if (url === '/') {
-              let script = document.createElement('script');
-              script.type= 'text/javascript';
-              let scriptSrc='/js/index.js';
-              script.src= scriptSrc;
-              var head = document.getElementsByTagName('head')[0];
-              head.appendChild(script);
+            if(!isPopstate) {
+              window.history.pushState(window.history.state, '', window.location.origin + url)
             }
-            window.history.replaceState(window.history.state, '', window.location.origin + url)
             currentPage = url
+            if (url === '/') {
+              let script = document.createElement('script')
+              script.type= 'text/javascript'
+              let scriptSrc='/js/index.js'
+              script.src= scriptSrc
+              var head = document.getElementsByTagName('head')[0]
+              head.appendChild(script)
+            }
+            // 手机端选择完要隐藏菜单
+            const clientWidth = document.documentElement.clientWidth
+            if (clientWidth < 1000) {
+              $('.main .main-left').css('margin-left', '-81%')
+              const btn = $('.mobile-nav-btn')
+              btn.removeClass('icon-close')
+              btn.removeClass('active')
+              btn.addClass('icon-menu')
+              $('.main .main-left').css('margin-left', '-81%')
+            }
             setTimeout(() => {
-              $('#main-body-loading').fadeOut()
+                $('#main-body-loading').fadeOut()
             }, 500)
     })
   }
+
+
+  window.addEventListener('popstate',function(event){
+    const path = window.location.pathname
+    navigation(path, true)
+  })
 </script>

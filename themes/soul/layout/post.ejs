@@ -1,4 +1,4 @@
-<div class="post flex">
+<div class="post flex" id="uuid" uuid="<%= page.uuid %>">
   <%- css('css/sons-of-obsidian') %>
   <%- css('css/post') %>
   <div class="post-warp flex1">
@@ -28,6 +28,8 @@
       <article>
         <%- page.content %>
       </article>
+
+      <%- partial('_partial/gitalk') %>
     </div>
   </div>
 

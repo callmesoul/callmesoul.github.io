@@ -1,3 +1,4 @@
+
 (function(doc, win, designSize,htmlFontSize) {
   var docEl = doc.documentElement,
           isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
@@ -17,7 +18,7 @@
   recalc();
   if (!doc.addEventListener) return;
   win.addEventListener(resizeEvt, recalc, false);
-})(document, window,1920,100);
+})(document, window, document.documentElement.clientWidth > 1000 ? 1920 : document.documentElement.clientWidth, 100);
 
 
 window.onload = function () {

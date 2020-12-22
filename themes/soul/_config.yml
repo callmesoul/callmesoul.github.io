@@ -15,10 +15,10 @@ node_sass:
 menu:
   - { name: 首页, description: Home Page, link: /, icon: home }
   - { name: 归档, description: Archive Page, link: /archives/, icon: archives }
-  - { name: 目录, description: Archive Page, link: /categories/, icon: category }
+  # - { name: 目录, description: Archive Page, link: /categories/, icon: category }
   - { name: 关于我, description: About Me, link: /about/, icon: about }
 
-
+# 音乐播放列表
 musics:
   - { name: '说好不哭', singer: '周杰伦', url: 'https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/music/%E5%91%A8%E6%9D%B0%E4%BC%A6%20-%20%E8%AF%B4%E5%A5%BD%E4%B8%8D%E5%93%AD.mp3'}
   - { name: '爱在西元前', singer: '周杰伦', url: 'https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/music/%E5%91%A8%E6%9D%B0%E4%BC%A6%20-%20%E7%88%B1%E5%9C%A8%E8%A5%BF%E5%85%83%E5%89%8D%20%5Bmqms2%5D.mp3'}

@@ -53,6 +53,12 @@ index_generator:
   per_page: 12
   order_by: -date
 
+# 归档页面
+archive_generator:
+  per_page: 99
+  yearly: true
+  monthly: true
+
 # Category & Tag
 default_category: uncategorized
 category_map:

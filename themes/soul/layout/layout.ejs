@@ -41,12 +41,16 @@
 
     <!-- main -->
     <div class="main height-100 flex flex-v">
+      <div class="mobile-logo flex flex-align-center">
+        <img src="<%= theme.logo %>" class="flex1" />
+        <a  to="/home" class="mobile-nav-btn iconfont icon-menu" onclick="switchMobileMenu()"></a>
+      </div>
       <div class="main-top flex flex1">
-        <nuxt-link  to="/home" class="mobile-nav-btn iconfont icon-fenlei"></nuxt-link>
+        
         <!--主页上左部分-->
         <div class="height-100 main-left  flex flex-v">
           <div class="main-left-top flex1">
-            <a class="logo">
+            <a class="logo"  onclick="navigation('/')">
               <img src="<%= theme.logo %>" />
               <div class="sub-title"><%= theme.subTitle %></div>
             </a>
@@ -90,38 +94,35 @@
         
       </div>
       <div class="main-bottom">
-        <div class="music flex flex-pack-justify flex-align-center">
-          <div class="control">
-            <a onclick="preSong()"><span class="iconfont icon-shangyishou"></span></a>
-            <a onclick="playControl()"><span class="iconfont play-icon icon-kaishi1"></span></a>
-            <a onclick="nextSong()"><span class="iconfont icon-xiayishou-copy"></span></a>
-          </div>
-          <div class="msg flex1 flex flex-align-center">
-            <span class="time">00:00</span>
-            <div class="line-warp flex1">
-              <div class="song-msg"><%= theme.musics[0].singer %> - <%= theme.musics[0].name %></div>
-              <div class="line" ref="progress-line-warp">
-                <div class="current-line" ref="progress-line">
-                  <a tag="a" class="target" v-on:mousedown.prevent="mousedown"></a>
-                </div>
-              </div>
-            </div>
-            <span class="all-time">00:00</span>
-          </div>
-          <div class="right-control">
-            <a class="order-btn flex flex-align-center" onclick="toogleShowMusicList()">
-              <span class="iconfont icon-ttpodicon"></span>
-              <span class="number flex1"><%= theme.musics.length %></span>
-            </a>
-          </div>
-          <audio id="audio" class="mian-audio" src="<%= theme.musics[0].url %>">
-            Your browser does not support the audio element.
-          </audio>
-        </div>
+        <!-- 音乐播放器 -->
+        <%- partial('_partial/music') %>
       </div>
-      <!-- 音乐播放器 -->
-      <%- partial('_partial/music') %>
     </div>
 
   </body>
 </html>
+
+<script>
+  var gitalk = {
+    clientID: '<%- theme.gitalk.clientID %>',
+    clientSecret: '<%- theme.gitalk.clientSecret %>',
+    repo: '<%- theme.gitalk.repo %>',
+    owner: '<%- theme.gitalk.owner %>',
+    admin: ['<%- theme.gitalk.admin %>'],
+  }
+  function switchMobileMenu () {
+    const btn = $('.mobile-nav-btn')
+    const isActive = btn.hasClass('active')
+    if (isActive) {
+      btn.removeClass('icon-close')
+      btn.removeClass('active')
+      btn.addClass('icon-menu')
+      $('.main .main-left').css('margin-left', '-81%')
+    } else {
+      btn.removeClass('icon-menu')
+      btn.addClass('active')
+      btn.addClass('icon-close')
+      $('.main .main-left').css('margin-left', 0)
+    }
+  }
+</script>
