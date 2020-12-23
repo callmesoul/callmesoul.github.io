@@ -1,4 +1,5 @@
 ---
+uuid: 50c95040-4438-11eb-877f-9d665ae77b76
 layout: 使用headless
 title: 使用headless cms + ssr渲染框架来开发网站
 date: 2019-11-25 11:15:44
@@ -9,11 +10,11 @@ tags: frontend
 ---
 
 
-### 前言
+# 前言
 
 由于我是一名前端开发者，偶尔会接一些私单，最主要的无非就是帮人做网站了。
 
-##### CMS
+# CMS
 
 根据以前的经验无非就是前端写完界面，然后找一个cms去套，但由于国内的cms框架（duxcms我之前一直用,dedecms.phpcms,wordpress）已经很难满足了现在的客户需求了。
 
@@ -30,7 +31,7 @@ tags: frontend
 
 问题虽然有，但方向应该是对的，就看怎么解决这些问题而已。
 
-##### 为什么写网站也要用spa
+# 为什么写网站也要用spa
 
 ​		而且平时在公司或者自己写前端，写法习惯都已经从jq过渡到了前后端分离框架`vue`、`react`、`angular`等写法的习惯了。然后接了一个私单，又要突然转回去以前那种`jq`操作`dom`的 时代。
 
@@ -42,7 +43,7 @@ tags: frontend
 
 
 
-### SSR 服务端渲染框架
+# SSR 服务端渲染框架
 
  使用SSR（也称为“通用”或“同构”）模式，将使用Node.js服务器将基于Vue组件的HTML传递给客户端，而不是纯JavaScript。   --- nuxt.js
 
@@ -66,19 +67,19 @@ tags: frontend
 - 对`gatsby`友好
 - 提供全平台sdk
 
-### headless cms
+# headless cms
 
  翻译一下就是只提供纯api的cms，不包含任何客户端代码，也就是老子只负责api你手机，还是网页想咋用咋用。 ---  摘抄自[北方蜘蛛]( https://www.jianshu.com/p/ac7caffe3931 )
 
 
 
-##### [Contentful]( https://www.contentful.com/ )
+## [Contentful]( https://www.contentful.com/ )
 
 你搜headless cms，然后到处都能看得到[Contentful]( https://www.contentful.com/ )
 
 来说说它的强大之处：
 
-- ### [API-First CMS to Power All Digital Products | *Contentful*](http://www.baidu.com/link?url=U4F_e7OMQNL_JvtG6ojIW93MqoiriddS2TxnmcxkEHmT6Rx3ek4Rk_Lsp8ZRdA4z)
+- [API-First CMS to Power All Digital Products | *Contentful*](http://www.baidu.com/link?url=U4F_e7OMQNL_JvtG6ojIW93MqoiriddS2TxnmcxkEHmT6Rx3ek4Rk_Lsp8ZRdA4z)
 
   简单翻译就是第一个只提供api的cms吧，先做有经验优势嘛
 
@@ -110,7 +111,7 @@ tags: frontend
 
 
 
-##### [strapi]( https://strapi.io/ )
+## [strapi]( https://strapi.io/ )
 
 我试了挺久的一个，功能也简单，界面也简洁。
 
@@ -178,7 +179,7 @@ tags: frontend
 
 
 
-### [ghost]( https://ghost.org/ )
+## [ghost]( https://ghost.org/ )
 
 我用过算最好的博客系统吧，性能飞跃，后台管理、写作交互,体验都完美，也有很多很漂亮的，后来因为服务器到期了，续费太贵了，于是才把博客迁移到了`hexo`+`github pages` 免服务器啊，还可以`https`，当然速度和原来的没法比啊。而且你`github` 搜 `nodejs` 的 `headless cms` 第一名就是`ghost`,第二是``strapi`
 

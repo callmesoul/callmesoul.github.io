@@ -35,48 +35,50 @@
     <!-- loading -->
     <div class="loading" id="loading">
       <div class="loading-warp">
-        <img src="/svg/loading-logo.svg" />
+        <img title="loading" alt="loading" src="/icon/loading-logo.svg" />
       </div>
     </div>
 
     <!-- main -->
     <div class="main height-100 flex flex-v">
       <div class="mobile-logo flex flex-align-center">
-        <img src="<%= theme.logo %>" class="flex1" />
-        <a  to="/home" class="mobile-nav-btn iconfont icon-menu" onclick="switchMobileMenu()"></a>
+        <img src="<%= theme.logo %>" alt="<%= theme.title %>" title="<%= theme.title %>" class="flex1" />
+        <a alt="菜单" tile="菜单"  to="/home" class="mobile-nav-btn iconfont icon-menu" onclick="switchMobileMenu()"></a>
       </div>
       <div class="main-top flex flex1">
         
         <!--主页上左部分-->
         <div class="height-100 main-left  flex flex-v">
           <div class="main-left-top flex1">
-            <a class="logo"  onclick="navigation('/')">
-              <img src="<%= theme.logo %>" />
+            <a alt="logo" title="logo"  class="logo"  onclick="navigation('/')">
+              <img title="<%= theme.title %>" alt="<%= theme.title %>" src="<%= theme.logo %>" />
               <div class="sub-title"><%= theme.subTitle %></div>
             </a>
             <%- partial('_partial/nav') %>
           </div>
     
           <view class="website-msg">
-            <div class="beian"><a target="_blank" href="http://www.miitbeian.gov.cn/"><%= theme.beian %></a></div>
+            <div class="beian"><a alt="备案" title="备案" target="_blank" href="http://www.miitbeian.gov.cn/"><%= theme.beian %></a></div>
             <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
             <div class="beian"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></div>
-            <div class="theme-drsc">PowerBy:<a href="https://hexo.io" target="_blank">Hexo</a> ThemeBy:<a href="" target="_blank">Soul</a></div>
-            <div class="copyright">Copyright &#169 <a href="mailto:<%= theme.mail %>"><%= theme.copyright %></a> </div>
+            <div class="theme-drsc">PowerBy:<a alt="Hexo" title="Hexo" href="https://hexo.io" target="_blank">Hexo</a> ThemeBy:<a href="" target="_blank">Soul</a></div>
+            <div class="copyright">Copyright &#169 <a href="mailto:<%= theme.mail %>" alt="<%= theme.mail %>" title="<%= theme.mail %>"><%= theme.copyright %></a> </div>
           </view>
+
+          <!-- 社交图标 -->
+          <% if (theme.social) { %>
           <div class="social flex flex-align-center ">
-            <% if (theme.social) { %>
               <% _.forEach(theme.social, function(value, key) { %>
                 <% if (value) { %>
                   <a class="flex1 text-center" href="<%= url_for(value) %>" target="_blank" title="<%= key %>" alt="<%= key %>">
-                    <div class="icon relative">
-                      <i class="iconfont icon-<%= key.toLowerCase() %>"></i>
+                    <div class="icon relative flex flex-align-center flex-pack-center">
+                      <img class="svg-icon" src="/icon/<%= key %>.svg" onload="SVGInject(this)"/>
                     </div>
                   </a>
                 <% } %>
               <% }); %>
-            <% } %>
           </div>
+          <% } %>
         </div>
         <!--主页上右部分-->
 
@@ -87,7 +89,7 @@
 
           <div id="main-body-loading" class="flex flex-align-center flex-pack-center">
             <div class="loading-warp">
-              <img src="/svg/loading-logo.svg" />
+              <img title="loading" alt="loading" src="/icon/loading-logo.svg" />
             </div>
           </div>
         </div>
@@ -99,11 +101,15 @@
       </div>
     </div>
 
+    <!-- 百度统计 -->
+    <%- partial('_partial/baidu-statistics') %>
+    
   </body>
 </html>
 
 <script>
   var gitalk = {
+    enable: eval('<%- theme.gitalk.enable %>'),
     clientID: '<%- theme.gitalk.clientID %>',
     clientSecret: '<%- theme.gitalk.clientSecret %>',
     repo: '<%- theme.gitalk.repo %>',

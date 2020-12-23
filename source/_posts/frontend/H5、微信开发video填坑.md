@@ -7,8 +7,6 @@ date: 2019-10-14 16:22:50
 cover:
 tags:
 ---
-"<ul>
-<li>ios系统下，视频播放默认全屏播放<br>
-解决方法：加上<code>x5-playsinline=&quot;&quot; playsinline=&quot;&quot; webkit-playsinline=&quot;&quot;</code></li>
-</ul>
-"
+
+# ios系统下，视频播放默认全屏播放
+- 加上`x5-playsinline=""; playsinline=""; webkit-playsinline=""`

@@ -4,7 +4,7 @@
 
 # Site
 title: CallMeSoul
-subtitle:
+subtitle: Front-end developer
 description: web前端开发
 keywords: web,前端,开发,vue,nodejs
 author: CallMeSoul
@@ -38,6 +38,7 @@ render_drafts: false
 post_asset_folder: false
 relative_link: false
 future: true
+
 # 自带高亮  关闭
 highlight:
   enable: false
@@ -90,12 +91,19 @@ theme: soul
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   - type: git
-    repo: https://gitee.com/callmesoul/callmesoul.git
-  - type: git
-    repo: https://github.com/callmesoul/callmesoul.github.io.git
+    repo: git@118.25.146.149:/www/repos/blog.git
+    branch: master
+  - type: baidu_url_submitter ## 这是新加的
 
 # 自动生成sitemap
 sitemap:
   path: sitemap.xml
 baidusitemap:
   path: baidusitemap.xml
+
+
+baidu_url_submit:
+  count: 10 ## 提交最新的一个链接
+  host: callmesoul.cn ## 在百度站长平台中注册的域名
+  token: your_token ## 请注意这是您的秘钥， 所以请不要把博客源代码发布在公众仓库里!
+  path: baidu_urls.txt ## 文本文档的地址， 新链接会保存在此文本文档里

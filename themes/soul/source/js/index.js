@@ -92,7 +92,7 @@ function showpostDetail(page) {
 			}
 			prettyPrint();
 			//  初始化 Gitalk 评论
-			if (gitalk.clientID && gitalk.clientID !== '') {
+			if (gitalk.enable) {
 				var _gitalk = new Gitalk({
 					clientID: gitalk.clientID,
 					clientSecret: gitalk.clientSecret,
@@ -104,8 +104,12 @@ function showpostDetail(page) {
         });
         _gitalk.render('gitalk-container');
 			}
+
+			// 执行广告script
+			try {
+				(adsbygoogle = window.adsbygoogle || []).push({});
+			} catch (error) { }
 			
-			// 显示弹窗
 			document.getElementById('post-detail-modal').style.bottom = 0;
 		});
 }

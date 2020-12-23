@@ -1,5 +1,5 @@
 ---
-uuid: 42b41410-4102-11eb-b113-9717c2aea740
+uuid: ed031f30-44bb-11eb-877f-9d665ae77b76
 title: 使用HTTPCODE替换自定义CODE
 tags: frontend
 categories:
