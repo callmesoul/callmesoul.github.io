@@ -6,7 +6,7 @@
 - 技术博客：[https://callmesoul.cn/](https://callmesoul.cn/)
 - Github：[https://github.com/callmesoul](https://github.com/callmesoul)
 
-- 期望职位：前端开发工程师，node接受开发工程师
+- 期望职位：前端开发工程师，`nodejs`开发工程师
 - 期望城市：广东中山
 - Email：callmesoul@foxmail.com
 - QQ/微信号：547437716/callmesoul
