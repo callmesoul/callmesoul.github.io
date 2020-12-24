@@ -130,3 +130,12 @@ postMoreAdsence:
   client: ca-pub-xxx,
   slot: xxxxxxxxx
 ```
+
+### 支持 &#x1F34E;
+原创的主题需要你的支持
+你可以start一下或者关注下公众号，如果你想更有利的支持，请和我喝瓶快乐水呗
+
+<img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/qrcode_for_callmesoul.jpg" width = "200" alt="callmesoul公众号" align=center />
+
+<img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/callmesoul_weixin_pay.png" width = "200" alt="微信支付" align=center />
+<img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/callmesou_ali_pay.jpg" width = "200" alt="支付宝" align=top />
