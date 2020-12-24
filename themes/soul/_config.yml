@@ -57,3 +57,14 @@ gitalk:
   admin: callmesoul
   distractionFreeMode: false
 
+
+  # 文章详情 右侧 推荐文章 下方 广告位
+postMoreAdsence:
+  enable: true # 是否开启
+  google: # 谷歌单元广告 https://www.google.com/adsense
+    client: ca-pub-2041041323733631
+    slot: 4634786954
+
+
+
+

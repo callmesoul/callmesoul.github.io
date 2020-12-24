@@ -28,6 +28,20 @@
   to { transform: rotateY(360deg); }
 }
     </style>
+    <script>
+      function getQueryVariable(variable)
+        {
+              var query = window.location.search.substring(1);
+              var vars = query.split("&");
+              for (var i=0;i<vars.length;i++) {
+                      var pair = vars[i].split("=");
+                      if(pair[0] == variable){return pair[1];}
+              }
+              return(false);
+        }
+        var isAjax = getQueryVariable('ajax') ? true : false
+        console.log(isAjax)
+    </script>
     <%- partial('_partial/head') %>
   </head>
   <body>
@@ -101,6 +115,8 @@
       </div>
     </div>
 
+    <!-- commonjs -->
+    <%- js('js/common') %>
     <!-- 百度统计 -->
     <%- partial('_partial/baidu-statistics') %>
     
@@ -108,6 +124,13 @@
 </html>
 
 <script>
+  if (isAjax) {
+    $('.main-left').css('display', 'none')
+    $('.main-bottom').css('display', 'none')
+  } else {
+    $('.hide-modal-btn').css('display', 'none')
+    $('audio').remove()
+  }
   var gitalk = {
     enable: eval('<%- theme.gitalk.enable %>'),
     clientID: '<%- theme.gitalk.clientID %>',

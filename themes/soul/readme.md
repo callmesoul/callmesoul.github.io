@@ -12,6 +12,7 @@
 - 集成`gitalk` 评论插件使用`github issue`作为文档评论功能，集体使用查看[gitalk](https://github.com/gitalk/gitalk)
 - 集成[不蒜子](http://busuanzi.ibruce.info/)极简网站访问统计
 - 集成百度统计
+- 谷歌单元广告
 
 ## ToDo
 - [ ] 完善其他小功能细节
@@ -121,4 +122,11 @@ gitalk:
   owner: callmesoul
   admin: callmesoul
   distractionFreeMode: false
+
+  # 文章详情 右侧 推荐文章 下方 广告位
+postMoreAdsence:
+  enable: true # 是否开启
+  google: # 谷歌单元广告 https://www.google.com/adsense
+  client: ca-pub-xxx,
+  slot: xxxxxxxxx
 ```
