@@ -21,7 +21,7 @@ date: 2020-11-18 09:05:27
 以下均为我熟练使用的技能
 
 - Web开发：Node
-- Web框架：Egg/Loa/Express/Nest
+- Web框架：Egg/Koa/Express/Nest
 - 前端框架：VueJs/EmberJS/HTML5
 - 前端工具：Graphql/Webpack/Bower/Gulp/SaSS/
 - 数据库相关：MySQL/MongoDb

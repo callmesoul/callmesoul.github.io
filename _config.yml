@@ -79,7 +79,7 @@ plugins:
 #Feed Atom
 feed:
   type: rss2
-  path: atom.xml
+  path: rss.xml
   limit: 20
   template:
     - ./source/rss2.xml

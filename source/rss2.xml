@@ -23,6 +23,7 @@
       <link>{{ post.permalink | uriencode }}</link>
       <guid>{{ post.uuid }}</guid>
       <pubDate>{{ post.date.toDate().toUTCString() }}</pubDate>
+      <author>CallMeSoul</author>
       {% if post.description %}
       <description>{{ post.description }}</description>
       {% elif post.intro %}
@@ -43,7 +44,7 @@
         {% endif %}
       {% endif %}
       {% if post.cover %}
-      <enclosure url="{{ url + post.cover | uriencode }}" type="cover"/>
+      <enclosure url="{{ url + post.cover | uriencode }}" type="image/jpg" />
       {% endif %}
       {% if config.feed.content and post.content %}
       <content:encoded><![CDATA[{{ post.content | noControlChars | safe }}]]></content:encoded>
