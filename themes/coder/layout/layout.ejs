@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <%- partial('_partial/head') %>
+  </head>
+	<body>
+    <div class="main-left">
+      <a href="/" class="logo" alt="<%= config.title %>">
+        <img src="/images/logo.svg" alt="<%= config.title %>" />
+      </a>
+      <div class="search">
+        <div class="search-warp">
+          <img src="/images/search.svg" alt="搜索" />
+          <input type="text" placeholder="Search by article" />
+        </div>
+      </div>
+      <nav>
+        <% if (theme.menu) { %>
+          <% theme.menu.forEach(function(nav) { %>
+          <div class="nav-item <%- is_current(nav.link) ? 'active' : '' %>">
+            <div class="nav-item-warp">
+              <a href="<%= nav.link %>" class="name" alt="<%= nav.name %>"><%= nav.name %></a>
+            </div>
+          </div>
+          <% }); %>
+        <% } %>
+        <div class="nav-tips">
+          目录
+        </div>
+        <div class="menu-list">
+          <% site.categories.each(function(categorie,index) { %>
+            <div class="nav-item <%= page.categories && page.categories.data[0].name === categorie.name ? 'active' : '' %>">
+              <div class="nav-item-warp" onclick="navToggle(this)">
+                <span class="name"><%- categorie.name %></span>
+                <span class="icon iconfont icon-right"></span>
+              </div>
+              <div class="nav-child-warp">
+                <% categorie.posts.each(function(post,postIndex) { %>
+                <a class="nav-child-item <%- is_current(url_for(post.path)) ? 'active' : '' %>" href="<%= url_for(post.path) %>" alt="<%= post.title %>"><%= post.title %></a>
+                <% }) %>
+              </div>
+            </div>
+            <% }) %>
+        </div>
+      </nav>
+      <view class="website-msg">
+        <div class="beian"><a alt="备案" title="备案" target="_blank" href="http://www.miitbeian.gov.cn/"><%= theme.beian %></a></div>
+        <div class="beian"><span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span></div>
+        <div class="theme-drsc">Power:<a alt="Hexo" title="Hexo" href="https://hexo.io" target="_blank">Hexo</a> Theme:<a href="" target="_blank">Coder</a></div>
+        <div class="copyright">Copyright &#169 <a href="mailto:<%= theme.mail %>" alt="<%= theme.mail %>" title="<%= theme.mail %>"><%= theme.copyright %></a> </div>
+      </view>
+    </div>
+    <div class="main-right">
+      <%- body %>
+    </div>
+
+    <script>
+      function navToggle(e) {
+        const navs = [ ...document.getElementsByClassName('nav-item') ]
+        console.log(navs)
+        const index = navs.findIndex(item => item.childNodes[1].innerText === e.childNodes[1].innerText)
+        console.log(index)
+        navs.forEach((nav,_index) => {
+          if(index !== _index){
+            nav.classList.remove('open')
+          }
+        });
+        const classList = [...e.parentNode.classList]
+        const active = classList.find(item => item === 'active')
+        if (active) {
+          return
+        }
+        const isOpen = classList.find(item => item === 'open')
+        if (isOpen) {
+          e.parentNode.classList.remove('open')
+        } else {
+          e.parentNode.classList.add('open')
+        }
+      }
+    </script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  </body>
+</html>

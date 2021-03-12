@@ -1,0 +1,240 @@
+html,body,.main-left,.main-right{
+  height: 100%;
+}
+
+body{
+  font-size: 0.16rem;
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+  color: #061748;
+  .main-left{
+    background: #101b3b;
+    box-sizing: border-box;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    .logo{
+      padding: 30px;
+      cursor: pointer;
+      img{
+        width: 100%;
+        -webkit-user-drag: none;
+      }
+    }
+    .search{
+      padding: 0 30px;
+
+      .search-warp{
+        display: flex;
+        align-items: center;
+        background: #2d3653;
+        border-radius: 5px;
+        padding: 5px;
+        img{
+          width: 20px;
+          height: 20px;
+          margin-right: 5px;
+        }
+        input{
+          flex: 1;
+          background: transparent;
+          outline: 0;
+          border: none;
+          color: #fff;
+          font-size: 14px;
+        }
+      }
+    }
+    
+    nav{
+      flex: 1;
+      min-height: 0;
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      .nav-tips{
+        color: #53628f;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        border-bottom: 1px solid #22305b;
+        padding-bottom: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+      .nav-item{
+        padding: 10px 30px;
+        color: #929cbb;
+        cursor: pointer;
+        
+        .nav-item-warp{
+          font-size: 16px;
+          font-weight: bold;
+          display: flex;
+          align-items: center;
+          .name{
+            flex: 1;
+            min-width: 0;
+            color: inherit;
+            text-decoration: none;
+          }
+          &:hover{
+            color: #fff;
+          }
+        }
+        .nav-child-warp{
+          margin-top: 15px;
+          margin-left: 20px;
+          position: relative;
+          display: none;
+          height: 0;
+          &:before{
+            content: '';
+            display: block;
+            width: 4px;
+            border-radius: 2px;
+            height: 100%;
+            background: rgb(40,51,83);
+            position: absolute;
+            left: 0;
+            top: 0;
+            margin-left: -20px;
+          }
+          .nav-child-item{
+            display: block;
+            padding: 5px 0;
+            font-size: 14px;
+            line-height: 20px;
+            color: inherit;
+            text-decoration: none;
+            &:hover, &.active{
+              color: #fff;
+              position: relative;
+              &:before{
+                content: '';
+                display: block;
+                width: 4px;
+                border-radius: 2px;
+                height: 100%;
+                background: rgb(101,113,146);
+                position: absolute;
+                left: 0;
+                top: 0;
+                margin-left: -20px;
+              }
+            }
+          }
+        }
+        &.active,&.open{
+          .nav-item-warp{
+            color: #fff !important;
+            .icon{
+              transform: rotate(90deg);
+            }
+          }
+          .nav-child-warp{
+            display: block;
+            height: auto;
+          }
+        }
+      }
+      .menu-list{
+        flex: 1;
+        overflow-x: hidden;
+        overflow-y: auto;
+        min-height: 0;
+      }
+    }
+    .website-msg{
+      font-size: 12px;
+      padding: 30px;
+      color: #979ba6;
+      line-height: 20px;
+      a{
+        color: #979ba6;
+      }
+    }
+  }
+  .main-right{
+    flex: 1;
+    min-width: 0;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.5rem;
+    box-sizing: border-box;
+    overflow-y: auto;
+  }
+}
+
+
+
+
+/*滚动条的宽度*/
+::-webkit-scrollbar {
+  width: 0.06rem;
+  height: 0.06rem;
+}
+
+/*外层轨道。可以用display:none让其不显示，也可以添加背景图片，颜色改变显示效果*/
+::-webkit-scrollbar-track {
+  width: 0.06rem;
+  background-color: transparent;
+  -webkit-border-radius: 0em;
+  -moz-border-radius: 0em;
+  border-radius: 0em;
+}
+
+/*滚动条的设置*/
+::-webkit-scrollbar-thumb {
+  background-color: #54669a;
+  ;
+  background-clip: padding-box;
+  min-height: 0.28rem;
+  -webkit-border-radius: 0em;
+  -moz-border-radius: 0em;
+  border-radius: 0em;
+}
+
+/*滚动条移上去的背景*/
+::-webkit-scrollbar-thumb:hover {
+  background-color: #54669a;
+}
+
+@font-face{
+  font-family: FireCode;
+  src: url('../FiraCode-Medium.ttf');
+}
+
+.prettyprint{
+  padding: 0.15rem;
+  background: #101b3b !important;
+  li.L0, li.L1, li.L2, li.L3, li.L4, li.L5, li.L6, li.L7, li.L8, li.L9{
+    background: #101b3b !important;
+  }
+}
+code{
+  background: #101b3b;
+  color: #fff;
+  padding: 0.03rem 0.05rem;
+  margin: 0 0.05rem;
+  font-family: FireCode;
+}
+p{
+  line-height: 26px;
+}
+
+ol li, ul li{
+  line-height: 26px;
+}
+.toc{
+  list-style: none;
+  a{
+    color: inherit;
+    text-decoration: none;
+  }
+  .toc-child{
+    list-style: none;
+  }
+}

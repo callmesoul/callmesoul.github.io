@@ -9,11 +9,12 @@ description: web前端开发
 keywords: web,前端,开发,vue,nodejs
 author: CallMeSoul
 language: zh-CN
-timezone:
+timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://callmesoul.cn
+# url: http://localhost:4000
 root: /
 permalink: posts/:uuid/
 permalink_defaults:
@@ -42,9 +43,8 @@ future: true
 # 自带高亮  关闭
 highlight:
   enable: false
-  line_number: false
-  auto_detect: false
-  tab_replace:
+prismjs:
+  enable: false
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
@@ -85,7 +85,28 @@ feed:
     - ./source/rss2.xml
 
 ## Themes: https://hexo.io/themes/
-theme: soul
+theme: coder
+
+theme_config:
+  favicon: /images/icon.png
+  mail: callmesoul@foxmail.com
+  copyright: 2017 CallMeSoul
+  menu:
+    - { name: 首页, link: / }
+    - { name: 归档,  link: /archives/ }
+    - { name: 关于我,  link: /about/ }
+  # gitalk 
+  # 详细使用说明 https://github.com/gitalk/gitalk/blob/master/readme-cn.md
+  gitalk:
+    enable: true # 是否开启
+    clientID: 85810192d72d7f763a9a
+    clientSecret: e9867192041e53ad9f4581db6e50bbe7373a090d
+    repo: myblog
+    owner: callmesoul
+    admin: callmesoul
+    distractionFreeMode: false
+    uuidName: uuid
+
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -109,3 +130,8 @@ baidu_url_submit:
   path: baidu_urls.txt ## 文本文档的地址， 新链接会保存在此文本文档里
 
   
+excerpt:
+  depth: 10
+  excerpt_excludes: []
+  more_excludes: []
+  hideWholePostExcerpts: true

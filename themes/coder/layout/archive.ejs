@@ -1,0 +1,27 @@
+<style>
+  .archive {
+    font-size: 16px;
+  }
+  .archive .archive-item{
+    display: flex;
+    color: inherit;
+    text-decoration: none;
+    padding: 10px 0;
+  }
+  .archive .archive-item .name{
+    flex: 1;
+    text-align: left;
+  }
+  .archive .archive-item .time{
+    width: 200px;
+  }
+</style>
+<h1>归档</h1>
+<section class="archive">
+  <% page.posts.forEach((post) => { %>
+    <a href="<%= url_for(post.path) %>" alt="<%= post.title %>" class="archive-item">
+      <div class="time"><%= full_date(post.date) %></div>
+      <div class="name"><%= post.title %></div>
+    </a>
+  <% }) %>
+</section>

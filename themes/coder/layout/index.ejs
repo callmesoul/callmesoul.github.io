@@ -1,0 +1,56 @@
+
+<style>
+  .index .index-item{
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    padding: 30px ;
+    border-bottom: 1px solid #eee;
+  }
+  .index .index-item:hover{
+    background: #f6f6f6;
+  }
+  .index .index-item .name{
+    font-size: 24px;
+  }
+  .index .index-item .drsc{
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    color: #4f5d89;
+    font-size: 14px;
+    line-height: 24px;
+  }
+  .index .index-item .drsc .excerpt{
+    flex: 1;
+  }
+  .index .index-item .drsc img{
+    width: 150px;
+    height: 100px;
+    margin-right: 15px;
+  }
+  .index .index-item .time{
+    margin-top: 10px;
+    color: #999;
+    font-size: 12px;
+  }
+</style>
+<div class="index">
+  <% page.posts.forEach((post) => { %>
+    <a href="<%= url_for(post.path) %>" alt="<%= post.title %>" class="index-item">
+      <div class="name"><%= post.title %></div>
+      <div class="drsc">
+        <% if (post.cover) { %>
+        <img alt="<%= post.title %>" src="<%= post.cover %>" />
+        <% } else { %>
+        <img alt="<%= post.title %>" src="/images/default.jpg" />
+        <% } %>
+        <div class="excerpt">
+          <%= strip_html(post.excerpt) %>...
+        </div>
+      </div>
+      <div class="time"><%= full_date(post.date) %></div>
+    </a>
+  <% }) %>
+</div>

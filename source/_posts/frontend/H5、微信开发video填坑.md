@@ -10,3 +10,5 @@ tags:
 
 # ios系统下，视频播放默认全屏播放
 - 加上`x5-playsinline=""; playsinline=""; webkit-playsinline=""`
+
+<!-- more -->

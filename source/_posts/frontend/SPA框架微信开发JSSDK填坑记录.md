@@ -36,14 +36,12 @@ export default {
 }
 ```
 
-# IOS 滚动穿透问题：就是非body滚动时，其他其他浮层滚动，会穿透，时body滚动。
+# IOS 滚动穿透问题：就是非body滚动时，其他其他浮层滚动，会穿透使body滚动。
 
-原因：我也不知道啊，为什么这么设计，我也不敢问，也不敢说。
+## 原因：
+IOS下touch相关事件机制问题
 
-解决：
-
-
-
+## 解决：
 ```javascript
 // 打开浮层时调用closeTouch阻止body事件，关闭时调用openTouch 恢复
 {

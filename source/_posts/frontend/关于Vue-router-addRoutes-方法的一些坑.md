@@ -26,6 +26,8 @@ router.options.routes.push(...routers)
 router.addRoutes(routers)
 ```
 
+<!-- more -->
+
 3. 注册完最好重定向
 
    如果添加路由之前，要访问的地址是需要 `addRoutes` 添加的。

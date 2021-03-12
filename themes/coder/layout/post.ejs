@@ -1,0 +1,58 @@
+<style>
+  .post-title{
+    font-size: 2.4em;
+  }
+  img{
+    max-width: 100%;
+  }
+  .menu-tree{
+    margin-top: 0.5rem;
+  }
+  .msg .tag{
+    display: inline-block;
+    padding: 5px 10px;
+    background: #101b3b;
+    color: #cdcdcd;
+    text-decoration: none;
+    font-size: 12px;
+    border-radius: 10px 10px 10px 0;
+    margin-right: 10px;
+  }
+  .msg .tag:hover{
+    color: #fff;
+  }
+</style>
+<%- css('css/atelier-estuary-dark') %>
+<h1 class="post-title"><%= page.title %></h1>
+<div class="msg"> 
+  <% if (is_post()){ %>
+    <% page.tags.forEach(function(tag) { %>
+      <a href="<%= url_for(tag.path) %>" class="tag" alt="<%= tag.name %>"><%= tag.name %></a>
+    <% }) %>
+  <% } %>
+  <%= full_date(page.date) %>
+</div>
+<!-- 导航目录 -->
+  <% if (is_post()){ %>
+  <div class="menu-tree">
+    <h1 class="name">目录</h1>
+    <%- toc(page.content) %>
+  </div>
+  <% } %>
+<article>
+  <%- page.content %>
+</article>
+<!-- 评论 -->
+<%- partial('_partial/gitalk') %>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  window.onload = function() { 
+    const pres = document.getElementsByTagName('pre')
+    for (var i = 0; i < pres.length; i++) {
+      pres[i].className = 'prettyprint linenums'
+      pres[i].style.overflow = 'auto'
+    }
+    prettyPrint()
+  }
+</script>

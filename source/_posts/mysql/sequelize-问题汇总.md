@@ -14,6 +14,7 @@ date: 2020-06-17 09:20:33
 
 # sequelize include order
 写过原生sql查询的人都知道，排序都是在最外层排序的，所以一下代码无效:
+<!-- more -->
 ```
 ctx.model.User.findAll({
     include: [

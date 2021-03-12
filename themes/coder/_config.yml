@@ -1,0 +1,7 @@
+
+# node_sas设置 不用改
+node_sass:
+  outputStyle: nested
+  precision: 5
+  sourceComments: false
+  

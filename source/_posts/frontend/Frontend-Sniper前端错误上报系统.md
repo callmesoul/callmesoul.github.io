@@ -19,6 +19,8 @@ categories:
 对服务端还是新手所以代码质量....graphql也是试手。
 但好在错误监控系统一般内部人使用，独立不影响线上项目和用户。所以大胆地使用吧。
 
+<!-- more -->
+
 # 项目集
 
 - 服务端 [frontend-sniper-server](https://github.com/callmesoul/frontend-sniper-server)

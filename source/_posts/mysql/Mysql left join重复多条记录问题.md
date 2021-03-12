@@ -21,6 +21,7 @@ tags:
 于是我就设计成，同一个错误的合并，只显示最新那个。
 
 一开始sql写法为
+<!-- more -->
 
 ```sql
 SELECT * from `errors` GROUP BY `title`,`msg`,`category`,`level`,`appId`  ORDER BY `createdAt` DESC
