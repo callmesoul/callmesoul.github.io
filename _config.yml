@@ -5,8 +5,8 @@
 # Site
 title: CallMeSoul
 subtitle: Front-end developer
-description: web前端开发
-keywords: web,前端,开发,vue,nodejs
+description: web前端开发,个人开发者,全棧开发,nodejs开发
+keywords: web,前端,开发,vue,nodejs,全棧开发,headless cms
 author: CallMeSoul
 language: zh-CN
 timezone: Asia/Shanghai
@@ -106,6 +106,11 @@ theme_config:
     admin: callmesoul
     distractionFreeMode: false
     uuidName: uuid
+  # 网站统计
+  # 百度统计
+  baidu_statistics:
+    enable: true # 是否开启
+    sitecode: f4e4f3d9d2532faa71e451f2ab41cbb6  ## 百度统计的网站code
 
 
 # Deployment

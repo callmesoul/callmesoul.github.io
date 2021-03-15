@@ -29,16 +29,16 @@
     <% page.tags.forEach(function(tag) { %>
       <a href="<%= url_for(tag.path) %>" class="tag" alt="<%= tag.name %>"><%= tag.name %></a>
     <% }) %>
+    <%= full_date(page.date) %>
   <% } %>
-  <%= full_date(page.date) %>
 </div>
 <!-- 导航目录 -->
-  <% if (is_post()){ %>
+<% if (is_post()){ %>
   <div class="menu-tree">
     <h1 class="name">目录</h1>
     <%- toc(page.content) %>
   </div>
-  <% } %>
+<% } %>
 <article>
   <%- page.content %>
 </article>

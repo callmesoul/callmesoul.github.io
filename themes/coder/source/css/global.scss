@@ -238,3 +238,47 @@ ol li, ul li{
     list-style: none;
   }
 }
+
+.pagination{
+  text-align: center;
+  margin: 30px 0;
+  a,span{
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #eee;
+    margin: 0 5px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #101b3b;
+    &.current{
+      background: #101b3b;
+      color: #fff;
+    }
+  }
+}
+
+
+@media only screen and (min-width: 300px) and (max-width: 1000px) {
+  .main-left{
+    position: fixed;
+    left: 0;
+    top: 0;
+    margin-left: -250px;
+  }
+  .index{
+    .index-item{
+      .drsc{
+        flex-direction: column;
+        img{
+          margin-right: 0 !important;
+          display: block;
+          width: 100% !important;
+          height: auto !important;
+        }
+        .excerpt{
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+ }

@@ -53,4 +53,19 @@
       <div class="time"><%= full_date(post.date) %></div>
     </a>
   <% }) %>
+
+  <div class="pagination">
+    <%- paginator() %>
+  </div>
 </div>
+<!-- <script src="/scripts/infinite-scroll.pkgd.min.js"></script>
+<script>
+  let elem = document.querySelector('.main-right');
+  debugger
+  let infScroll = new InfiniteScroll( elem, {
+    // options
+    path: '.next',
+    append: '.index',
+    history: false,
+  })
+</script> -->
