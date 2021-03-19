@@ -5,8 +5,8 @@
 # Site
 title: CallMeSoul
 subtitle: Front-end developer
-description: web前端开发,个人开发者,全棧开发,nodejs开发
-keywords: web,前端,开发,vue,nodejs,全棧开发,headless cms
+description: callmesoul前端开发者
+keywords: callmesoul,web,前端,开发,vue,nodejs,全棧开发,headless cms
 author: CallMeSoul
 language: zh-CN
 timezone: Asia/Shanghai
@@ -129,9 +129,9 @@ baidusitemap:
 
 
 baidu_url_submit:
-  count: 10 ## 提交最新的一个链接
+  count: 999 ## 提交最新的一个链接
   host: callmesoul.cn ## 在百度站长平台中注册的域名
-  token: your_token ## 请注意这是您的秘钥， 所以请不要把博客源代码发布在公众仓库里!
+  token: n8pB3D9RHsAo8rxe ## 请注意这是您的秘钥， 所以请不要把博客源代码发布在公众仓库里!
   path: baidu_urls.txt ## 文本文档的地址， 新链接会保存在此文本文档里
 
   

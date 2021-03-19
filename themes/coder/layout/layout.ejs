@@ -4,16 +4,27 @@
     <%- partial('_partial/head') %>
   </head>
 	<body>
+    <div class="mobile-header">
+      <a class="mobile-men-btn iconfont icon-genduo" onclick="mobileHeaderToggle()"></a>
+      <a href="/" class="logo" alt="<%= config.title %>">
+        <img src="/images/logo.svg" alt="<%= config.title %>" />
+      </a>
+    </div>
     <div class="main-left">
       <a href="/" class="logo" alt="<%= config.title %>">
         <img src="/images/logo.svg" alt="<%= config.title %>" />
       </a>
-      <div class="search">
+      <form class="search" action="//baidu.com/baidu" method="get" accept-charset="utf-8">
         <div class="search-warp">
           <img src="/images/search.svg" alt="搜索" />
-          <input type="text" placeholder="Search by article" />
+          <input  type="text" type="search" name="word" results="0" placeholder="Search by article" />
+          <input type="hidden" name="si" value="<%- config.url.replace(/^https?:\/\//, '') %>">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input name=s type=hidden value="on">
         </div>
-      </div>
+      </form>
       <nav>
         <% if (theme.menu) { %>
           <% theme.menu.forEach(function(nav) { %>
@@ -75,6 +86,21 @@
           e.parentNode.classList.remove('open')
         } else {
           e.parentNode.classList.add('open')
+        }
+      }
+
+      function mobileHeaderToggle() {
+        const mainLeft = document.getElementsByClassName('main-left')[0]
+        const offsetLeft = mainLeft.offsetLeft
+        const value = offsetLeft === 0 ? '-250px' : '0'
+        mainLeft.style.marginLeft = value
+        const btn = document.getElementsByClassName('mobile-men-btn')[0]
+        if (offsetLeft === 0) {
+          btn.classList.remove('icon-guanbi')
+          btn.classList.add('icon-genduo')
+        } else {
+          btn.classList.remove('icon-genduo')
+          btn.classList.add('icon-guanbi')
         }
       }
     </script>
