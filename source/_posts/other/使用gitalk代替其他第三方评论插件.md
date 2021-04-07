@@ -1,6 +1,6 @@
 ---
 uuid: 6c3206d0-4102-11eb-b113-9717c2aea740
-title: 使用**gitalk** 代替其他第三方评论插件
+title: 使用gitalk代替其他第三方评论插件
 categories:
   - 工具周边
 date: 2018-06-10 09:14:14

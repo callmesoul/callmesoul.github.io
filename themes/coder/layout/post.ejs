@@ -21,6 +21,10 @@
   .msg .tag:hover{
     color: #fff;
   }
+  #js-reward-warp{
+    text-align: center;
+    margin-top: 0.6rem;
+  }
 </style>
 <%- css('css/atelier-estuary-dark') %>
 <h1 class="post-title"><%= page.title %></h1>
@@ -42,10 +46,15 @@
 <article>
   <%- page.content %>
 </article>
+
+<!-- 赞赏 -->
+<div id="js-reward-warp"></div>
+
 <!-- 评论 -->
 <%- partial('_partial/gitalk') %>
 
 <script src="https://cdn.bootcdn.net/ajax/libs/prettify/r298/prettify.min.js"></script>
+<script src="/scripts/js-reward.js"></script>
 <script>
   window.onload = function() { 
     const pres = document.getElementsByTagName('pre')
@@ -54,5 +63,10 @@
       pres[i].style.overflow = 'auto'
     }
     prettyPrint()
+
+    const jsReward = new JsReward('js-reward-warp',[
+        { name: 'wechatpay', src: '/images/WeChanQR.png'},
+        { name: 'alipay', src: '/images/AliPayQR.png'}
+    ])
   }
 </script>
