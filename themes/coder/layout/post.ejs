@@ -56,8 +56,7 @@
 <script src="https://cdn.bootcdn.net/ajax/libs/prettify/r298/prettify.min.js"></script>
 <script src="/scripts/js-reward.js"></script>
 <script>
-  window.onload = function() { 
-    const pres = document.getElementsByTagName('pre')
+  const pres = document.getElementsByTagName('pre')
     for (var i = 0; i < pres.length; i++) {
       pres[i].className = 'prettyprint linenums'
       pres[i].style.overflow = 'auto'
@@ -68,5 +67,4 @@
         { name: 'wechatpay', src: '/images/WeChanQR.png'},
         { name: 'alipay', src: '/images/AliPayQR.png'}
     ])
-  }
 </script>
