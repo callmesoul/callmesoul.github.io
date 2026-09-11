@@ -21,4 +21,4 @@ npm run build
 
 ## 主题来源
 
-`themes/hexo` 从 soul-blog-theme 的 `themes/hexo` 引入，并包含主题运行所需的图片和音频资源。当前基于上游提交 `1a84c58`（v1.5.0）。
+`themes/hexo` 从 soul-blog-theme 的 `themes/hexo` 引入，并包含主题运行所需的图片和音频资源。当前基于上游提交 `2afa6d1`（v1.5.1）。
