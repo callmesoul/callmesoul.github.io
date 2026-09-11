@@ -47,10 +47,10 @@ logo:
 # 生成 repo_id / category_id；字段未填完整时，文章页会显示配置引导。
 giscus:
   enabled: true
-  repo: callmesoul/soul-blog-theme
-  repo_id: R_kgDOUG1kRA
+  repo: callmesoul/callmesoul.github.io
+  repo_id: MDEwOlJlcG9zaXRvcnkyMDM5NDM5Njg=
   category: Announcements
-  category_id: ''
+  category_id: DIC_kwDODCfwIM4DFXMB
   term_prefix: 'article:'
   strict: true
   reactions_enabled: true
