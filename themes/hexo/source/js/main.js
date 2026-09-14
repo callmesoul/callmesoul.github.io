@@ -230,6 +230,21 @@ var o = class e extends r {
           border-radius: 11px;
           background: var(--brand-primary);
           box-shadow: 0 8px 22px rgba(var(--brand-rgb), 0.24);
+          cursor: pointer;
+          text-decoration: none;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .primary-logo:hover,
+        .primary-logo:focus-visible {
+          transform: translateY(-1px);
+          box-shadow: 0 10px 26px rgba(var(--brand-rgb), 0.32);
+        }
+        .primary-logo:focus-visible {
+          outline: 2px solid #ffffff;
+          outline-offset: 3px;
+        }
+        .primary-logo:active {
+          transform: scale(0.96);
         }
         .primary-logo img {
           display: block;
@@ -899,9 +914,9 @@ var o = class e extends r {
 
       <aside class="sidebar${m ? " directory-open" : ""}${v ? " archive-context" : ""}${y ? " about-context" : ""}${b ? " friends-context" : ""}">
         <div class="primary-rail">
-          <div class="primary-logo" title="${a(d)}">
+          <a class="primary-logo" href="./#cat=all" aria-label="返回首页" title="${a(d)} · 首页">
             <img src="/images/extracted/login/图形@2x.png" alt="${a(d)}">
-          </div>
+          </a>
 
           <nav class="primary-nav" aria-label="一级导航">
             <a class="primary-item${g ? " active" : ""}"
@@ -996,8 +1011,10 @@ var o = class e extends r {
 			this._setDirectoryOpen(!0);
 		}), this.$(".panel-close")?.addEventListener("click", () => {
 			this._setDirectoryOpen(!1);
-		}), this.$(".primary-item[data-cat=\"all\"]")?.addEventListener("click", (e) => {
-			e.preventDefault(), this._setDirectoryOpen(!1), this.emit("navigate", { cat: "all" });
+		}), this.$$(".primary-logo, .primary-item[data-cat=\"all\"]").forEach((e) => {
+			e.addEventListener("click", (e) => {
+				e.preventDefault(), this._setDirectoryOpen(!1), this.emit("navigate", { cat: "all" });
+			});
 		}), this.$(".site-nav")?.addEventListener("click", (e) => {
 			let t = e.target, n = t.closest(".tag-item");
 			if (n) {
@@ -1549,12 +1566,6 @@ var ie = class extends r {
           align-items: center;
           padding: 40px 59px 20px;
         }
-        @media (max-width: 700px) {
-          .list-header { padding: 40px 20px 20px; }
-        }
-        @media (max-width: 480px) {
-          .list-header { padding: 40px 14px 20px; }
-        }
         .home-icon {
           display: inline-block;
           width: 14px;
@@ -1641,6 +1652,36 @@ var ie = class extends r {
           line-height: 1;
           letter-spacing: 0.05em;
         }
+        @media (max-width: 700px) {
+          .list-header { padding: 32px 20px 18px; }
+          .crumb-current {
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          .header-divider {
+            min-width: 12px;
+            margin-left: 16px;
+          }
+          .search-trigger {
+            margin-left: 10px;
+            padding-inline: 10px;
+          }
+          .search-trigger-keys { display: none; }
+        }
+        @media (max-width: 480px) {
+          .list-header { padding: 28px 14px 16px; }
+          .header-divider { margin-left: 10px; }
+          .search-trigger {
+            width: 32px;
+            height: 32px;
+            justify-content: center;
+            margin-left: 8px;
+            padding: 0;
+          }
+          .search-trigger-label { display: none; }
+        }
         .article-area {
           flex: 1;
           display: flex;
@@ -1697,6 +1738,9 @@ var ie = class extends r {
           object-fit: cover;
         }
         .card-body {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
           padding: 14px 16px 16px;
         }
         .card-title {
@@ -1747,6 +1791,7 @@ var ie = class extends r {
           display: flex;
           align-items: center;
           gap: 14px;
+          margin-top: auto;
           font-size: 12px;
           color: #9e9d99;
         }
@@ -1881,7 +1926,7 @@ var ie = class extends r {
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path>
           </svg>
-          <span>搜索</span>
+          <span class="search-trigger-label">搜索</span>
           <span class="search-trigger-keys"><kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>F</kbd></span>
         </button>
       </div>
@@ -2867,8 +2912,11 @@ var N = [
           display: flex;
           position: relative;
           z-index: 30;
+          width: 100%;
+          min-width: 0;
           height: 50px;
           min-height: 50px;
+          box-sizing: border-box;
           flex-shrink: 0;
           margin-top: auto;
           background: rgba(0,0,0,0.42);
@@ -2878,8 +2926,10 @@ var N = [
         .player-inner {
           display: flex;
           flex: 1;
+          min-width: 0;
           align-items: center;
           height: 100%;
+          box-sizing: border-box;
           border-top: 1px solid rgba(255,255,255,0.16);
           padding: 0 32px;
         }
@@ -3141,6 +3191,63 @@ var N = [
         }
         .progress-track:hover .progress-thumb { opacity: 1; }
         .progress-track.is-dragging .progress-thumb { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+        @media (max-width: 700px) {
+          :host {
+            height: calc(54px + env(safe-area-inset-bottom, 0px));
+            min-height: calc(54px + env(safe-area-inset-bottom, 0px));
+          }
+          .player-inner {
+            padding: 0 max(12px, env(safe-area-inset-right, 0px)) env(safe-area-inset-bottom, 0px) max(12px, env(safe-area-inset-left, 0px));
+          }
+          .player-controls {
+            gap: 2px;
+          }
+          .player-btn.is-control {
+            width: 28px;
+            padding-inline: 4px;
+          }
+          .player-btn.is-primary {
+            margin-inline: 2px;
+          }
+          .player-center {
+            margin: 0 10px;
+          }
+          .progress-row {
+            gap: 6px;
+          }
+          .player-btn.volume-btn,
+          .player-btn.mode-toggle {
+            display: none;
+          }
+          .player-btn.is-pill {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+            padding: 6px;
+            border-radius: 50%;
+          }
+          .player-btn.is-pill span {
+            display: none;
+          }
+        }
+        @media (max-width: 360px) {
+          .player-inner {
+            padding-left: max(8px, env(safe-area-inset-left, 0px));
+            padding-right: max(8px, env(safe-area-inset-right, 0px));
+          }
+          .player-center {
+            margin-inline: 6px;
+          }
+          .track-sep,
+          .track-artist {
+            display: none;
+          }
+          .time-current,
+          .time-duration {
+            min-width: 28px;
+            font-size: 10px;
+          }
+        }
       </style>
       <div class="player-inner">
         <div class="player-controls">
@@ -3315,7 +3422,9 @@ var N = [
           right: 32px;
           bottom: 60px;
           width: 340px;
+          max-width: calc(100vw - 16px);
           max-height: 420px;
+          box-sizing: border-box;
           background: #0f0e0d;
           border: 1px solid #2a2a2a;
           border-radius: 6px;
@@ -3884,17 +3993,18 @@ var P = 420, F = 300, fe = 240, pe = ["/images/extracted/article/20160126052324@
         .viewer-tags {
           display: flex;
           flex-wrap: wrap;
-          gap: 8px;
+          gap: 6px;
           margin: 0 auto 28px;
         }
         .viewer-tag {
           display: inline-block;
-          padding: 4px 11px;
-          font-size: 12px;
+          padding: 2px 8px;
+          font-size: 11px;
+          line-height: 1.5;
           color: #9e9d99;
           background: rgba(255,255,255,0.05);
           border: 1px solid #2a2a2a;
-          border-radius: 999px;
+          border-radius: 3px;
           cursor: pointer;
           text-decoration: none;
           transition: color 0.2s, border-color 0.2s, background 0.2s;
@@ -4526,9 +4636,6 @@ var P = 420, F = 300, fe = 240, pe = ["/images/extracted/article/20160126052324@
           .viewer-meta {
             gap: 7px 12px;
           }
-          .viewer-tags {
-            gap: 7px;
-          }
           .viewer-cover {
             aspect-ratio: 4 / 3;
           }
@@ -4602,6 +4709,9 @@ var P = 420, F = 300, fe = 240, pe = ["/images/extracted/article/20160126052324@
 	}
 	mounted() {
 		this._setupBackdrop(), this._setupCloseButton(), this._setupCommentEvents(), this._setupEmoji(), this._setupKeyboard();
+	}
+	disconnectedCallback() {
+		this.classList.contains("is-open") && document.body.classList.remove("article-viewer-open");
 	}
 	_setupBackdrop() {
 		this.$("[data-part=\"backdrop\"]")?.addEventListener("click", () => this.closeWithFlip());
@@ -4849,13 +4959,13 @@ var P = 420, F = 300, fe = 240, pe = ["/images/extracted/article/20160126052324@
 		f && (f.textContent = this._catNames[t.cat] || t.cat, f.href = "./#cat=" + encodeURIComponent(t.cat)), this.$("[data-part=\"main\"]")?.scrollTo(0, 0), this.$("[data-part=\"body\"]")?.scrollTo(0, 0), this.$("[data-part=\"aside\"]")?.scrollTo(0, 0);
 	}
 	_open() {
-		this.classList.add("is-open"), this.hidden = !1, this._viewerGen++, this._renderArticle();
+		this.classList.add("is-open"), document.body.classList.add("article-viewer-open"), this.hidden = !1, this._viewerGen++, this._renderArticle();
 	}
 	_close() {
-		this.classList.remove("is-open"), this.hidden = !0, this._viewerGen++, this._trackedPageViewArticleId = null, this._pageViewFallbackTimer !== null && (window.clearTimeout(this._pageViewFallbackTimer), this._pageViewFallbackTimer = null), this.emit("viewer-close");
+		this.classList.remove("is-open"), document.body.classList.remove("article-viewer-open"), this.hidden = !0, this._viewerGen++, this._trackedPageViewArticleId = null, this._pageViewFallbackTimer !== null && (window.clearTimeout(this._pageViewFallbackTimer), this._pageViewFallbackTimer = null), this.emit("viewer-close");
 	}
 	openWithFlip(e, t) {
-		this._cardEl = e, this._viewerGen++, this.classList.add("is-open"), this.hidden = !1, this._renderArticle();
+		this._cardEl = e, this._viewerGen++, this.classList.add("is-open"), document.body.classList.add("article-viewer-open"), this.hidden = !1, this._renderArticle();
 		let n = this._article;
 		if (!n) return;
 		let r = this._viewerGen, i = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
