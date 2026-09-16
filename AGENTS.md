@@ -34,7 +34,7 @@ directory, then replace the entire theme. No file-by-file comparison is required
 Only a successful installation updates `THEME_REVISION`. The previous theme is
 restored if replacement or writing the version lock fails.
 
-The site currently uses v1.9.0 with `distribution: release`. Historical v1.8.0
+The site currently uses v1.9.1 with `distribution: release`. Historical v1.8.0
 has no runtime release and uses `distribution: source`.
 This legacy path requires pnpm 11.13.1, validates tag against sha, builds Core and
 Hexo, and includes upstream `assets/images` and `assets/audio`. New packaged

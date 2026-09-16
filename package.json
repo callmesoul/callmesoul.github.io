@@ -1,6 +1,6 @@
 {
   "name": "callmesoul.github.io",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "CallMeSoul 的 Hexo 博客，使用 soul-blog-theme。",
   "private": true,
   "scripts": {

@@ -15,10 +15,10 @@ npm run dev
 
 ## 更新主题
 
-当前使用 **v1.9.0 发布包**。一条命令安装指定版本：
+当前使用 **v1.9.1 发布包**。一条命令安装指定版本：
 
 ```bash
-npm run theme:update -- v1.9.0
+npm run theme:update -- v1.9.1
 npm run clean
 npm run build
 ```
@@ -51,7 +51,7 @@ npm run theme:sync -- --force
 静态输出位于 `public/`。本地主题开发可先在上游运行 `pnpm package:hexo`，再导入与当前锁定 tag/sha 一致的运行包：
 
 ```bash
-npm run theme:sync -- --archive /home/callmesoul/code/soul-blog-theme/dist/hexo/soul-blog-hexo-v1.9.0.tar.gz
+npm run theme:sync -- --archive /home/callmesoul/code/soul-blog-theme/dist/hexo/soul-blog-hexo-v1.9.1.tar.gz
 npm run dev
 ```
 
