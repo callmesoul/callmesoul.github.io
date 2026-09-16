@@ -1478,15 +1478,15 @@ function ee(e) {
 function k(e) {
 	return new URL(`/articles/${encodeURIComponent(e)}`, window.location.origin).href;
 }
-async function te(e) {
+async function te(e, t = e) {
 	_ = !0;
-	let t = ++v;
+	let n = ++v;
 	y !== null && (window.clearTimeout(y), y = null);
-	let n = k(e), r = await w(n, !0);
-	return r ? (t === v && O(r), g.set(n, Promise.resolve(r.pagePv)), window.dispatchEvent(new CustomEvent(m, { detail: {
+	let r = k(t), i = await w(r, !0);
+	return i ? (n === v && O(i), g.set(r, Promise.resolve(i.pagePv)), window.dispatchEvent(new CustomEvent(m, { detail: {
 		articleId: e,
-		views: r.pagePv
-	} })), r.pagePv) : (D(), null);
+		views: i.pagePv
+	} })), i.pagePv) : (D(), null);
 }
 function ne(e) {
 	let t = k(e), n = g.get(t);
@@ -2000,7 +2000,7 @@ var ie = class extends r {
 	_hydrateVisibleViews() {
 		this.$$(".article-card").forEach((e) => {
 			let t = e.dataset.id || "";
-			t && !this._remoteViews.has(t) && ne(t).then((e) => {
+			t && !this._remoteViews.has(t) && ne(this._articles.find((e) => e.id === t)?.statsKey || t).then((e) => {
 				this._remoteViews.has(t) || (e === null ? this._finishRemoteViewLoading(t) : this._applyRemoteViews(t, e));
 			});
 		});
@@ -2799,7 +2799,270 @@ var ce = class extends r {
 	}
 };
 customElements.get("about-page") || customElements.define("about-page", ce);
-var le = class extends r {
+var M = {
+	kicker: "Friends · Curated People",
+	title: "一些值得",
+	titleAccent: "反复拜访的人。",
+	description: "他们在各自的小世界里持续写作、创造，也让独立互联网保持温度。",
+	links: []
+};
+function le(e) {
+	if (e.domain) return e.domain;
+	try {
+		return new URL(e.url).hostname.replace(/^www\./, "");
+	} catch {
+		return e.url;
+	}
+}
+function ue(e) {
+	return e.mark || Array.from((e.name || "").trim())[0] || "·";
+}
+function de(e) {
+	return /^#[0-9a-f]{6}$/i.test(e || "") ? String(e) : "var(--brand-primary)";
+}
+var fe = class extends r {
+	render() {
+		let e = this._config, t = {
+			...M,
+			...e,
+			links: Array.isArray(e?.links) ? e.links : M.links
+		}, n = t.links.filter((e) => e && e.name && e.url), r = n.map((e, t) => {
+			let r = e.avatar ? `<img src="${a(e.avatar)}" alt="" loading="lazy">` : a(ue(e));
+			return `
+        <a class="friend-card${t === 0 || t === n.length - 1 ? " wide" : ""}" href="${a(e.url)}"
+           target="_blank" rel="noopener noreferrer"
+           style="--friend-color:${a(de(e.color))}">
+          <span class="friend-index">${String(t + 1).padStart(2, "0")}</span>
+          <span class="friend-mark">${r}</span>
+          <span class="friend-copy">
+            <strong>${a(e.name)}</strong>
+            <small>${a(le(e))}</small>
+            <span>${a(e.note || "")}</span>
+          </span>
+          <span class="friend-arrow" aria-hidden="true">
+            <svg viewBox="0 0 20 20"><path d="M5 15 15 5M7 5h8v8"></path></svg>
+          </span>
+        </a>
+      `;
+		}).join("");
+		return `
+      <style>
+        :host {
+          display: block;
+          min-width: 0;
+          flex: 1;
+          height: 100%;
+          color: #f5f2ef;
+        }
+        * { box-sizing: border-box; }
+        .friends-scroll {
+          --friends-line: rgba(255, 255, 255, 0.13);
+          --friends-muted: #928a84;
+          width: 100%;
+          height: 100%;
+          overflow-x: hidden;
+          overflow-y: auto;
+          background:
+            radial-gradient(circle at 78% 3%, rgba(var(--brand-rgb), 0.075), transparent 26%),
+            linear-gradient(120deg, rgba(39, 34, 30, 0.98), rgba(17, 15, 14, 0.99) 70%);
+          scrollbar-color: #48423d transparent;
+          scrollbar-width: thin;
+        }
+        .friends-panel {
+          width: min(100%, 1120px);
+          min-height: 100%;
+          margin: 0 auto;
+          padding: clamp(42px, 7vh, 76px) clamp(28px, 6vw, 82px) 88px;
+          animation: friends-enter 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .friends-heading {
+          display: flex;
+          align-items: flex-end;
+          justify-content: space-between;
+          gap: 30px;
+        }
+        .kicker {
+          margin: 0 0 18px;
+          color: var(--brand-primary);
+          font-family: var(--font-sans);
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.19em;
+          text-transform: uppercase;
+        }
+        h1 {
+          margin: 0;
+          color: #f5f2ef;
+          font-family: var(--font-sans);
+          font-size: clamp(42px, 6.1vw, 78px);
+          font-weight: 300;
+          line-height: 0.99;
+          letter-spacing: -0.048em;
+        }
+        h1 em {
+          color: var(--brand-primary);
+          font-style: normal;
+          font-weight: 650;
+        }
+        .description {
+          display: block;
+          max-width: 610px;
+          margin: 24px 0 0;
+          color: var(--friends-muted);
+          font-family: var(--font-sans);
+          font-size: 13px;
+          line-height: 1.9;
+        }
+        .friends-count {
+          flex: none;
+          padding-bottom: 6px;
+          color: #6d6661;
+          font-family: Georgia, 'Times New Roman', serif;
+          font-size: 34px;
+          line-height: 0.75;
+          text-align: right;
+        }
+        .friends-count small {
+          font-size: 8px;
+          letter-spacing: 0.2em;
+        }
+        .friend-gallery {
+          display: grid;
+          margin-top: clamp(36px, 6vh, 58px);
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          border-top: 1px solid var(--friends-line);
+          border-left: 1px solid var(--friends-line);
+        }
+        .friend-card {
+          position: relative;
+          display: flex;
+          min-height: 230px;
+          padding: 21px;
+          flex-direction: column;
+          overflow: hidden;
+          border-right: 1px solid var(--friends-line);
+          border-bottom: 1px solid var(--friends-line);
+          color: inherit;
+          background: rgba(12, 11, 10, 0.48);
+          font-family: var(--font-sans);
+          text-decoration: none;
+          transition: background 0.25s ease, transform 0.25s ease;
+        }
+        .friend-card:hover,
+        .friend-card:focus-visible {
+          z-index: 2;
+          background: rgba(255, 255, 255, 0.055);
+          transform: translateY(-3px);
+        }
+        .friend-card.wide { grid-column: span 2; }
+        .friend-index {
+          color: #625b56;
+          font-family: Georgia, 'Times New Roman', serif;
+          font-size: 10px;
+          letter-spacing: 0.08em;
+        }
+        .friend-mark {
+          display: grid;
+          width: 48px;
+          height: 48px;
+          margin: 26px 0 22px;
+          place-items: center;
+          overflow: hidden;
+          border: 1px solid color-mix(in srgb, var(--friend-color) 65%, transparent);
+          border-radius: 50%;
+          color: #fff;
+          background: color-mix(in srgb, var(--friend-color) 24%, #13110f);
+          font-family: Georgia, 'Times New Roman', serif;
+          font-size: 20px;
+        }
+        .friend-mark img { width: 100%; height: 100%; object-fit: cover; }
+        .friend-copy { display: flex; max-width: 400px; flex-direction: column; }
+        .friend-copy strong { color: #f5f2ef; font-size: 18px; font-weight: 500; }
+        .friend-copy small {
+          margin-top: 3px;
+          color: #6f6863;
+          font-family: Georgia, 'Times New Roman', serif;
+          font-size: 11px;
+        }
+        .friend-copy > span {
+          margin-top: 16px;
+          color: var(--friends-muted);
+          font-size: 12px;
+          line-height: 1.75;
+        }
+        .friend-arrow {
+          position: absolute;
+          top: 18px;
+          right: 20px;
+          color: #6b645f;
+          transition: color 0.2s ease, transform 0.2s ease;
+        }
+        .friend-arrow svg {
+          width: 18px;
+          height: 18px;
+          fill: none;
+          stroke: currentColor;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+          stroke-width: 1.25;
+        }
+        .friend-card:hover .friend-arrow,
+        .friend-card:focus-visible .friend-arrow {
+          color: var(--brand-primary);
+          transform: translate(2px, -2px);
+        }
+        .empty {
+          margin: 48px 0 0;
+          padding: 34px;
+          border: 1px solid var(--friends-line);
+          color: var(--friends-muted);
+          font-family: var(--font-sans);
+          font-size: 13px;
+          text-align: center;
+        }
+        @keyframes friends-enter {
+          from { opacity: 0; transform: translateY(12px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 980px) {
+          .friend-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+          .friend-card.wide { grid-column: span 1; }
+        }
+        @media (max-width: 620px) {
+          .friends-panel { padding: 34px 18px 72px; }
+          .friends-heading { align-items: flex-start; }
+          h1 { font-size: clamp(38px, 13vw, 56px); }
+          .friends-count { display: none; }
+          .friend-gallery { grid-template-columns: 1fr; }
+          .friend-card { min-height: 206px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .friends-panel { animation: none; }
+          .friend-card { transition-duration: 0.01ms; }
+        }
+      </style>
+
+      <div class="friends-scroll">
+        <main class="friends-panel">
+          <header class="friends-heading">
+            <div>
+              <p class="kicker">${a(t.kicker)}</p>
+              <h1 id="friends-title">${a(t.title)}<br><em>${a(t.titleAccent)}</em></h1>
+              <p class="description">${a(t.description)}</p>
+            </div>
+            <span class="friends-count">${String(n.length).padStart(2, "0")}<br><small>LINKS</small></span>
+          </header>
+          ${r ? `<section class="friend-gallery" aria-labelledby="friends-title">${r}</section>` : "<p class=\"empty\">友链还在路上，稍后再来看看。</p>"}
+        </main>
+      </div>
+    `;
+	}
+	set config(e) {
+		this._config = e || {}, this.shadow.innerHTML = this.render();
+	}
+};
+customElements.get("friends-page") || customElements.define("friends-page", fe);
+var pe = class extends r {
 	static get observedAttributes() {
 		return [];
 	}
@@ -2849,17 +3112,17 @@ var le = class extends r {
 		}
 	}
 };
-customElements.get("search-results") || customElements.define("search-results", le);
-function M(e) {
+customElements.get("search-results") || customElements.define("search-results", pe);
+function N(e) {
 	e = Math.max(0, Math.floor(e));
 	let t = Math.floor(e / 3600), n = Math.floor(e % 3600 / 60), r = e % 60, i = (e) => String(e).padStart(2, "0");
 	return t > 0 ? `${t}:${i(n)}:${i(r)}` : `${i(n)}:${i(r)}`;
 }
-var N = [
+var P = [
 	"loop",
 	"single",
 	"shuffle"
-], ue = [
+], me = [
 	{
 		title: "SoundHelix Song 1",
 		artist: "SoundHelix",
@@ -2885,11 +3148,11 @@ var N = [
 		artist: "SoundHelix",
 		src: "/audio/SoundHelix-Song-5.mp3"
 	}
-], de = class extends r {
+], he = class extends r {
 	static get observedAttributes() {
 		return [];
 	}
-	_tracks = ue;
+	_tracks = me;
 	_index = 0;
 	_isPlaying = !1;
 	_current = 0;
@@ -3564,7 +3827,7 @@ var N = [
           <p class="playlist-title">${a(e.title)}</p>
           <p class="playlist-artist">${a(e.artist)}</p>
         </div>
-        <span class="playlist-duration">${e.duration && isFinite(e.duration) ? M(e.duration) : "--:--"}</span>
+        <span class="playlist-duration">${e.duration && isFinite(e.duration) ? N(e.duration) : "--:--"}</span>
         <span class="playlist-playing" aria-hidden="true"><span></span><span></span><span></span></span>
       </div>
     `).join(""), e.querySelectorAll(".playlist-item").forEach((e) => {
@@ -3633,8 +3896,8 @@ var N = [
 		this._loadTrack(this._prevIndex(), !0);
 	}
 	_cycleMode() {
-		let e = N.indexOf(this._mode);
-		this._mode = N[(e + 1) % N.length], d.set("player:mode", this._mode), this._renderMode();
+		let e = P.indexOf(this._mode);
+		this._mode = P[(e + 1) % P.length], d.set("player:mode", this._mode), this._renderMode();
 	}
 	_renderMode() {
 		let e = this.$("[data-part=\"mode-btn\"]");
@@ -3673,11 +3936,11 @@ var N = [
 	}
 	_updateInfo() {
 		let e = this._tracks[this._index], t = this.$("[data-part=\"title\"]"), n = this.$("[data-part=\"artist\"]"), r = this.$("[data-part=\"duration\"]");
-		t && (t.textContent = e.title), n && (n.textContent = e.artist), r && (r.textContent = e.duration && isFinite(e.duration) ? M(e.duration) : "00:00"), this._updateProgress();
+		t && (t.textContent = e.title), n && (n.textContent = e.artist), r && (r.textContent = e.duration && isFinite(e.duration) ? N(e.duration) : "00:00"), this._updateProgress();
 	}
 	_updateProgress() {
 		let e = this._tracks[this._index], t = e.duration && e.duration > 0 ? Math.min(100, this._current / e.duration * 100) : 0, n = this.$("[data-part=\"fill\"]"), r = this.$("[data-part=\"thumb\"]"), i = this.$("[data-part=\"current\"]");
-		n && (n.style.width = t + "%"), r && (r.style.left = t + "%"), i && (i.textContent = M(this._current));
+		n && (n.style.width = t + "%"), r && (r.style.left = t + "%"), i && (i.textContent = N(this._current));
 	}
 	_prefillDurations() {
 		this._tracks.forEach((e, t) => {
@@ -3688,8 +3951,8 @@ var N = [
 		});
 	}
 };
-customElements.get("music-player") || customElements.define("music-player", de);
-var P = 420, F = 300, fe = 240, pe = ["/images/extracted/article/20160126052324@2x.png", "/images/extracted/article/4@2x.png"], me = class e extends r {
+customElements.get("music-player") || customElements.define("music-player", he);
+var F = 420, I = 300, ge = 240, _e = ["/images/extracted/article/20160126052324@2x.png", "/images/extracted/article/4@2x.png"], ve = class e extends r {
 	static get observedAttributes() {
 		return [];
 	}
@@ -3783,7 +4046,7 @@ var P = 420, F = 300, fe = 240, pe = ["/images/extracted/article/20160126052324@
 		};
 		this._pageViewFallbackTimer !== null && window.clearTimeout(this._pageViewFallbackTimer), this._pageViewFallbackTimer = window.setTimeout(() => {
 			n(Number(e.views) || 0);
-		}, 5e3), te(e.id).then((t) => {
+		}, 5e3), te(e.id, e.statsKey || e.id).then((t) => {
 			n(t ?? (Number(e.views) || 0));
 		});
 	}
@@ -3915,7 +4178,7 @@ var P = 420, F = 300, fe = 240, pe = ["/images/extracted/article/20160126052324@
           opacity: 0.3;
         }
         .viewer-body.viewer-in {
-          animation: fadeInUp ${fe}ms ease-out both;
+          animation: fadeInUp ${ge}ms ease-out both;
         }
         @keyframes fadeInUp {
           from { opacity: 0.3; transform: translateY(12px); }
@@ -4836,7 +5099,7 @@ var P = 420, F = 300, fe = 240, pe = ["/images/extracted/article/20160126052324@
 	_createCommentEl(t, n) {
 		let r = document.createElement("template");
 		return r.innerHTML = e.commentItemTemplate({
-			avatar: pe[0],
+			avatar: _e[0],
 			likes: 0,
 			name: n,
 			text: t,
@@ -4993,7 +5256,7 @@ var P = 420, F = 300, fe = 240, pe = ["/images/extracted/article/20160126052324@
 					width: t.width,
 					height: t.height
 				};
-				l.classList.add("is-anim"), l.style.transformOrigin = "top left", l.style.transition = "none", l.style.transform = `translate(${a.left}px, ${a.top}px) scale(${a.width / e.width}, ${a.height / e.height})`, l.offsetWidth, l.style.transition = `transform ${P}ms cubic-bezier(0.22, 1, 0.36, 1)`, l.style.transform = "";
+				l.classList.add("is-anim"), l.style.transformOrigin = "top left", l.style.transition = "none", l.style.transform = `translate(${a.left}px, ${a.top}px) scale(${a.width / e.width}, ${a.height / e.height})`, l.offsetWidth, l.style.transition = `transform ${F}ms cubic-bezier(0.22, 1, 0.36, 1)`, l.style.transform = "";
 			}
 			if (f && o) {
 				let n = (e?.querySelector(".card-thumb"))?.getBoundingClientRect(), i = n ? {
@@ -5014,7 +5277,7 @@ var P = 420, F = 300, fe = 240, pe = ["/images/extracted/article/20160126052324@
 				});
 				setTimeout(() => {
 					r === this._viewerGen && u && (u.classList.remove("viewer-mask"), u.classList.add("viewer-in"));
-				}, Math.round(P * .8)), setTimeout(() => {
+				}, Math.round(F * .8)), setTimeout(() => {
 					r === this._viewerGen && (m && m.cancel && m.cancel(), f && (f.style.display = "none", f.style.transform = ""), l && (l.classList.remove("is-anim"), l.style.transition = "", l.style.transform = ""));
 				}, 580);
 			}
@@ -5052,20 +5315,20 @@ var P = 420, F = 300, fe = 240, pe = ["/images/extracted/article/20160126052324@
 				width: t.width,
 				height: t.height
 			}, l = this.$("[data-part=\"panel\"]");
-			l && (l.classList.add("is-anim"), l.style.transformOrigin = "top left", l.style.transition = `transform ${F}ms cubic-bezier(0.45, 0, 0.55, 1), opacity 110ms ease ${F}ms`, l.style.transform = `translate(${n.left}px, ${n.top}px) scale(${n.width / c.width}, ${n.height / c.height})`, l.style.opacity = "0");
+			l && (l.classList.add("is-anim"), l.style.transformOrigin = "top left", l.style.transition = `transform ${I}ms cubic-bezier(0.45, 0, 0.55, 1), opacity 110ms ease ${I}ms`, l.style.transform = `translate(${n.left}px, ${n.top}px) scale(${n.width / c.width}, ${n.height / c.height})`, l.style.opacity = "0");
 			let u = r ? this._rectOf(r.querySelector(".card-thumb")) : null, d = this._toLocalRect(u, t) || n, f = this.$("[data-part=\"ghost\"]");
 			if (s && o && f && o.src) {
 				this._ghostShow(), f.style.left = "0", f.style.top = "0", f.style.transformOrigin = "top left", f.style.width = s.width + "px", f.style.height = s.height + "px", f.src = o.src;
 				let t = `translate(${s.left}px, ${s.top}px) scale(1, 1)`, n = `translate(${d.left}px, ${d.top}px) scale(${d.width / s.width}, ${d.height / s.height})`;
 				f.style.transform = t;
 				let r = f.animate([{ transform: t }, { transform: n }], {
-					duration: F,
+					duration: I,
 					easing: "cubic-bezier(0.45, 0, 0.55, 1)",
 					fill: "both"
 				});
 				setTimeout(() => {
 					e === this._viewerGen && (r && r.cancel && r.cancel(), f.style.width = d.width + "px", f.style.height = d.height + "px", f.style.transform = `translate(${d.left}px, ${d.top}px)`);
-				}, F);
+				}, I);
 			}
 			let p = this.$("[data-part=\"backdrop\"]");
 			p && p.classList.remove("viewer-in"), setTimeout(a, 410);
@@ -5103,10 +5366,10 @@ var P = 420, F = 300, fe = 240, pe = ["/images/extracted/article/20160126052324@
 		e && (e.style.display = "none", e.style.transform = "", e.style.width = "", e.style.height = "", e.style.left = "", e.style.top = ""), e && e.getAnimations && e.getAnimations().forEach((e) => e.cancel());
 	}
 };
-customElements.get("article-viewer") || customElements.define("article-viewer", me), re();
+customElements.get("article-viewer") || customElements.define("article-viewer", ve), re();
 //#endregion
 //#region src/main.js
-function he() {
+function ye() {
 	let e = document.getElementById("site-data");
 	if (!e) return null;
 	try {
@@ -5115,28 +5378,28 @@ function he() {
 		return null;
 	}
 }
-var I = he(), L = I?.articles || [], R = I?.categories || [], z = I?.icons || {}, B = I?.siteName || "CallMeSoul", ge = I?.icp || "", _e = I?.social || [], ve = I?.archiveUrl || "", ye = I?.aboutUrl || "", be = I?.homeUrl || "/", xe = I?.giscus || { enabled: !0 };
-function Se(e) {
+var L = ye(), R = L?.articles || [], z = L?.categories || [], B = L?.icons || {}, V = L?.siteName || "CallMeSoul", be = L?.icp || "", xe = L?.social || [], Se = L?.archiveUrl || "", Ce = L?.aboutUrl || "", we = L?.friendsUrl || "", Te = L?.homeUrl || "/", Ee = L?.giscus || { enabled: !0 };
+function De(e) {
+	return z.find((t) => t.id === e) || null;
+}
+function H(e) {
 	return R.find((t) => t.id === e) || null;
 }
-function V(e) {
-	return L.find((t) => t.id === e) || null;
-}
-function H() {
+function U() {
 	let e = location.hash.match(/[#&]cat=([\w-]+)/);
 	return e ? decodeURIComponent(e[1]) : "all";
 }
-function U() {
-	let e = location.hash.match(/[#&]art=([\w-]+)/);
+function W() {
+	let e = location.hash.match(/[#&]art=([^&]+)/);
 	return e ? decodeURIComponent(e[1]) : null;
 }
-function W() {
+function Oe() {
 	let e = location.hash.match(/[#&]tag=([^&]+)/);
 	return e ? decodeURIComponent(e[1]) : "";
 }
-function Ce() {
+function ke() {
 	let e = {};
-	return L.forEach((t) => {
+	return R.forEach((t) => {
 		t.tags && t.tags.forEach((t) => {
 			e[t] = (e[t] || 0) + 1;
 		});
@@ -5146,56 +5409,56 @@ function Ce() {
 	}));
 }
 function G(e) {
-	return Se(e) ? e : "all";
+	return De(e) ? e : "all";
 }
 function K(e, t) {
-	let n = t ? `cat=${t}` : "";
-	return "#" + (n ? `${n}&` : "") + `art=${e}`;
+	let n = t ? `cat=${encodeURIComponent(t)}` : "";
+	return "#" + (n ? `${n}&` : "") + `art=${encodeURIComponent(e)}`;
 }
-var q = document.querySelector("site-sidebar"), J = document.querySelector("article-list"), Y = document.querySelector("article-viewer"), X = document.querySelector("search-panel"), Z = document.querySelector("search-results"), Q = document.querySelector("about-page");
-if (q && (q.categories = R.map((e) => ({
+var q = document.querySelector("site-sidebar"), J = document.querySelector("article-list"), Y = document.querySelector("article-viewer"), X = document.querySelector("search-panel"), Z = document.querySelector("search-results"), Q = document.querySelector("about-page"), Ae = document.querySelector("friends-page");
+if (q && (q.categories = z.map((e) => ({
 	...e,
-	count: e.count == null ? (I?.articles || []).filter((t) => String(t.cat ?? "").toLowerCase() === String(e.id ?? "").toLowerCase()).length : e.count
-})), q.social = _e, q.siteName = B, q.icp = ge, q.tags = I?.tags && I.tags.length ? I.tags : Ce(), q.archiveUrl = ve, q.aboutUrl = ye, q.addEventListener("navigate", (e) => {
+	count: e.count == null ? (L?.articles || []).filter((t) => String(t.cat ?? "").toLowerCase() === String(e.id ?? "").toLowerCase()).length : e.count
+})), q.social = xe, q.siteName = V, q.icp = be, q.tags = L?.tags && L.tags.length ? L.tags : ke(), q.archiveUrl = Se, q.aboutUrl = Ce, q.friendsUrl = we, q.addEventListener("navigate", (e) => {
 	let t = e.detail.tag ? "#tag=" + encodeURIComponent(e.detail.tag) : "#cat=" + encodeURIComponent(e.detail.cat);
-	J ? location.hash = t : location.href = be + t;
-})), Q && (Q.config = I?.about || {}), J && (J.articles = L, J.icons = z, J.addEventListener("tag-select", (e) => {
+	J ? location.hash = t : location.href = Te + t;
+})), Q && (Q.config = L?.about || {}), Ae && (Ae.config = L?.friends || {}), J && (J.articles = R, J.icons = B, J.addEventListener("tag-select", (e) => {
 	let t = e.detail.tag;
 	location.hash = "#tag=" + encodeURIComponent(t);
 }), J.addEventListener("article-select", (e) => {
 	let { id: t, cat: n } = e.detail;
 	if (n) location.hash = "#cat=" + encodeURIComponent(n);
 	else {
-		let e = V(t);
-		e && (location.hash = K(e.id, G(H())));
+		let e = H(t);
+		e && (location.hash = K(e.id, G(U())));
 	}
-})), Y && (Y.articles = L, Y.icons = z, Y.giscusConfig = xe, Y.addEventListener("article-select", (e) => {
+})), Y && (Y.articles = R, Y.icons = B, Y.giscusConfig = Ee, Y.addEventListener("article-select", (e) => {
 	let { id: t, cat: n } = e.detail;
-	location.replace(K(t, n || G(H()))), $();
+	location.replace(K(t, n || G(U()))), $();
 }), Y.addEventListener("viewer-close", () => {
-	U() && (location.hash = "#cat=" + encodeURIComponent(G(H())));
-})), X && (X.articles = L, X.addEventListener("search-select", (e) => {
+	W() && (location.hash = "#cat=" + encodeURIComponent(G(U())));
+})), X && (X.articles = R, X.addEventListener("search-select", (e) => {
 	let { id: t, cat: n } = e.detail;
-	location.hash = K(t, n || G(H()));
+	location.hash = K(t, n || G(U()));
 })), Z) {
 	let e = {};
-	R.forEach((t) => {
+	z.forEach((t) => {
 		e[t.id] = t.name;
-	}), Z.articles = L, Z.catNames = e, Z.addEventListener("result-select", (e) => {
+	}), Z.articles = R, Z.catNames = e, Z.addEventListener("result-select", (e) => {
 		let { id: t, cat: n } = e.detail;
 		location.href = "/" + K(t, n);
 	});
 }
 function $() {
 	if (!J) return;
-	let e = G(H()), t = W(), n = U(), r = n ? V(n) : null;
+	let e = G(U()), t = Oe(), n = W(), r = n ? H(n) : null;
 	if (q && J && (q.setAttribute("active-cat", e), q.setAttribute("active-tag", t)), J && (J.setAttribute("active-cat", e), J.setAttribute("active-tag", t)), r && Y) {
 		if (Y.article = r, !Y.classList.contains("is-open")) {
 			let e = (J?.shadowRoot || document).querySelector(`.article-card[data-id="${r.id}"]`);
-			Y.openWithFlip(e, B);
+			Y.openWithFlip(e, V);
 		}
-		document.title = r.title + " - " + B;
-	} else Y && Y.classList.contains("is-open") && (Y.closeWithFlip(), document.title = B + " - 首页");
+		document.title = r.title + " - " + V;
+	} else Y && Y.classList.contains("is-open") && (Y.closeWithFlip(), document.title = V + " - 首页");
 }
 window.addEventListener("hashchange", $), document.addEventListener("DOMContentLoaded", $);
 //#endregion
