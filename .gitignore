@@ -7,3 +7,12 @@ public/
 .deploy*/
 _multiconfig.yml
 .codex/
+.workbuddy/
+
+# 主题由 tools/theme-sync.mjs 依据 THEME_REVISION 生成，不入库
+themes/hexo/
+.theme-upstream/
+.theme-cache/
+themes/.hexo-stage-*/
+themes/.hexo-backup-*/
+THEME_REVISION.tmp

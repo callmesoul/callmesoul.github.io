@@ -20,8 +20,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout site
         uses: actions/checkout@v7
+
+      - name: Read theme revision
+        id: theme
+        run: |
+          repo=$(sed -n 's/^repo:[[:space:]]*//p' THEME_REVISION)
+          tag=$(sed -n 's/^tag:[[:space:]]*//p' THEME_REVISION)
+          sha=$(sed -n 's/^sha:[[:space:]]*//p' THEME_REVISION)
+          distribution=$(sed -n 's/^distribution:[[:space:]]*//p' THEME_REVISION)
+          test -n "$repo" && test -n "$tag" && test -n "$sha" && test -n "$distribution"
+          echo "repo=$repo" >> "$GITHUB_OUTPUT"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "distribution=$distribution" >> "$GITHUB_OUTPUT"
+          echo "主题版本 $repo $tag ($sha)"
+
+      - name: Checkout theme source
+        if: steps.theme.outputs.distribution == 'source'
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ steps.theme.outputs.repo }}
+          ref: ${{ steps.theme.outputs.sha }}
+          path: .theme-upstream
+          fetch-depth: 1
+
+      - name: Setup pnpm
+        if: steps.theme.outputs.distribution == 'source'
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.13.1
 
       - name: Setup Node.js
         uses: actions/setup-node@v7
@@ -32,8 +61,11 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v6
 
-      - name: Install dependencies
+      - name: Install site dependencies
         run: npm ci
+
+      - name: Verify theme update behavior
+        run: npm run test:theme
 
       - name: Build Hexo
         run: npm run build
